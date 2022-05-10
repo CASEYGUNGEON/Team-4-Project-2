@@ -12,5 +12,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /*As a guest I can create a Potlukk account
+    POST {host}/users
+
+    As a guest I can login to a Potlukk account to become a registered User
+    GET {host}/users/{user_id}?=username?=password*/
+
     //TODO ADD ROUTES
 }
