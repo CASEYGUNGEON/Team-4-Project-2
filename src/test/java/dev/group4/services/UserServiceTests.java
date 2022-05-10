@@ -17,11 +17,11 @@ public class UserServiceTests {
     @Test
     void registerUser() {
         //String most likely would be Null or empty quotes, unknown till have a database to test on
-        User user = new User("", "username", "password");
+        User user = new User("username", "password");
         userRepo.save(user);
         testUser = user;
         System.out.println(user);
-        Assertions.assertNotNull(user.getId());
+        Assertions.assertNotNull(user.getUsername());
 
     }
     @Order(2)
