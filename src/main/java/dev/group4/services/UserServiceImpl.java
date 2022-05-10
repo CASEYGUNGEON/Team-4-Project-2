@@ -13,12 +13,13 @@ public class UserServiceImpl implements UserService{
     @Override
     public User registerUser(User user) {
 
-
-        return null;
+        return this.userRepo.save(user);
     }
 
     @Override
     public User login(String username, String password) {
+
+
         return null;
     }
 }

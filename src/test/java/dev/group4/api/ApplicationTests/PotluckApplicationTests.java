@@ -1,4 +1,4 @@
-package dev.group4.api;
+package dev.group4.api.ApplicationTests;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
