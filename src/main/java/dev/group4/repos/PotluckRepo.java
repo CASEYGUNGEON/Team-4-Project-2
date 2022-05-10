@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Component
 @Repository
 public interface PotluckRepo extends JpaRepository<Potluck,String> {
+    //TODO add custom method signatures
 }
