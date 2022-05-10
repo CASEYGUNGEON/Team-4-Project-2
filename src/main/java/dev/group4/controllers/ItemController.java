@@ -13,5 +13,5 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    //TODO ADD ROUTES
+    //TODO ADD ROUTES / REMOVE?
 }
