@@ -24,8 +24,13 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public Item updateSupplier(String supplier) {
+    public Item updateSupplier(Item item, String supplier) {
         return null;
+    }
+
+    @Override
+    public boolean deleteItem(Item item) {
+        return deleteItem(item.getId());
     }
 
     @Override
