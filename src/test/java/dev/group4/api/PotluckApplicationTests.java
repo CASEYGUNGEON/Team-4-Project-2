@@ -1,12 +1,13 @@
-package dev.group4.ServiceTests;
+package dev.group4.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class PotLuckSerivceTests {
+class PotluckApplicationTests {
 
-    @Test
-    void registerUser() {
-    }
+	@Test
+	void contextLoads() {
+	}
+
 }
