@@ -11,7 +11,7 @@ import java.util.List;
 @SpringBootTest
 public class PotLuckServiceTests {
     PotluckServiceImpl potluckService = new PotluckServiceImpl();
-    Potluck potluck = new Potluck("", "aaaa", 2000,);
+    Potluck potluck = new Potluck("", 2000, "aaaa");
 
     @Test
     @Order(1)
@@ -35,4 +35,8 @@ public class PotLuckServiceTests {
     }
 
     @Test
+    @Order(4)
+    void cancelTest() {
+        Assertions.assertTrue(potluckService.cancelPotluck(potluck));
+    }
 }
