@@ -22,14 +22,26 @@ public class PotluckServiceImpl implements PotluckService{
         return null;
     }
 
+    /*
     @Override
     public List<Potluck> getAllPotlucksByStatus(StatusType status) {
         return null;
     }
+    */
 
     @Override
-    public Potluck changePotluckTime(long epoch) {
+    public Potluck changePotluckTime(Potluck potluck, long epoch) {
+        return changePotluckTime(potluck.getId(), epoch);
+    }
+
+    @Override
+    public Potluck changePotluckTime(String id, long epoch) {
         return null;
+    }
+
+    @Override
+    public boolean cancelPotluck(Potluck potluck) {
+        return cancelPotluck(potluck.getId());
     }
 
     @Override
