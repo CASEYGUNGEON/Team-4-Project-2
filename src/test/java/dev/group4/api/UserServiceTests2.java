@@ -17,7 +17,7 @@ public class UserServiceTests2 {
     @Test
     void registerUser() {
         //String most likely would be Null or empty quotes, unknown till have a database to test on
-        User user = new User("username", "password");
+        User user = new User("Brooklyn", "Pegasus");
         userRepo.save(user);
         testUser = user;
         System.out.println(user);
@@ -27,8 +27,8 @@ public class UserServiceTests2 {
     @Order(2)
     @Test
     void loginWithUsernameAndPassword(){
-        User user1 = userRepo.findUserByUsernameAndPassword("username", "password");
-        Assertions.assertNotNull(user1);
+        User user1 = userRepo.findUserByUsername("Brooklyn");
+        Assertions.assertEquals("Pegasus", user1.getPassword());
 
     }
 

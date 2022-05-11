@@ -11,5 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface UserRepo  extends JpaRepository<User,String> {
     //TODO add custom method signatures
     User findUserByUsernameAndPassword(String username, String password);
+    User findUserByUsername(String username);
+
 
 }

@@ -1,4 +1,4 @@
-package dev.group4.services;
+package dev.group4.api;
 
 import dev.group4.entities.Potluck;
 import dev.group4.services.PotluckServiceImpl;
@@ -11,13 +11,16 @@ import java.util.List;
 @SpringBootTest
 public class PotLuckServiceTests {
     PotluckServiceImpl potluckService = new PotluckServiceImpl();
-    Potluck potluck = new Potluck("", 2000L, "aaaa",true);
+    static Potluck testpotluck = null;
 
     @Test
     @Order(1)
     void schedulePotluckTest() {
-        potluck = potluckService.schedulePotluck(potluck);
-        Assertions.assertNotEquals("", potluck.getId());
+        Potluck newPotluck = new Potluck("First", 2000L, "username",true);
+        PotLuckServiceTests.testpotluck = newPotluck;
+        potluckService.schedulePotluck(newPotluck);
+        System.out.println(testpotluck);
+        Assertions.assertNotEquals("", testpotluck.getId());
     }
 
     @Test
@@ -30,13 +33,13 @@ public class PotLuckServiceTests {
     @Test
     @Order(3)
     void changeTimeTest() {
-        potluck = potluckService.changePotluckTime(potluck, 3000);
-        Assertions.assertEquals(3000, potluck.getDateTime());
+        testpotluck = potluckService.changePotluckTime(testpotluck, 3000);
+        Assertions.assertEquals(3000, testpotluck.getDateTime());
     }
 
     @Test
     @Order(4)
     void cancelTest() {
-        Assertions.assertTrue(potluckService.cancelPotluck(potluck));
+        Assertions.assertTrue(potluckService.cancelPotluck(testpotluck));
     }
 }
