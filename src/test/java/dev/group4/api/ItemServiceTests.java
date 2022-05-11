@@ -1,9 +1,11 @@
-package dev.group4.services;
+package dev.group4.api;
 
 import dev.group4.entities.Item;
 import dev.group4.entities.Potluck;
 import dev.group4.entities.StatusType;
 import dev.group4.repos.ItemRepo;
+import dev.group4.services.ItemService;
+import dev.group4.services.ItemServiceImpl;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,18 +14,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest
 public class ItemServiceTests {
-    ItemServiceImpl itemService = new ItemServiceImpl();
-    Item item = new Item ("buttchecks","Pizza", StatusType.WANTED, "Ron from Accounting","PotluckId");
+    ItemService itemService = new ItemServiceImpl();
+    static Item item;
 
-
-    @Autowired
-    private ItemRepo itemRepo;
+    //@Autowired
+    //private ItemService itemService;
 
 
     @Test
     @Order(1)
     void registerTest() {
-        item = itemService.registerItem(item);
+        Item i = new Item ("buttchecks","Pizza", StatusType.WANTED, "Ron from Accounting","PotluckId");
+
+        item = itemService.registerItem(i);
+        System.out.println(item);
         Assertions.assertNotEquals("buttchecks",item.getId());
     }
 

@@ -1,8 +1,9 @@
-package dev.group4.services;
+package dev.group4.api;
 
 import dev.group4.entities.Potluck;
 import dev.group4.services.PotluckServiceImpl;
 import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest
 public class PotLuckServiceTests {
+    @Autowired
     PotluckServiceImpl potluckService = new PotluckServiceImpl();
     Potluck potluck = new Potluck("", 2000L, "aaaa",true);
 
