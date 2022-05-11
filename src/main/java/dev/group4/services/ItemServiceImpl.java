@@ -3,8 +3,13 @@ package dev.group4.services;
 import dev.group4.entities.Item;
 import dev.group4.repos.ItemRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+@Component
+@Service
 public class ItemServiceImpl implements ItemService{
+
     @Autowired
     private ItemRepo itemRepo;
 
@@ -22,6 +27,7 @@ public class ItemServiceImpl implements ItemService{
     public Item replaceItem(Item item) {
         return null;
     }
+
 
     @Override
     public Item updateSupplier(Item item, String supplier) {

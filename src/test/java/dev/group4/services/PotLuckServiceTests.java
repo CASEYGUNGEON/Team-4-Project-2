@@ -11,7 +11,7 @@ import java.util.List;
 @SpringBootTest
 public class PotLuckServiceTests {
     PotluckServiceImpl potluckService = new PotluckServiceImpl();
-    Potluck potluck = new Potluck("", 2000, "aaaa");
+    Potluck potluck = new Potluck("", 2000L, "aaaa",true);
 
     @Test
     @Order(1)

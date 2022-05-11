@@ -4,9 +4,13 @@ import dev.group4.entities.Potluck;
 import dev.group4.entities.StatusType;
 import dev.group4.repos.PotluckRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Component
+@Service
 public class PotluckServiceImpl implements PotluckService{
     @Autowired
     private PotluckRepo potluckRepo;
