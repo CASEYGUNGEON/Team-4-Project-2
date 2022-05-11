@@ -1,8 +1,13 @@
 package dev.group4.services;
 
 import dev.group4.entities.Item;
+import dev.group4.repos.ItemRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class ItemServiceImpl implements ItemService{
+    @Autowired
+    private ItemRepo itemRepo;
+
     @Override
     public Item registerItem(Item item) {
         return null;
@@ -19,8 +24,13 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public Item updateSupplier(String supplier) {
+    public Item updateSupplier(Item item, String supplier) {
         return null;
+    }
+
+    @Override
+    public boolean deleteItem(Item item) {
+        return deleteItem(item.getId());
     }
 
     @Override

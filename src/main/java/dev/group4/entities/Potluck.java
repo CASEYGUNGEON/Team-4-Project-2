@@ -23,4 +23,7 @@ import javax.persistence.*;
         @Column(name = "creator_id")
         private String creatorId;
 
+        @Column(name = "visibility")
+        private Boolean visibility;
+
 }
