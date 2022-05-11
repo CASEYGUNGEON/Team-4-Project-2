@@ -26,8 +26,8 @@ public class UserServiceTests2 {
     }
     @Order(2)
     @Test
-    void loginWithUsernameAndPassword(User testUser){
-        User user1 = userRepo.findUserByUsernameAndPassword(testUser.getUsername(), testUser.getPassword());
+    void loginWithUsernameAndPassword(){
+        User user1 = userRepo.findUserByUsernameAndPassword("username", "password");
         Assertions.assertNotNull(user1);
 
     }
