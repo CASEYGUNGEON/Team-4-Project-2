@@ -1,0 +1,558 @@
+{
+	"info": {
+		"_postman_id": "b78274be-020f-4c2c-9d02-221f2ed7be96",
+		"name": "PotluckRequests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Root Connection",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Potluck @Secured",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "username",
+						"value": "user",
+						"type": "default"
+					},
+					{
+						"key": "password",
+						"value": "password1!",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"id\":\"\" ,\"dateTime\": 1652213267,\"creatorId\":\"\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{host}/potlucks",
+					"host": [
+						"{host}"
+					],
+					"path": [
+						"potlucks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add items to Potluck @Secured",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "username",
+						"value": "username",
+						"type": "default"
+					},
+					{
+						"key": "password",
+						"value": "password1!",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"id\":\"\" , \"description\":\"Mashed Potatoes\" , \"status\":\"NEEDED\", \"supplier\":\"Aunt Jessica\", \"potluckId\":\"\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{host}/potlucks/{potluck_id}/items",
+					"host": [
+						"{host}"
+					],
+					"path": [
+						"potlucks",
+						"{potluck_id}",
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete items in Potluck @Secured",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "username",
+						"value": "username",
+						"type": "default"
+					},
+					{
+						"key": "password",
+						"value": "password1!",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{host}/potlucks/{potluck_id}/items",
+					"host": [
+						"{host}"
+					],
+					"path": [
+						"potlucks",
+						"{potluck_id}",
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Public Potlucks",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "username",
+						"value": "username",
+						"type": "default"
+					},
+					{
+						"key": "password",
+						"value": "password1!",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{host}/potlucks/",
+					"host": [
+						"{host}"
+					],
+					"path": [
+						"potlucks",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Potluck Item",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "username",
+						"value": "username",
+						"type": "default"
+					},
+					{
+						"key": "password",
+						"value": "password1!",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"id\":\"\" , \"description\":\"Collared Greens\" , \"status\":\"WANTED\", \"supplier\":\"\", \"potluckId\":\"\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{host}/items",
+					"host": [
+						"{host}"
+					],
+					"path": [
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assign a Potluck Item",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "username",
+						"value": "username",
+						"type": "default"
+					},
+					{
+						"key": "password",
+						"value": "password1!",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"id\":\"\" , \"description\":\"Collared Greens\" , \"status\":\"\", \"supplier\":\"Uncle Joe\", \"potluckId\":\"\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{host}/potlucks/{potluck_id}/items",
+					"host": [
+						"{host}"
+					],
+					"path": [
+						"potlucks",
+						"{potluck_id}",
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "username",
+						"value": "username",
+						"type": "default"
+					},
+					{
+						"key": "password",
+						"value": "password1!",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"username\":\"username\" , \"password\":\"password1!\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{host}/users",
+					"host": [
+						"{host}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "username",
+						"value": "username",
+						"type": "default",
+						"disabled": true
+					},
+					{
+						"key": "password",
+						"value": "password1!",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"username\":\"username\" , \"password\":\"password1!\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{host}/users/{user_id}",
+					"host": [
+						"{host}"
+					],
+					"path": [
+						"users",
+						"{user_id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Potluck Time",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password1!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "username",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "username",
+						"value": "username",
+						"type": "default",
+						"disabled": true
+					},
+					{
+						"key": "password",
+						"value": "password1!",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"id\":\"\" ,\"dateTime\": 2652213267,\"creatorId\":\"\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{host}/potluck/{id}",
+					"host": [
+						"{host}"
+					],
+					"path": [
+						"potluck",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Potluck Link",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password1!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "username",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "username",
+						"value": "username",
+						"type": "default",
+						"disabled": true
+					},
+					{
+						"key": "password",
+						"value": "password1!",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"id\":\"\" ,\"dateTime\": 0,\"creatorId\":\"\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{host}/potluck/{id}",
+					"host": [
+						"{host}"
+					],
+					"path": [
+						"potluck",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Potluck",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password1!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "username",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "username",
+						"value": "username",
+						"type": "default",
+						"disabled": true
+					},
+					{
+						"key": "password",
+						"value": "password1!",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"id\":\"\" ,\"dateTime\": 0,\"creatorId\":\"\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{host}/potluck/{id}",
+					"host": [
+						"{host}"
+					],
+					"path": [
+						"potluck",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Private Potluck",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password1!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "username",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "username",
+						"value": "username",
+						"type": "default",
+						"disabled": true
+					},
+					{
+						"key": "password",
+						"value": "password1!",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"id\":\"\" ,\"dateTime\": 1752213267,\"creatorId\":\"\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{host}/potluck/{id}?visibility=private",
+					"host": [
+						"{host}"
+					],
+					"path": [
+						"potluck",
+						"{id}"
+					],
+					"query": [
+						{
+							"key": "visibility",
+							"value": "private"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
