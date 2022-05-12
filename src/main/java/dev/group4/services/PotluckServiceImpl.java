@@ -1,5 +1,6 @@
 package dev.group4.services;
 
+import dev.group4.aspects.InvalidTimeException;
 import dev.group4.entities.Potluck;
 import dev.group4.entities.StatusType;
 import dev.group4.repos.PotluckRepo;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @Service
@@ -17,8 +19,17 @@ public class PotluckServiceImpl implements PotluckService{
 
 
     @Override
-    public Potluck schedulePotluck(Potluck potluck) {
-        return null;
+    public Potluck schedulePotluck(Potluck potluck) throws InvalidTimeException {
+        if(potluck.getDateTime()<= System.currentTimeMillis())
+            throw new InvalidTimeException("The time you wish to schedule the potluck has already passed.");
+        List<Long> potlucks = potluckRepo.findAll().stream().map(Potluck::getDateTime).collect(Collectors.toList());
+        for(long time : potlucks){
+            if( potluck.getDateTime() - 3600000  >= time  && potluck.getDateTime() +3600000 <=  time  )
+                throw new InvalidTimeException("The time you wish to schedule the potluck " +
+                        "is within an hour of a currently scheduled Potluck");
+        }
+        potluck = potluckRepo.save(potluck);
+        return potluck;
     }
 
     @Override
