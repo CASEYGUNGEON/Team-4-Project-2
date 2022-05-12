@@ -14,7 +14,7 @@ import java.sql.DriverManager;
 @ComponentScan(basePackages = "dev.group4") // Tell spring to scan all code in the dev.ranieri packages
 @EntityScan(basePackages = "dev.group4.entities") // tell spring to scan my entities
 @EnableJpaRepositories(basePackages = "dev.group4.repos")// tell spring where to find my repos
-/**
+/*
  * Potluck Tracker - Spring Application
  */
 public class PotluckSpringApplication {

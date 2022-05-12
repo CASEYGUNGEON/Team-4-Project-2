@@ -7,18 +7,18 @@ function App() {
   const[userId, setUserId] = useState("");
   const[username, setUsername] = useState("undefined");
   let pageDisplay = "potlucks";
-  let jsx = [];
+  let jsx = [<UserHandler userId={userId} setUserId={setUserId} username={username} setUsername={setUsername} />];
   
 
   if(pageDisplay === "index") {
       jsx.push(test());
   }
   else if(pageDisplay === "potlucks") {
-    jsx.push(<p>potluck</p>)
+    jsx.push(<p><br/><br/>potluck</p>)
   }
   return(
     <>
-    <UserHandler userId={userId} setUserId={setUserId} username={username} setUsername={setUsername} />
+    {jsx}
     </>);
 }
 
