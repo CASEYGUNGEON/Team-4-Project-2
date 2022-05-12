@@ -5,7 +5,7 @@ import UserHandler from './UserHandler'
 
 function App() {
   const[userId, setUserId] = useState("");
-  const[username, setUsername] = useState("");
+  const[username, setUsername] = useState("undefined");
   let pageDisplay = "potlucks";
   let jsx = [];
   

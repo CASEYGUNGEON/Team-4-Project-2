@@ -1,3 +1,5 @@
+import './App.css';
+
 export default function UserHandler(props) {
     const user = props.userId;
     const setUserId = props.setUserId;
@@ -13,14 +15,16 @@ export default function UserHandler(props) {
 
     if(user === "") {
         return(
-            <>
-            <label htmlFor="username">username</label>
-            <input type="text" name="username" onChange={setUsernameWithLog} placeholder="username" />
-            <br/>
-            <button onClick={() => props.setUserId("A")}>log in</button>
-            </>
+            <div class="accstatus">
+            <label htmlFor="username">Username </label>
+            <input type="text" name="username" onChange={setUsernameWithLog} placeholder="username" /><br/><br/>
+            <button class="rightbutton" onClick={() => props.setUserId("A")}>Log In</button>
+            </div>
         );
     }
     else
-        return <button onClick={() => props.setUserId("")}>log out</button>
+        return(<>
+            <div class="accstatus">Welcome, {username} <button onClick={() => props.setUserId("")}>Log Out</button></div>
+            
+        </>);
 }
