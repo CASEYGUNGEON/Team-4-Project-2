@@ -1,10 +1,18 @@
 package dev.group4.controllers;
 
 
+import dev.group4.aspects.InvalidTimeException;
+import dev.group4.aspects.Secured;
+import dev.group4.entities.Potluck;
 import dev.group4.services.PotluckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @Component
 @RestController
@@ -12,25 +20,19 @@ public class PotluckController {
 
     @Autowired
     private PotluckService potluckService;
-    /*As a registered User I can create a potluck (date and time required)
-    POST {host}/potlucks   @secured
 
+    @Secured
+    @PostMapping("{host}/potlucks")
+    public Potluck createPotluck(@RequestBody Potluck potluck){
+        try {
+            return this.potluckService.schedulePotluck(potluck);
+        } catch (InvalidTimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-    As a registered User I can add items to potlucks I created
-    POST {host}/potlucks/{potluck_id}/items   @secured
-
-
-    As a registered User I can remove items from potlucks I created
-    DELETE POST {host}/potlucks/{potluck_id}/items   @secured
-
-
-    As a guest I can view all potlucks
-    GET {host}/potlucks    //query param for status
-
-
-    As a guest I can add an item to a potluck, put down my name as the supplier
-    POST {host}/potlucks/{potluck_id}/items
-    PATCH {host}/potlucks/{potluck_id}/{item_id}*/
-
-    //TODO ADD ROUTES
+    @GetMapping("{host}/potlucks")
+    public List<Potluck> getAllPublicPotlucks(){
+        return potluckService.getAllPublicPotlucks();
+    }
 }
