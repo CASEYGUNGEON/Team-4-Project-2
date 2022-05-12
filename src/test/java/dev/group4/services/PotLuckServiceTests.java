@@ -1,4 +1,4 @@
-package dev.group4.api;
+package dev.group4.services;
 
 import dev.group4.aspects.InvalidTimeException;
 import dev.group4.entities.Potluck;

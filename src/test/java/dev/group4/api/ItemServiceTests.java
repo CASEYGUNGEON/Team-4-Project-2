@@ -65,7 +65,7 @@ import org.springframework.boot.test.context.SpringBootTest;
         Item item = new Item ("","Pizza", StatusType.WANTED, "Ron from Accounting","");
         //item = itemService.registerItem(item);
         itemRepo.save(item);
-        Assertions.assertNotEquals("buttchecks",item.getId());
+        Assertions.assertNotEquals("",item.getId());
     }
 
 //    @Test
