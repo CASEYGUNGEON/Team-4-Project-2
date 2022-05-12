@@ -33,6 +33,7 @@ public class UserServiceTests {
         User user1 = userService.login(testUser);
         Assertions.assertNotNull(user1);
         userRepo.delete(testUser);
+
     }
 
 }
