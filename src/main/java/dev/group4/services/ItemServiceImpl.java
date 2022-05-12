@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Component
 @Service
 public class ItemServiceImpl implements ItemService{
@@ -15,23 +17,27 @@ public class ItemServiceImpl implements ItemService{
 
     @Override
     public Item registerItem(Item item) {
-        return null;
+        return itemRepo.save(item);
     }
 
     @Override
     public Item getItemById(String id) {
-        return null;
+        Optional<Item> item = itemRepo.findById(id);
+        if(item.isPresent())
+            return item.get();
+        throw new NullPointerException("Item not found, id: " + id);
     }
 
     @Override
     public Item replaceItem(Item item) {
-        return null;
+        return itemRepo.save(item);
     }
 
 
     @Override
     public Item updateSupplier(Item item, String supplier) {
-        return null;
+        item.setSupplier(supplier);
+        return itemRepo.save(item);
     }
 
     @Override
@@ -41,6 +47,11 @@ public class ItemServiceImpl implements ItemService{
 
     @Override
     public boolean deleteItem(String id) {
+        Item item = getItemById(id);
+        if(item != null) {
+            itemRepo.deleteById(id);
+            return true;
+        }
         return false;
     }
 }
