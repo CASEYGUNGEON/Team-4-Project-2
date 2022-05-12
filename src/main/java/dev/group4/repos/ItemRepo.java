@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 @Component
 @Repository
 public interface ItemRepo  extends JpaRepository<Item,String> {
-    //TODO add custom method signatures
 }

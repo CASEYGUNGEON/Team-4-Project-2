@@ -38,7 +38,7 @@ public class ItemServiceTests {
     @Order(3)
     void replaceTest() {
         item.setDescription("Ice cream");
-        
+
     }
 
     @Test

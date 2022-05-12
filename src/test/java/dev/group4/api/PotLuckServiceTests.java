@@ -26,6 +26,7 @@ public class PotLuckServiceTests {
     void schedulePotluckTest() throws InvalidTimeException {
         Potluck newPotLuck = new Potluck("First", System.currentTimeMillis() + 1000L, "username",true);
         testPotluck =potluckService.schedulePotluck(newPotLuck);
+
         Assertions.assertNotEquals("", newPotLuck.getId());
     }
 
@@ -60,43 +61,5 @@ public class PotLuckServiceTests {
         System.out.println(testPotluck);
         Assertions.assertTrue(potluckService.cancelPotluck(testPotluck));
     }
-//    @Test
-//    @Order(3)
-//    void changeTimeTest() {
-//
-//        Potluck retrievedPotLuck = potluckService.get
-//        potluck = potluckService.changePotluckTime(potluck, 3000);
-//        Assertions.assertEquals(3000, potluck.getDateTime());
-//    }
 
-
-
-//    @Test
-//    @Order(2)
-//    void getAllPotlucksTest(){
-//        List<Potluck> list = this.potluckRepo.findAll();
-//        System.out.println(list);
-//    }
-
-
-//
-//    @Test
-//    @Order(2)
-//    void getAllPotlucksTest() {
-//        List<Potluck> list = potluckService.getAllPotlucks();
-//        Assertions.assertNotNull(list.get(0).getId());
-//    }
-//
-//    @Test
-//    @Order(3)
-//    void changeTimeTest() {
-//        potluck = potluckService.changePotluckTime(potluck, 3000);
-//        Assertions.assertEquals(3000, potluck.getDateTime());
-//    }
-//
-//    @Test
-//    @Order(4)
-//    void cancelTest() {
-//        Assertions.assertTrue(potluckService.cancelPotluck(potluck));
-//    }
 }
