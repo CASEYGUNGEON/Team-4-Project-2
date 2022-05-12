@@ -13,15 +13,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest
-public class ItemServiceTests {
-    ItemService itemService = new ItemServiceImpl();
+  public class ItemServiceTests {
+    @Autowired
+    private ItemService itemService;
     static Item item;
 
-    //@Autowired
-    //private ItemService itemService;
+    @Autowired
+    private ItemRepo itemRepo;
 
 
-    @Test
+    /*@Test
     @Order(1)
     void registerTest() {
         Item i = new Item ("buttchecks","Pizza", StatusType.WANTED, "Ron from Accounting","PotluckId");
@@ -56,5 +57,42 @@ public class ItemServiceTests {
     @Order(5)
     void deleteTest() {
         Assertions.assertTrue(itemService.deleteItem(item));
+    }*/
+
+    @Test
+    @Order(1)
+    void registerTest() {
+        Item item = new Item ("","Pizza", StatusType.WANTED, "Ron from Accounting","");
+        //item = itemService.registerItem(item);
+        itemRepo.save(item);
+        Assertions.assertNotEquals("buttchecks",item.getId());
     }
+
+//    @Test
+//    @Order(2)
+//    void getByIdTest() {
+//        Item temp = itemService.getItemById(item.getId());
+//        Assertions.assertNotNull(temp);
+//    }
+//
+//    @Test
+//    @Order(3)
+//    void replaceTest() {
+//        item.setDescription("Ice cream");
+//
+//    }
+//
+//    @Test
+//    @Order(4)
+//    void supplierTest() {
+//        item = itemService.updateSupplier(item,"Your mom");
+//        Assertions.assertEquals("Your mom", item.getSupplier());
+//    }
+//
+//    @Test
+//    @Order(5)
+//    void deleteTest() {
+//        Assertions.assertTrue(itemService.deleteItem(item));
+//    }
+
 }
