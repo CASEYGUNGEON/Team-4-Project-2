@@ -18,12 +18,14 @@ public class PotluckServiceImpl implements PotluckService{
 
     @Override
     public Potluck schedulePotluck(Potluck potluck) {
-        return null;
+
+
+        return this.potluckRepo.save(potluck);
     }
 
     @Override
     public List<Potluck> getAllPotlucks() {
-        return null;
+        return this.potluckRepo.findAll();
     }
 
     /*
