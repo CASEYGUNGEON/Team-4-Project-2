@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.accstatus {
+  display:inline-block;
+  float:right;
+  padding-right:0.5%;
+  padding-top:0.5%
+}
+
+.rightbutton {
+  display:inline-block;
+  float:right;
+}
