@@ -1,6 +1,6 @@
 package dev.group4.services;
 
-import dev.group4.aspects.InvalidUserNameException;
+import dev.group4.aspects.InvalidCredentialException;
 import dev.group4.entities.User;
 import dev.group4.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,19 +16,19 @@ public class UserServiceImpl implements UserService{
 
 
     @Override
-    public User registerUser(User user) throws InvalidUserNameException {
+    public User registerUser(User user) throws InvalidCredentialException {
         String username = user.getUsername();
         String password = user.getPassword();
         if(userRepo.findById(username).isPresent())
-            throw new InvalidUserNameException("Username is already in use. Username : "+username);
+            throw new InvalidCredentialException("Username is already in use. Username : "+username);
         if(username.length()==0 || username.length()>20)
-            throw new InvalidUserNameException("Username is not the required length. Current length:"+username.length());
+            throw new InvalidCredentialException("Username is not the required length. Current length:"+username.length());
         if(password.length()==0 || password.length()>20)
-            throw new InvalidUserNameException("Password is not the required length. Current length:"+password.length());
+            throw new InvalidCredentialException("Password is not the required length. Current length:"+password.length());
         if(characterValidation(password))
             return this.userRepo.save(user);
         else{
-            throw new InvalidUserNameException("The Password did not contain the required special characters.");
+            throw new InvalidCredentialException("The Password did not contain the required special characters.");
         }
     }
 
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User login(User user) throws InvalidUserNameException {
+    public User login(User user) throws InvalidCredentialException {
 
         String username = user.getUsername();
 
@@ -55,6 +55,6 @@ public class UserServiceImpl implements UserService{
             if(password.equals(user.getPassword()))
                 return user;
         }
-        throw new InvalidUserNameException("Login was invalid");
+        throw new InvalidCredentialException("Login was invalid");
     }
 }

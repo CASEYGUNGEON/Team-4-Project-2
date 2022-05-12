@@ -14,10 +14,11 @@ public interface PotluckService {
      * @throws InvalidTimeException The Time specified for the potluck was not valid.
      */
     Potluck schedulePotluck(Potluck potluck) throws InvalidTimeException;
-    List<Potluck> getAllPotlucks();
+    Potluck getPotluckById(String id);
+    List<Potluck> getAllPublicPotlucks();
     //List<Potluck> getAllPotlucksByStatus(StatusType status);
-    Potluck changePotluckTime(Potluck potluck, long epoch);
-    Potluck changePotluckTime(String id, long epoch);
+    Potluck changePotluckTime(Potluck potluck, long epoch) throws InvalidTimeException;
+    Potluck changePotluckTime(String id, long epoch) throws InvalidTimeException;
     boolean cancelPotluck(Potluck potluck);
     boolean cancelPotluck(String id);
 
