@@ -5,17 +5,22 @@ export default function UserHandler(props) {
     const setUsername = props.setUsername;
     let password = '';
 
+    function setUsernameWithLog(event) {
+        setUsername(event.target.value);
+        console.log(event.target.value);
+    }
 
 
-    if(props.user === "")
+    if(user === "") {
         return(
             <>
-            <form>
-                <input type="text" value="Username" />
-            </form>
+            <label htmlFor="username">username</label>
+            <input type="text" name="username" onChange={setUsernameWithLog} placeholder="username" />
+            <br/>
             <button onClick={() => props.setUserId("A")}>log in</button>
             </>
         );
+    }
     else
         return <button onClick={() => props.setUserId("")}>log out</button>
 }

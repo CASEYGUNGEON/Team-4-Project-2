@@ -10,11 +10,11 @@ function App() {
   let jsx = [];
   
 
-  if(pageDisplay == "index") {
+  if(pageDisplay === "index") {
       jsx.push(test());
   }
-  else if(pageDisplay == "potlucks") {
-    jsx.push(<p>potlucks</p>)
+  else if(pageDisplay === "potlucks") {
+    jsx.push(<p>potluck</p>)
   }
   return(
     <>
