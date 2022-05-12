@@ -22,7 +22,7 @@ public class PotluckController {
     private PotluckService potluckService;
 
     @Secured
-    @PostMapping("{host}/potlucks")
+    @PostMapping("/potlucks")
     public Potluck createPotluck(@RequestBody Potluck potluck){
         try {
             return this.potluckService.schedulePotluck(potluck);
@@ -31,7 +31,7 @@ public class PotluckController {
         }
     }
 
-    @GetMapping("{host}/potlucks")
+    @GetMapping("/potlucks")
     public List<Potluck> getAllPublicPotlucks(){
         return potluckService.getAllPublicPotlucks();
     }

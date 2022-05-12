@@ -17,7 +17,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("{host}/users")
+    @PostMapping("/users")
     public User registerNewUser(@RequestBody User user){
         try {
             return this.userService.registerUser(user);
@@ -27,7 +27,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("{host}/users")
+    @GetMapping("/users")
     public User login(@RequestBody User user) throws InvalidCredentialException {
         return this.userService.login(user);
     }
