@@ -1,4 +1,4 @@
-package dev.group4.api;
+package dev.group4;
 
 import dev.group4.entities.Item;
 import dev.group4.entities.StatusType;

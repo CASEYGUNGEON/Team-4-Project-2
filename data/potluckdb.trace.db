@@ -1,0 +1,318 @@
+2022-05-12 00:10:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "POTLUCK" not found; SQL statement:
+select potluck0_.potluck_id as potluck_1_1_, potluck0_.creator_id as creator_2_1_, potluck0_.date_time as date_tim3_1_, potluck0_.visibility as visibili4_1_ from potluck potluck0_ [42102-200]
+2022-05-12 00:11:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "POTLUCK" not found; SQL statement:
+select potluck0_.potluck_id as potluck_1_1_, potluck0_.creator_id as creator_2_1_, potluck0_.date_time as date_tim3_1_, potluck0_.visibility as visibili4_1_ from potluck potluck0_ [42102-200]
+2022-05-12 00:13:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "POTLUCK" not found; SQL statement:
+select potluck0_.potluck_id as potluck_1_1_, potluck0_.creator_id as creator_2_1_, potluck0_.date_time as date_tim3_1_, potluck0_.visibility as visibili4_1_ from potluck potluck0_ [42102-200]
+2022-05-12 07:13:48 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE POTLUCK(
+POTLUCK_ID VARCHAR(50) PRIMARY KEY DEFAULT[*] GEN_RANDOM_UUID(),
+DATE_TIME BIGINT,
+CREATOR_ID VARCHAR(20) REFERENCES REG_USER(USERNAME),
+VISIBILITY BOOL
+)"; expected "HASH, AUTO_INCREMENT, NOT, NULL, COMMENT, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE potluck(
+potluck_id varchar(50) primary key default gen_random_uuid(),
+date_time bigint,
+creator_id varchar(20) references reg_user(username),
+visibility bool
+) [42001-200]
+2022-05-12 07:14:04 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE POTLUCK(
+POTLUCK_ID VARCHAR(50) PRIMARY KEY DEFAULT[*] GEN_RANDOM_UUID(),
+DATE_TIME BIGINT,
+CREATOR_ID VARCHAR(20) REFERENCES REG_USER(USERNAME),
+VISIBILITY BOOL
+)"; expected "HASH, AUTO_INCREMENT, NOT, NULL, COMMENT, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE potluck(
+potluck_id varchar(50) primary key default gen_random_uuid(),
+date_time bigint,
+creator_id varchar(20) references reg_user(username),
+visibility bool
+) [42001-200]
+2022-05-12 07:14:37 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE POTLUCK(
+POTLUCK_ID VARCHAR(50) PRIMARY KEY DEFAULT[*] GEN_RANDOM_UUID(),
+DATE_TIME BIGINT,
+CREATOR_ID VARCHAR(20) REFERENCES REG_USER(USERNAME),
+VISIBILITY BOOLEAN
+)"; expected "HASH, AUTO_INCREMENT, NOT, NULL, COMMENT, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE potluck(
+potluck_id varchar(50) primary key default gen_random_uuid(),
+date_time bigint,
+creator_id varchar(20) references reg_user(username),
+visibility boolean
+) [42001-200]
+2022-05-12 07:17:04 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE POTLUCK(
+POTLUCK_ID UUID PRIMARY KEY DEFAULT[*] GEN_RANDOM_UUID(),
+DATE_TIME BIGINT,
+CREATOR_ID VARCHAR(20) REFERENCES REG_USER(USERNAME),
+VISIBILITY BOOLEAN
+)"; expected "HASH, AUTO_INCREMENT, NOT, NULL, COMMENT, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE potluck(
+potluck_id uuid primary key default gen_random_uuid(),
+date_time bigint,
+creator_id varchar(20) references reg_user(username),
+visibility boolean
+) [42001-200]
+2022-05-12 07:18:06 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE POTLUCK(
+POTLUCK_ID VARCHAR(50) PRIMARY KEY DEFAULT[*] UUID_GEN_V4(),
+DATE_TIME BIGINT,
+CREATOR_ID VARCHAR(20) REFERENCES REG_USER(USERNAME),
+VISIBILITY BOOLEAN
+)"; expected "HASH, AUTO_INCREMENT, NOT, NULL, COMMENT, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE potluck(
+potluck_id varchar(50) primary key default uuid_gen_v4(),
+date_time bigint,
+creator_id varchar(20) references reg_user(username),
+visibility boolean
+) [42001-200]
+2022-05-12 07:18:08 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE POTLUCK(
+POTLUCK_ID VARCHAR(50) PRIMARY KEY DEFAULT[*] UUID_GENERATE_V4(),
+DATE_TIME BIGINT,
+CREATOR_ID VARCHAR(20) REFERENCES REG_USER(USERNAME),
+VISIBILITY BOOLEAN
+)"; expected "HASH, AUTO_INCREMENT, NOT, NULL, COMMENT, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE potluck(
+potluck_id varchar(50) primary key default uuid_generate_v4(),
+date_time bigint,
+creator_id varchar(20) references reg_user(username),
+visibility boolean
+) [42001-200]
+2022-05-12 07:18:16 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE POTLUCK(
+POTLUCK_ID VARCHAR(50) PRIMARY KEY DEFAULT[*] UUID_GENERATE_V4(),
+DATE_TIME BIGINT,
+CREATOR_ID VARCHAR(20) REFERENCES REG_USER(USERNAME),
+VISIBILITY BOOLEAN
+)"; expected "HASH, AUTO_INCREMENT, NOT, NULL, COMMENT, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE potluck(
+potluck_id varchar(50) primary key default uuid_generate_v4(),
+date_time bigint,
+creator_id varchar(20) references reg_user(username),
+visibility boolean
+) [42001-200]
+2022-05-12 07:18:52 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE EXTENSION[*] IF NOT EXISTS ""uuid-ossp"""; expected "OR, FORCE, VIEW, ALIAS, SEQUENCE, USER, TRIGGER, ROLE, SCHEMA, CONSTANT, DOMAIN, TYPE, DATATYPE, AGGREGATE, LINKED, MEMORY, CACHED, LOCAL, GLOBAL, TEMP, TEMPORARY, TABLE, SYNONYM, PRIMARY, UNIQUE, HASH, SPATIAL, INDEX"; SQL statement:
+create extension if not exists "uuid-ossp" [42001-200]
+2022-05-12 07:18:52 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE POTLUCK(
+POTLUCK_ID VARCHAR(50) PRIMARY KEY DEFAULT[*] UUID_GENERATE_V4(),
+DATE_TIME BIGINT,
+CREATOR_ID VARCHAR(20) REFERENCES REG_USER(USERNAME),
+VISIBILITY BOOLEAN
+)"; expected "HASH, AUTO_INCREMENT, NOT, NULL, COMMENT, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE potluck(
+potluck_id varchar(50) primary key default uuid_generate_v4(),
+date_time bigint,
+creator_id varchar(20) references reg_user(username),
+visibility boolean
+) [42001-200]
+2022-05-12 07:20:07 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PG_AVAILABLE_EXTENSIONS" not found; SQL statement:
+SELECT * FROM pg_available_extensions [42102-200]
+2022-05-12 07:20:07 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE EXTENSION[*] IF NOT EXISTS ""uuid-ossp"""; expected "OR, FORCE, VIEW, ALIAS, SEQUENCE, USER, TRIGGER, ROLE, SCHEMA, CONSTANT, DOMAIN, TYPE, DATATYPE, AGGREGATE, LINKED, MEMORY, CACHED, LOCAL, GLOBAL, TEMP, TEMPORARY, TABLE, SYNONYM, PRIMARY, UNIQUE, HASH, SPATIAL, INDEX"; SQL statement:
+create extension if not exists "uuid-ossp" [42001-200]
+2022-05-12 07:20:07 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE POTLUCK(
+POTLUCK_ID VARCHAR(50) PRIMARY KEY DEFAULT[*] UUID_GENERATE_V4(),
+DATE_TIME BIGINT,
+CREATOR_ID VARCHAR(20) REFERENCES REG_USER(USERNAME),
+VISIBILITY BOOLEAN
+)"; expected "HASH, AUTO_INCREMENT, NOT, NULL, COMMENT, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE potluck(
+potluck_id varchar(50) primary key default uuid_generate_v4(),
+date_time bigint,
+creator_id varchar(20) references reg_user(username),
+visibility boolean
+) [42001-200]
+2022-05-12 07:20:35 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PG_EXTENSION" not found; SQL statement:
+SELECT * FROM pg_extension [42102-200]
+2022-05-12 07:20:35 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE EXTENSION[*] IF NOT EXISTS ""uuid-ossp"""; expected "OR, FORCE, VIEW, ALIAS, SEQUENCE, USER, TRIGGER, ROLE, SCHEMA, CONSTANT, DOMAIN, TYPE, DATATYPE, AGGREGATE, LINKED, MEMORY, CACHED, LOCAL, GLOBAL, TEMP, TEMPORARY, TABLE, SYNONYM, PRIMARY, UNIQUE, HASH, SPATIAL, INDEX"; SQL statement:
+create extension if not exists "uuid-ossp" [42001-200]
+2022-05-12 07:20:35 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE POTLUCK(
+POTLUCK_ID VARCHAR(50) PRIMARY KEY DEFAULT[*] UUID_GENERATE_V4(),
+DATE_TIME BIGINT,
+CREATOR_ID VARCHAR(20) REFERENCES REG_USER(USERNAME),
+VISIBILITY BOOLEAN
+)"; expected "HASH, AUTO_INCREMENT, NOT, NULL, COMMENT, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE potluck(
+potluck_id varchar(50) primary key default uuid_generate_v4(),
+date_time bigint,
+creator_id varchar(20) references reg_user(username),
+visibility boolean
+) [42001-200]
+2022-05-12 07:20:35 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PG_EXTENSION" not found; SQL statement:
+SELECT * FROM pg_extension [42102-200]
+2022-05-12 07:20:35 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE EXTENSION[*] IF NOT EXISTS ""uuid-ossp"""; expected "OR, FORCE, VIEW, ALIAS, SEQUENCE, USER, TRIGGER, ROLE, SCHEMA, CONSTANT, DOMAIN, TYPE, DATATYPE, AGGREGATE, LINKED, MEMORY, CACHED, LOCAL, GLOBAL, TEMP, TEMPORARY, TABLE, SYNONYM, PRIMARY, UNIQUE, HASH, SPATIAL, INDEX"; SQL statement:
+create extension if not exists "uuid-ossp" [42001-200]
+2022-05-12 07:20:35 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE POTLUCK(
+POTLUCK_ID VARCHAR(50) PRIMARY KEY DEFAULT[*] UUID_GENERATE_V4(),
+DATE_TIME BIGINT,
+CREATOR_ID VARCHAR(20) REFERENCES REG_USER(USERNAME),
+VISIBILITY BOOLEAN
+)"; expected "HASH, AUTO_INCREMENT, NOT, NULL, COMMENT, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE potluck(
+potluck_id varchar(50) primary key default uuid_generate_v4(),
+date_time bigint,
+creator_id varchar(20) references reg_user(username),
+visibility boolean
+) [42001-200]
+2022-05-12 07:20:37 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PG_EXTENSIONS" not found; SQL statement:
+SELECT * FROM pg_extensions [42102-200]
+2022-05-12 07:20:37 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE EXTENSION[*] IF NOT EXISTS ""uuid-ossp"""; expected "OR, FORCE, VIEW, ALIAS, SEQUENCE, USER, TRIGGER, ROLE, SCHEMA, CONSTANT, DOMAIN, TYPE, DATATYPE, AGGREGATE, LINKED, MEMORY, CACHED, LOCAL, GLOBAL, TEMP, TEMPORARY, TABLE, SYNONYM, PRIMARY, UNIQUE, HASH, SPATIAL, INDEX"; SQL statement:
+create extension if not exists "uuid-ossp" [42001-200]
+2022-05-12 07:20:37 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE POTLUCK(
+POTLUCK_ID VARCHAR(50) PRIMARY KEY DEFAULT[*] UUID_GENERATE_V4(),
+DATE_TIME BIGINT,
+CREATOR_ID VARCHAR(20) REFERENCES REG_USER(USERNAME),
+VISIBILITY BOOLEAN
+)"; expected "HASH, AUTO_INCREMENT, NOT, NULL, COMMENT, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE potluck(
+potluck_id varchar(50) primary key default uuid_generate_v4(),
+date_time bigint,
+creator_id varchar(20) references reg_user(username),
+visibility boolean
+) [42001-200]
+2022-05-12 07:21:35 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE POTLUCK(
+POTLUCK_ID VARCHAR(50) PRIMARY KEY DEFAULT[*] UUID(),
+DATE_TIME BIGINT,
+CREATOR_ID VARCHAR(20) REFERENCES REG_USER(USERNAME),
+VISIBILITY BOOLEAN
+)"; expected "HASH, AUTO_INCREMENT, NOT, NULL, COMMENT, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE potluck(
+potluck_id varchar(50) primary key default uuid(),
+date_time bigint,
+creator_id varchar(20) references reg_user(username),
+visibility boolean
+) [42001-200]
+2022-05-12 07:21:47 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE POTLUCK(
+POTLUCK_ID VARCHAR(50) PRIMARY KEY DEFAULT[*] UUID(),
+DATE_TIME BIGINT,
+CREATOR_ID VARCHAR(20) REFERENCES REG_USER(USERNAME),
+VISIBILITY BOOL
+)"; expected "HASH, AUTO_INCREMENT, NOT, NULL, COMMENT, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE potluck(
+potluck_id varchar(50) primary key default uuid(),
+date_time bigint,
+creator_id varchar(20) references reg_user(username),
+visibility bool
+) [42001-200]
+2022-05-12 07:24:07 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Function "GEN_RANDOM_UUID" not found; SQL statement:
+CREATE TABLE potluck(
+potluck_id varchar(50) default gen_random_uuid() primary key ,
+date_time bigint,
+creator_id varchar(20) references reg_user(username),
+visibility boolean
+) [90022-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:576)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.command.Parser.readJavaFunction(Parser.java:3565)
+	at org.h2.command.Parser.readFunction(Parser.java:3770)
+	at org.h2.command.Parser.readTerm(Parser.java:4305)
+	at org.h2.command.Parser.readFactor(Parser.java:3343)
+	at org.h2.command.Parser.readSum(Parser.java:3330)
+	at org.h2.command.Parser.readConcat(Parser.java:3305)
+	at org.h2.command.Parser.readCondition(Parser.java:3108)
+	at org.h2.command.Parser.readExpression(Parser.java:3059)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:5727)
+	at org.h2.command.Parser.parseTableColumnDefinition(Parser.java:8442)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:8379)
+	at org.h2.command.Parser.parseCreate(Parser.java:6276)
+	at org.h2.command.Parser.parsePrepared(Parser.java:903)
+	at org.h2.command.Parser.parse(Parser.java:843)
+	at org.h2.command.Parser.parse(Parser.java:815)
+	at org.h2.command.Parser.prepareCommand(Parser.java:738)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:212)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1459)
+	at org.h2.server.web.WebApp.query(WebApp.java:1116)
+	at org.h2.server.web.WebApp.query(WebApp.java:1092)
+	at org.h2.server.web.WebApp.process(WebApp.java:241)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:173)
+	at org.h2.server.web.WebServlet.doGet(WebServlet.java:129)
+	at org.h2.server.web.WebServlet.doPost(WebServlet.java:166)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:890)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1743)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:750)
+2022-05-12 07:24:07 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "POTLUCK[*]"; expected "PREPARE"; SQL statement:
+POTLUCK [42001-200]
+2022-05-12 07:24:20 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "POTLUCK[*]"; expected "PREPARE"; SQL statement:
+POTLUCK [42001-200]
+2022-05-12 07:25:11 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE ITEM(
+ITEM_ID VARCHAR(50) DEFAULT UUID() PRIMARY KEY ,
+DESCRIPTION VARCHAR(50) NOT NULL,
+STATUS VARCHAR(9) NOT NULL
+SUPPLIER[*] VARCHAR(50),
+POTLUCK_ID VARCHAR(50) REFERENCES POTLUCK(POTLUCK_ID) ON DELETE CASCADE
+)"; expected "AS, DEFAULT, GENERATED, ON, NOT, NULL, AUTO_INCREMENT, BIGSERIAL, SERIAL, IDENTITY, NULL_TO_DEFAULT, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, PRIMARY, UNIQUE, NOT, NULL, COMMENT, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE item(
+item_id varchar(50) default uuid() primary key ,
+description varchar(50) NOT NULL,
+status varchar(9) NOT NULL
+supplier varchar(50),
+potluck_id varchar(50) references potluck(potluck_id) on delete cascade
+) [42001-200]
