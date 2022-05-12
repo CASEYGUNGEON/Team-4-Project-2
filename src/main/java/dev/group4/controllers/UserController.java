@@ -1,6 +1,6 @@
 package dev.group4.controllers;
 
-import dev.group4.aspects.InvalidUserNameException;
+import dev.group4.aspects.InvalidCredentialException;
 import dev.group4.entities.User;
 import dev.group4.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +21,14 @@ public class UserController {
     public User registerNewUser(@RequestBody User user){
         try {
             return this.userService.registerUser(user);
-        } catch (InvalidUserNameException e) {
+        } catch (InvalidCredentialException e) {
             //throw new RuntimeException(e);
             return null;
         }
     }
 
     @GetMapping("{host}/users")
-    public User login(@RequestBody User user) throws InvalidUserNameException {
+    public User login(@RequestBody User user) throws InvalidCredentialException {
         return this.userService.login(user);
     }
 

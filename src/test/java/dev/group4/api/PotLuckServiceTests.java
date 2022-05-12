@@ -1,5 +1,6 @@
 package dev.group4.api;
 
+import dev.group4.aspects.InvalidTimeException;
 import dev.group4.entities.Potluck;
 import dev.group4.repos.PotluckRepo;
 import dev.group4.services.PotluckServiceImpl;
@@ -24,7 +25,7 @@ public class PotLuckServiceTests {
 
     @Test
     @Order(1)
-    void schedulePotluckTest() {
+    void schedulePotluckTest() throws InvalidTimeException {
         Potluck newPotLuck = new Potluck("First", System.currentTimeMillis() + 1000L, "username",true);
         //Potluck potluck = new Potluck("First", 0L, "username",true);
         PotLuckServiceTests.testPotluck = newPotLuck;
@@ -34,16 +35,16 @@ public class PotLuckServiceTests {
 
     @Test
     @Order(2)
-    void getAllPotlucksTest(){
-        Potluck test1 = new Potluck("Second", 0L, "username", true);
-        Potluck test2 = new Potluck("Third", 0L, "username", true);
-        Potluck test3 = new Potluck("Fourth", 0L, "username", true);
+    void getAllPotlucksTest() throws InvalidTimeException {
+        Potluck test1 = new Potluck("Second", 10L, "username", true);
+        Potluck test2 = new Potluck("Third", 3600012L, "username", true);
+        Potluck test3 = new Potluck("Fourth", 7200013L, "username", true);
 
         potluckService.schedulePotluck(test1);
         potluckService.schedulePotluck(test2);
         potluckService.schedulePotluck(test3);
 
-        List<Potluck> list1 = potluckService.getAllPotlucks();
+        List<Potluck> list1 = potluckService.getAllPublicPotlucks();
         System.out.println(list1);
 
     }
@@ -51,7 +52,7 @@ public class PotLuckServiceTests {
 
     @Test
     @Order(3)
-    void changeTimeTest(){
+    void changeTimeTest() throws InvalidTimeException {
         Potluck retrievedPotLuck = testPotluck;
         potluckService.changePotluckTime(retrievedPotLuck, System.currentTimeMillis() + 3000L);
         Assertions.assertEquals(3000L, retrievedPotLuck.getDateTime());
