@@ -16,17 +16,14 @@ public class PotLuckServiceTests {
     static Potluck testPotluck = null;
 
     @Autowired
-
     private PotluckRepo potluckRepo;
-    PotluckServiceImpl potluckService = new PotluckServiceImpl();
-   // Potluck potluck = new Potluck("First", 0L, "username",true);
-    //Potluck potluck = new Potluck("", 2000L, "aaaa",true);
+  @Autowired
+    private PotluckService potluckService;
 
     @Test
     @Order(1)
     void schedulePotluckTest() {
-        Potluck newPotLuck = new Potluck("First", System.currentTimeMillis() + 1000L, "username",true);
-        //Potluck potluck = new Potluck("First", 0L, "username",true);
+        Potluck newPotLuck = new Potluck("", System.currentTimeMillis() + 1000L, "username",true);
         PotLuckServiceTests.testPotluck = newPotLuck;
         potluckService.schedulePotluck(newPotLuck);
         Assertions.assertNotEquals("", newPotLuck.getId());

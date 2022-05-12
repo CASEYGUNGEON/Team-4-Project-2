@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping("{host}/users")
-    public User login(@RequestBody User user){
+    public User login(@RequestBody User user) throws InvalidUserNameException {
         return this.userService.login(user);
     }
 
