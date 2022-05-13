@@ -40,6 +40,6 @@ public class ItemController {
     @PatchMapping("/potlucks/{potluck_id}/items")
     public Item claimItem(@RequestBody Item item,@PathVariable String potluck_id){
         item.setPotluckId(potluck_id);
-        return itemService.updateSupplier(item);
+        return itemService.updateSupplier(item, item.getSupplier());
     }
 }

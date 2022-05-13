@@ -51,9 +51,9 @@ public class ItemServiceTests {
     @Test
     void supplierTest() {
         Item testItem = itemService.registerItem(item);
-        testItem.setSupplier("Your mom");
-        item = itemService.updateSupplier(testItem);
-        Assertions.assertEquals("Your mom", item.getSupplier());
+
+        item = itemService.updateSupplier(testItem, "Your Mom");
+        Assertions.assertEquals("Your Mom", item.getSupplier());
         itemRepo.delete(testItem);
     }
 
