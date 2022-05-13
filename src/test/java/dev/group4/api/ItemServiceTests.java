@@ -1,5 +1,6 @@
 package dev.group4.api;
 
+import dev.group4.aspects.InvalidCredentialException;
 import dev.group4.entities.Item;
 import dev.group4.entities.Potluck;
 import dev.group4.entities.StatusType;
@@ -22,7 +23,7 @@ public class ItemServiceTests {
 
 
     @Test
-    void registerTest() {
+    void registerTest() throws InvalidCredentialException {
         itemService.registerItem(item);
         Item testItem = this.itemRepo.findItemByDescription("IceCream");
         Assertions.assertNotEquals("notgeneratedid",testItem.getId());
@@ -31,7 +32,7 @@ public class ItemServiceTests {
     }
 
     @Test
-    void getByIdTest() {
+    void getByIdTest() throws InvalidCredentialException {
         Item testItem = itemService.registerItem(item);
         Item temp = itemService.getItemById(testItem.getId());
         Assertions.assertNotNull(temp);
@@ -39,7 +40,7 @@ public class ItemServiceTests {
     }
 
     @Test
-    void replaceTest() {
+    void replaceTest() throws InvalidCredentialException {
         Item testItem = itemService.registerItem(item);
         testItem.setDescription("Pizza Ball");
         System.out.println(testItem);
@@ -49,7 +50,7 @@ public class ItemServiceTests {
     }
 
     @Test
-    void supplierTest() {
+    void supplierTest() throws InvalidCredentialException {
         Item testItem = itemService.registerItem(item);
 
         item = itemService.updateSupplier(testItem, "Your Mom");
@@ -69,6 +70,13 @@ public class ItemServiceTests {
     void SQLException(){
         Item badItem = new Item ("notgeneratedid","IceCream", StatusType.WANTED, "Ron from Accounting","memes");
         Assertions.assertThrows(DataIntegrityViolationException.class, () -> itemService.registerItem(badItem));
+    }
+
+    @Test
+    void BlankDescription(){
+        Item badItem = new Item ("notgeneratedid","", StatusType.WANTED, "Ron from Accounting","1322f481-5b03-49a2-84d1-7a80e967c1e3");
+        Assertions.assertThrows(InvalidCredentialException.class, () -> itemService.registerItem(badItem));
+
     }
 
 
