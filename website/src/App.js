@@ -8,7 +8,7 @@ function App() {
   const[username, setUsername] = useState("undefined");
   let pageDisplay = "potlucks";
   let jsx = [<UserHandler userId={userId} setUserId={setUserId} username={username} setUsername={setUsername} />];
-  
+
 
   if(pageDisplay === "index") {
       jsx.push(test());

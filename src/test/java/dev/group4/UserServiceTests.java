@@ -7,6 +7,7 @@ import dev.group4.services.UserService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Configuration;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -17,6 +18,7 @@ public class UserServiceTests {
 
     @Autowired
     private UserService userService;
+
     @Order(1)
     @Test
     public void registerUser() throws InvalidCredentialException {
@@ -26,6 +28,7 @@ public class UserServiceTests {
         System.out.println(testUser);
         Assertions.assertNotNull(user.getUsername());
     }
+
     @Order(2)
     @Test
     public void loginTest() throws InvalidCredentialException {
