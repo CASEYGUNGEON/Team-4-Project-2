@@ -37,14 +37,20 @@ public class UserServiceTests {
 
     ////SHOULD BE WRONG TESTS BEGIN HERE////////////SHOULD BE WRONG TESTS BEGIN HERE//////////////////////SHOULD BE WRONG TESTS BEGIN HERE/////////////////////
     @Test
-    public void BlankUsernameOrPasswordOnCreateUserTest() throws InvalidCredentialException {
+    public void BlankUsernameOrPasswordOnCreateUserTest(){
         User wrongUser = new User("","ProperPassword2!");
         Assertions.assertThrows(InvalidCredentialException.class , () -> userService.registerUser((wrongUser)), "This method SHOULD have thrown but did not");
     }
 
     @Test
-    public void PasswordTooLongTest() throws InvalidCredentialException{
+    public void PasswordTooLongTest(){
         User wrongUser = new User("properusername","tooLONNNNNGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG1!!!!!!!!!!!!!!!!!!!!!!!");
         Assertions.assertThrows(InvalidCredentialException.class , () -> userService.registerUser((wrongUser)), "This method SHOULD have thrown but did not");
+    }
+    @Test
+    public void IncorrectPasswordTest(){
+        User wrongPassword = new User("username", "wrongpassword");
+        Assertions.assertThrows(InvalidCredentialException.class, () -> userService.login(wrongPassword));
+
     }
 }

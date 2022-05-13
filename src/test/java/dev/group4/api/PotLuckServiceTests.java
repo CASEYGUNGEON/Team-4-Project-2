@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest
 public class PotLuckServiceTests {
 
@@ -22,7 +21,6 @@ public class PotLuckServiceTests {
     private PotluckServiceImpl potluckService;
 
     @Test
-    @Order(1)
     void schedulePotluckTest() throws InvalidTimeException {
         Potluck newPotLuck = new Potluck("First", System.currentTimeMillis() + 1000L, "username",true);
         testPotluck =potluckService.schedulePotluck(newPotLuck);
@@ -30,7 +28,6 @@ public class PotLuckServiceTests {
     }
 
     @Test
-    @Order(2)
     void getAllPotlucksTest() throws InvalidTimeException {
 
         Potluck test1 = new Potluck("Second", System.currentTimeMillis() +10L, "username", true);
@@ -48,7 +45,6 @@ public class PotLuckServiceTests {
 
 
     @Test
-    @Order(3)
     void changeTimeTest() throws InvalidTimeException {
         long test = testPotluck.getDateTime();
         testPotluck.setDateTime( System.currentTimeMillis() + 3604000L);
@@ -57,7 +53,6 @@ public class PotLuckServiceTests {
     }
 
     @Test
-    @Order(4)
     void cancelTest() {
         System.out.println(testPotluck);
         Assertions.assertTrue(potluckService.cancelPotluck(testPotluck));

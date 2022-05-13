@@ -1,5 +1,6 @@
 package dev.group4.api;
 
+import dev.group4.aspects.InvalidCredentialException;
 import dev.group4.entities.Item;
 import dev.group4.entities.Potluck;
 import dev.group4.entities.StatusType;
@@ -8,7 +9,7 @@ import dev.group4.services.ItemServiceImpl;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
+import org.springframework.dao.DataIntegrityViolationException;
 
 
 @SpringBootTest
@@ -22,7 +23,7 @@ public class ItemServiceTests {
 
 
     @Test
-    void registerTest() {
+    void registerTest() throws InvalidCredentialException {
         itemService.registerItem(item);
         Item testItem = this.itemRepo.findItemByDescription("IceCream");
         Assertions.assertNotEquals("notgeneratedid",testItem.getId());
@@ -31,7 +32,7 @@ public class ItemServiceTests {
     }
 
     @Test
-    void getByIdTest() {
+    void getByIdTest() throws InvalidCredentialException {
         Item testItem = itemService.registerItem(item);
         Item temp = itemService.getItemById(testItem.getId());
         Assertions.assertNotNull(temp);
@@ -39,7 +40,7 @@ public class ItemServiceTests {
     }
 
     @Test
-    void replaceTest() {
+    void replaceTest() throws InvalidCredentialException {
         Item testItem = itemService.registerItem(item);
         testItem.setDescription("Pizza Ball");
         System.out.println(testItem);
@@ -49,11 +50,11 @@ public class ItemServiceTests {
     }
 
     @Test
-    void supplierTest() {
+    void supplierTest() throws InvalidCredentialException {
         Item testItem = itemService.registerItem(item);
-        testItem.setSupplier("Your mom");
-        item = itemService.updateSupplier(testItem);
-        Assertions.assertEquals("Your mom", item.getSupplier());
+
+        item = itemService.updateSupplier(testItem, "Your Mom");
+        Assertions.assertEquals("Your Mom", item.getSupplier());
         itemRepo.delete(testItem);
     }
 
@@ -64,4 +65,19 @@ public class ItemServiceTests {
 
 
     ////SHOULD BE WRONG TESTS BEGIN HERE////////////SHOULD BE WRONG TESTS BEGIN HERE//////////////////////SHOULD BE WRONG TESTS BEGIN HERE/////////////////////
+
+    @Test
+    void SQLException(){
+        Item badItem = new Item ("notgeneratedid","IceCream", StatusType.WANTED, "Ron from Accounting","memes");
+        Assertions.assertThrows(DataIntegrityViolationException.class, () -> itemService.registerItem(badItem));
+    }
+
+    @Test
+    void BlankDescription(){
+        Item badItem = new Item ("notgeneratedid","", StatusType.WANTED, "Ron from Accounting","1322f481-5b03-49a2-84d1-7a80e967c1e3");
+        Assertions.assertThrows(InvalidCredentialException.class, () -> itemService.registerItem(badItem));
+
+    }
+
+
 }
