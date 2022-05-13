@@ -8,7 +8,7 @@ import dev.group4.services.ItemServiceImpl;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
+import org.springframework.dao.DataIntegrityViolationException;
 
 
 @SpringBootTest
@@ -64,4 +64,12 @@ public class ItemServiceTests {
 
 
     ////SHOULD BE WRONG TESTS BEGIN HERE////////////SHOULD BE WRONG TESTS BEGIN HERE//////////////////////SHOULD BE WRONG TESTS BEGIN HERE/////////////////////
+
+    @Test
+    void SQLException(){
+        Item badItem = new Item ("notgeneratedid","IceCream", StatusType.WANTED, "Ron from Accounting","memes");
+        Assertions.assertThrows(DataIntegrityViolationException.class, () -> itemService.registerItem(badItem));
+    }
+
+
 }
