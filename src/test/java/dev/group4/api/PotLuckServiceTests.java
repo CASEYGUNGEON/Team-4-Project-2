@@ -26,7 +26,7 @@ public class PotLuckServiceTests {
     @Test
     @Order(1)
     void schedulePotluckTest() throws InvalidTimeException {
-        Potluck newPotLuck = new Potluck("First", System.currentTimeMillis() + 1000L, "username",true);
+        Potluck newPotLuck = new Potluck("first", System.currentTimeMillis() + 1000L, "username",true);
         testPotluck =potluckService.schedulePotluck(newPotLuck);
         Assertions.assertNotEquals("", newPotLuck.getId());
     }
@@ -69,7 +69,7 @@ public class PotLuckServiceTests {
     @Test
     @Order(7)
     void registerPotluckForNegativeTest() throws InvalidTimeException {
-        Potluck newPotLuck = new Potluck("First", System.currentTimeMillis() + 500L, "username",true);
+        Potluck newPotLuck = new Potluck("first", System.currentTimeMillis() + 500L, "username",true);
         testPotluck1 =potluckService.schedulePotluck(newPotLuck);
         Assertions.assertNotEquals("", newPotLuck.getId());
     }
@@ -78,7 +78,7 @@ public class PotLuckServiceTests {
     @Order(8)
     void firstValidationTimeTest()throws InvalidTimeException{
 
-        Potluck newPotLuck = new Potluck("Second", System.currentTimeMillis() + 10000L,
+        Potluck newPotLuck = new Potluck("second", System.currentTimeMillis() + 10000L,
                 "username",true);
         Assertions.assertThrows(InvalidTimeException.class,
                 () -> potluckService.schedulePotluck(newPotLuck),
@@ -89,7 +89,7 @@ public class PotLuckServiceTests {
     @Order(9)
     void secondValidationTimeTest()throws InvalidTimeException{
 
-        Potluck newPotLuck = new Potluck("Second", 1000L, "username",true);
+        Potluck newPotLuck = new Potluck("second", 1000L, "username",true);
         Assertions.assertThrows(InvalidTimeException.class,
                 () -> potluckService.schedulePotluck(newPotLuck),
                 "The time you wish to schedule the potluck has already passed.");
