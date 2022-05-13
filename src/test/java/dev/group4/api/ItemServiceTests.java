@@ -39,7 +39,6 @@ public class ItemServiceTests {
     }
 
     @Test
-
     void replaceTest() {
         Item testItem = itemService.registerItem(item);
         testItem.setDescription("Pizza Ball");
@@ -50,17 +49,19 @@ public class ItemServiceTests {
     }
 
     @Test
-
     void supplierTest() {
         Item testItem = itemService.registerItem(item);
         testItem.setSupplier("Your mom");
         item = itemService.updateSupplier(testItem);
         Assertions.assertEquals("Your mom", item.getSupplier());
+        itemRepo.delete(testItem);
     }
 
     @Test
-
     void deleteTest() {
         Assertions.assertTrue(itemService.deleteItem(item));
     }
+
+
+    ////SHOULD BE WRONG TESTS BEGIN HERE////////////SHOULD BE WRONG TESTS BEGIN HERE//////////////////////SHOULD BE WRONG TESTS BEGIN HERE/////////////////////
 }
