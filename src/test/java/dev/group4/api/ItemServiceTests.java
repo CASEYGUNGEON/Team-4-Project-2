@@ -45,7 +45,7 @@ public class ItemServiceTests {
     @Test
     @Order(4)
     void supplierTest() {
-        item = itemService.updateSupplier(item,"Your mom");
+        item = itemService.updateSupplier(item);
         Assertions.assertEquals("Your mom", item.getSupplier());
     }
 
