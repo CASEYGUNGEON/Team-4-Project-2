@@ -9,31 +9,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UserServiceTests {
-    static User testUser;
+    static User testUser = new User("username13", "Password22!");
     @Autowired
     private UserRepo userRepo;
 
     @Autowired
     private UserService userService;
-    @Order(1)
+
     @Test
     public void registerUser() throws InvalidCredentialException {
         //String most likely would be Null or empty quotes, unknown till have a database to test on
-        User user = new User("username", "Password!1");
-        testUser = userService.registerUser(user);//userRepo.save(user);
+        userService.registerUser(testUser);//userRepo.save(user);
         System.out.println(testUser);
-        Assertions.assertNotNull(user.getUsername());
+        Assertions.assertNotNull(testUser.getUsername());
+        userRepo.delete(testUser);
     }
-    @Order(2)
+
     @Test
     public void loginTest() throws InvalidCredentialException {
-        System.out.println(testUser);
+        userService.registerUser(testUser);
         User user1 = userService.login(testUser);
         Assertions.assertNotNull(user1);
         userRepo.delete(testUser);
 
     }
 
+    ////SHOULD BE WRONG TESTS BEGIN HERE////////////SHOULD BE WRONG TESTS BEGIN HERE//////////////////////SHOULD BE WRONG TESTS BEGIN HERE/////////////////////
+    @Test
+    public void BlankUsernameOrPasswordOnCreateUserTest() throws InvalidCredentialException {
+        User wrongUser = new User("","ProperPassword2!");
+        Assertions.assertThrows(InvalidCredentialException.class , () -> userService.registerUser((wrongUser)), "This method SHOULD have thrown but did not");
+    }
+
+    @Test
+    public void PasswordTooLongTest() throws InvalidCredentialException{
+        User wrongUser = new User("","tooLONNNNNGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG1!!!!!!!!!!!!!!!!!!!!!!!");
+        Assertions.assertThrows(InvalidCredentialException.class , () -> userService.registerUser((wrongUser)), "This method SHOULD have thrown but did not");
+    }
 }
