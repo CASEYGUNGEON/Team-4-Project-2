@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-
 public class UserServiceTests {
     static User testUser = new User("username13", "Password22!");
     @Autowired
@@ -17,7 +16,6 @@ public class UserServiceTests {
 
     @Autowired
     private UserService userService;
-
 
     @Test
     public void registerUser() throws InvalidCredentialException {
@@ -49,5 +47,4 @@ public class UserServiceTests {
         User wrongUser = new User("","tooLONNNNNGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG1!!!!!!!!!!!!!!!!!!!!!!!");
         Assertions.assertThrows(InvalidCredentialException.class , () -> userService.registerUser((wrongUser)), "This method SHOULD have thrown but did not");
     }
-
 }
