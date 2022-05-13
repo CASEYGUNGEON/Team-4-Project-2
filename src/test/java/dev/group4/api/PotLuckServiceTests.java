@@ -51,7 +51,8 @@ public class PotLuckServiceTests {
     @Order(3)
     void changeTimeTest() throws InvalidTimeException {
         long test = testPotluck.getDateTime();
-        Potluck retrievedPotLuck = potluckService.changePotluckTime(testPotluck, System.currentTimeMillis() + 3604000L);
+        testPotluck.setDateTime( System.currentTimeMillis() + 3604000L);
+        Potluck retrievedPotLuck = potluckService.changePotluckTime(testPotluck);
         Assertions.assertNotEquals(test, retrievedPotLuck.getDateTime());
     }
 
