@@ -18,39 +18,48 @@ public class ItemServiceTests {
     @Autowired
     private ItemRepo itemRepo;
     //THIS IS A HARD-WIRED VALUE FOR THE POTLUCK ID, YOU WILL CURRENTLY NEED TO OVERWRITE THE POTLUCK ID WITH AN EXISTING VALUE FROM YOUR OWN DATABASE
-    static Item item = new Item ("buttchecks","IceCream", StatusType.WANTED, "Ron from Accounting","1322f481-5b03-49a2-84d1-7a80e967c1e3");
+    static Item item = new Item ("notgeneratedid","IceCream", StatusType.WANTED, "Ron from Accounting","1322f481-5b03-49a2-84d1-7a80e967c1e3");
 
 
     @Test
     void registerTest() {
         itemService.registerItem(item);
         Item testItem = this.itemRepo.findItemByDescription("IceCream");
-        Assertions.assertNotEquals("buttchecks",testItem.getId());
-        itemRepo.delete(item);
+        Assertions.assertNotEquals("notgeneratedid",testItem.getId());
+        System.out.println(testItem);
+        itemRepo.delete(testItem);
     }
 
     @Test
     void getByIdTest() {
-        Item temp = itemService.getItemById(item.getId());
+        Item testItem = itemService.registerItem(item);
+        Item temp = itemService.getItemById(testItem.getId());
         Assertions.assertNotNull(temp);
+        itemRepo.delete(testItem);
     }
 
     @Test
 
     void replaceTest() {
-        item.setDescription("Ice cream");
+        Item testItem = itemService.registerItem(item);
+        testItem.setDescription("Pizza Ball");
+        System.out.println(testItem);
+        Assertions.assertEquals((testItem.getDescription()), "Pizza Ball");
+        itemRepo.delete(testItem);
 
     }
 
     @Test
 
     void supplierTest() {
-        item = itemService.updateSupplier(item);
+        Item testItem = itemService.registerItem(item);
+        testItem.setSupplier("Your mom");
+        item = itemService.updateSupplier(testItem);
         Assertions.assertEquals("Your mom", item.getSupplier());
     }
 
     @Test
-    @Order(5)
+
     void deleteTest() {
         Assertions.assertTrue(itemService.deleteItem(item));
     }
