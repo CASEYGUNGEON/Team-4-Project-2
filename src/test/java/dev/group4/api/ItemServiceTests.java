@@ -10,40 +10,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+
 @SpringBootTest
 public class ItemServiceTests {
-    ItemServiceImpl itemService = new ItemServiceImpl();
-    Item item = new Item ("buttchecks","Pizza", StatusType.WANTED, "Ron from Accounting","PotluckId");
-
-
+    @Autowired
+    private ItemServiceImpl itemService;
     @Autowired
     private ItemRepo itemRepo;
+    //THIS IS A HARD-WIRED VALUE FOR THE POTLUCK ID, YOU WILL CURRENTLY NEED TO OVERWRITE THE POTLUCK ID WITH AN EXISTING VALUE FROM YOUR OWN DATABASE
+    static Item item = new Item ("buttchecks","IceCream", StatusType.WANTED, "Ron from Accounting","1322f481-5b03-49a2-84d1-7a80e967c1e3");
 
 
     @Test
-    @Order(1)
     void registerTest() {
-        item = itemService.registerItem(item);
-        Assertions.assertNotEquals("buttchecks",item.getId());
+        itemService.registerItem(item);
+        Item testItem = this.itemRepo.findItemByDescription("IceCream");
+        Assertions.assertNotEquals("buttchecks",testItem.getId());
+        itemRepo.delete(item);
     }
 
     @Test
-    @Order(2)
     void getByIdTest() {
         Item temp = itemService.getItemById(item.getId());
         Assertions.assertNotNull(temp);
     }
 
     @Test
-    @Order(3)
+
     void replaceTest() {
         item.setDescription("Ice cream");
 
     }
 
     @Test
-    @Order(4)
+
     void supplierTest() {
         item = itemService.updateSupplier(item);
         Assertions.assertEquals("Your mom", item.getSupplier());
