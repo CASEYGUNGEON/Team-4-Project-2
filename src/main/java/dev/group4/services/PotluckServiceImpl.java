@@ -28,9 +28,10 @@ public class PotluckServiceImpl implements PotluckService{
     private boolean validateTime(long timeToValidate) throws InvalidTimeException {
         if(timeToValidate<= System.currentTimeMillis())
             throw new InvalidTimeException("The time you wish to schedule the potluck has already passed.");
+
         List<Long> potlucks = potluckRepo.findAll().stream().map(Potluck::getDateTime).collect(Collectors.toList());
         for(long time : potlucks){
-            if(timeToValidate <=  time + 3600000 )
+            if(timeToValidate +3600000 <=  time  )
                 throw new InvalidTimeException("The time you wish to schedule the potluck " +
                         "is within an hour of a currently scheduled Potluck");
         }
