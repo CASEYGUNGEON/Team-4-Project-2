@@ -18,7 +18,7 @@ public class PotluckController {
     @Autowired
     private PotluckService potluckService;
 
-    @Secured
+    //@Secured
     @PostMapping("/potlucks")
     public Potluck createPotluck(@RequestBody Potluck potluck){
         try {
@@ -33,8 +33,8 @@ public class PotluckController {
         return potluckService.getAllPublicPotlucks();
     }
 
-    @Secured
-    @PatchMapping("potluck/{potluck_id}")
+    //@Secured
+    @PatchMapping("/potluck/{potluck_id}")
     public Potluck changePotluck(@RequestBody Potluck potluck,@PathVariable String potluck_id){
         potluck.setId(potluck_id);
         try {
@@ -44,13 +44,13 @@ public class PotluckController {
         }
     }
 
-    @Secured
+    //@Secured
     @DeleteMapping("/potlucks/{potluck_id}")
     public void deletePotluck(@PathVariable String potluck_id){
         potluckService.cancelPotluck(potluck_id);
     }
 
-    @Secured
+    //@Secured
     @GetMapping("/potlucks/{potluck_id}")
     public Potluck shareLink(@PathVariable String potluck_id) {
         return potluckService.getPotluckById(potluck_id);

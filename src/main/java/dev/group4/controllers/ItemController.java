@@ -17,14 +17,14 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @Secured
+    //@Secured
     @PostMapping("/potlucks/{potluck_id}/items")
     public Item addItem(@RequestBody Item item,@PathVariable String potluck_id){
         item.setPotluckId(potluck_id);
         return itemService.registerItem(item);
     }
 
-    @Secured
+    //@Secured
     @DeleteMapping("/potlucks/{potluck_id}/items")
     public boolean deleteItem(@RequestBody Item item,  @PathVariable String potluck_id){
         item.setPotluckId(potluck_id);
@@ -37,10 +37,9 @@ public class ItemController {
         return itemService.registerItem(item);
     }
 
-    @PatchMapping("/potlucks/{potluck_id}/items/{item_id}")
-    public Item claimItem(@RequestBody Item item,@PathVariable String potluck_id,@PathVariable String item_id){
+    @PatchMapping("/potlucks/{potluck_id}/items")
+    public Item claimItem(@RequestBody Item item,@PathVariable String potluck_id){
         item.setPotluckId(potluck_id);
-        item.setId(item_id);
         return itemService.updateSupplier(item);
     }
 }
