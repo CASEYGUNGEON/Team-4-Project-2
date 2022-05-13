@@ -6,7 +6,7 @@ public interface ItemService {
     Item registerItem(Item item);
     Item getItemById(String id);
     Item replaceItem(Item item);
-    public Item updateSupplier(Item item, String supplier);
+    Item updateSupplier(Item item);
     boolean deleteItem(Item item);
     boolean deleteItem(String id);
 }

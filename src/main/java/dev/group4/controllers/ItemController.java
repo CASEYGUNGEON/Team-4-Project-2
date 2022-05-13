@@ -31,11 +31,16 @@ public class ItemController {
         return itemService.deleteItem(item);
     }
 
-/*
     @PostMapping(" /potlucks/{potluck_id}/items")
-    public Item addGuestItem
-    As a guest I can add an item to a potluck, put down my name as the supplier
-    POST {host}/potlucks/{potluck_id}/items
-    PATCH {host}/potlucks/{potluck_id}/items/{item_id}*/
+    public Item addGuestItem(@RequestBody Item item,@PathVariable String potluck_id){
+        item.setPotluckId(potluck_id);
+        return itemService.registerItem(item);
+    }
 
+    @PatchMapping("/potlucks/{potluck_id}/items/{item_id}")
+    public Item claimItem(@RequestBody Item item,@PathVariable String potluck_id,@PathVariable String item_id){
+        item.setPotluckId(potluck_id);
+        item.setId(item_id);
+        return itemService.updateSupplier(item);
+    }
 }

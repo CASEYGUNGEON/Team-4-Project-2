@@ -35,8 +35,7 @@ public class ItemServiceImpl implements ItemService{
 
 
     @Override
-    public Item updateSupplier(Item item, String supplier) {
-        item.setSupplier(supplier);
+    public Item updateSupplier(Item item) {
         return itemRepo.save(item);
     }
 
