@@ -22,7 +22,7 @@ public class PotLuckServiceTests {
 
     @Test
     void schedulePotluckTest() throws InvalidTimeException {
-        Potluck newPotLuck = new Potluck("First", System.currentTimeMillis() + 1000L, "username",true);
+        Potluck newPotLuck = new Potluck("first", System.currentTimeMillis() + 1000L, "username",true);
         testPotluck =potluckService.schedulePotluck(newPotLuck);
         Assertions.assertNotEquals("", newPotLuck.getId());
     }
@@ -43,7 +43,6 @@ public class PotLuckServiceTests {
 
     }
 
-
     @Test
     void changeTimeTest() throws InvalidTimeException {
         long test = testPotluck.getDateTime();
@@ -56,5 +55,45 @@ public class PotLuckServiceTests {
     void cancelTest() {
         System.out.println(testPotluck);
         Assertions.assertTrue(potluckService.cancelPotluck(testPotluck));
+    }
+
+    //negative tests
+
+    @Test
+    void registerPotluckForNegativeTest() throws InvalidTimeException {
+        Potluck newPotLuck = new Potluck("first", System.currentTimeMillis() + 500L, "username",true);
+        testPotluck1 =potluckService.schedulePotluck(newPotLuck);
+        Assertions.assertNotEquals("", newPotLuck.getId());
+    }
+
+    @Test
+    void firstValidationTimeTest()throws InvalidTimeException{
+
+        Potluck newPotLuck = new Potluck("second", System.currentTimeMillis() + 10000L,
+                "username",true);
+        Assertions.assertThrows(InvalidTimeException.class,
+                () -> potluckService.schedulePotluck(newPotLuck),
+                "The time you wish to schedule the potluck is within an hour of a currently scheduled Potluck.");
+    }
+
+    @Test
+    void secondValidationTimeTest()throws InvalidTimeException{
+
+        Potluck newPotLuck = new Potluck("second", 1000L, "username",true);
+        Assertions.assertThrows(InvalidTimeException.class,
+                () -> potluckService.schedulePotluck(newPotLuck),
+                "The time you wish to schedule the potluck has already passed.");
+    }
+
+    @Test
+    void cancelNegativeTest() {
+        Assertions.assertTrue(potluckService.cancelPotluck(testPotluck1));
+    }
+
+    @Test
+    void noPotluckIdTest()throws NullPointerException{
+        Assertions.assertThrows(NullPointerException.class,
+               () -> potluckService.getPotluckById(testPotluck.getId()),
+                "Potluck id was not found: " + testPotluck.getId());
     }
 }
