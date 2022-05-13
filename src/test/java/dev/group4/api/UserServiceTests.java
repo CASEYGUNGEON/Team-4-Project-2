@@ -44,7 +44,7 @@ public class UserServiceTests {
 
     @Test
     public void PasswordTooLongTest() throws InvalidCredentialException{
-        User wrongUser = new User("","tooLONNNNNGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG1!!!!!!!!!!!!!!!!!!!!!!!");
+        User wrongUser = new User("properusername","tooLONNNNNGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG1!!!!!!!!!!!!!!!!!!!!!!!");
         Assertions.assertThrows(InvalidCredentialException.class , () -> userService.registerUser((wrongUser)), "This method SHOULD have thrown but did not");
     }
 }
