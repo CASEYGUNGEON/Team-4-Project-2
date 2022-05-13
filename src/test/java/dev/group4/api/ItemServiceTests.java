@@ -1,4 +1,4 @@
-package dev.group4;
+package dev.group4.api;
 
 import dev.group4.entities.Item;
 import dev.group4.entities.Potluck;
