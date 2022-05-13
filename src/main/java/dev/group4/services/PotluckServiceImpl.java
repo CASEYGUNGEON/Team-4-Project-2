@@ -53,8 +53,10 @@ public class PotluckServiceImpl implements PotluckService{
 
 
     public Potluck changePotluckTime(Potluck potluck) throws InvalidTimeException {
+        long epoch = potluck.getDateTime();
         if(validateTime(potluck.getDateTime())) {
-            potluck.setDateTime(potluck.getDateTime());
+            potluck= getPotluckById(potluck.getId());
+            potluck.setDateTime(epoch);
             potluck = potluckRepo.save(potluck);
         }
         return potluck;
