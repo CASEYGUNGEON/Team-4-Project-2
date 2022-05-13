@@ -20,7 +20,7 @@ import java.sql.DriverManager;
 public class PotluckSpringApplication {
 
 	public static void main(String[] args) {
-		Server server = null;
+		/*Server server = null;
 		try {
 			server = Server.createTcpServer("-tcpAllowOthers").start();
 			Class.forName("org.h2.Driver");
@@ -30,7 +30,7 @@ public class PotluckSpringApplication {
 		}
 		catch(Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 		SpringApplication.run(PotluckSpringApplication.class, args);
 	}
 
