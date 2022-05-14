@@ -27,7 +27,6 @@ public class SecurityAspect {
         HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getResponse();
         String authorization = request.getHeader("Authorization");
         authorization = new String(Base64.getDecoder().decode(authorization.substring(authorization.indexOf(' ')+1)));
-
         if(compareAuthentication(authorization)){
             return pjp.proceed();
         }
@@ -38,20 +37,15 @@ public class SecurityAspect {
     }
 
     private boolean compareAuthentication(String authorization){
-        String username = authorization.substring(0,authorization.indexOf(':'));
-        String pass = authorization.substring(authorization.indexOf(':')+1);
-        User user = new User(username,pass);
-        //TODO get authentication from database or Local Storage?
         try {
-            if(userService.login(user)!=null){
-                System.out.println("Secured method" +user + pass);
+            if(userService.login(authorization).getAuthorization()!=null){
+                System.out.println("Secured method" +authorization);
                 return true;
             }
         } catch (InvalidCredentialException e) {
-            System.out.println("Couldn't login with secured method" + username + pass);
-            return false;
+            System.out.println("Couldn't login with secured method" + authorization);
         }
-        return true;
+        return false;
     }
 
     @Pointcut("@annotation(dev.group4.aspects.Secured)")

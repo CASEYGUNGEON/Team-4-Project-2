@@ -1,12 +1,15 @@
 package dev.group4.api;
 
 import dev.group4.aspects.InvalidCredentialException;
+import dev.group4.dtos.UserInfo;
 import dev.group4.entities.User;
 import dev.group4.repos.UserRepo;
 import dev.group4.services.UserService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Base64;
 
 @SpringBootTest
 public class UserServiceTests {
@@ -29,8 +32,9 @@ public class UserServiceTests {
     @Test
     public void loginTest() throws InvalidCredentialException {
         userService.registerUser(testUser);
-        User user1 = userService.login(testUser);
-        Assertions.assertNotNull(user1);
+        String authorization = testUser.getUsername()+":"+testUser.getPassword();
+        UserInfo user1 = userService.login(authorization);
+        Assertions.assertNotNull(user1.getAuthorization());
         userRepo.delete(testUser);
 
     }
@@ -50,7 +54,8 @@ public class UserServiceTests {
     @Test
     public void IncorrectPasswordTest(){
         User wrongPassword = new User("username", "wrongpassword");
-        Assertions.assertThrows(InvalidCredentialException.class, () -> userService.login(wrongPassword));
+        String authorization = testUser.getUsername()+":"+testUser.getPassword();
+        Assertions.assertThrows(InvalidCredentialException.class, () -> userService.login(authorization));
 
     }
 }
