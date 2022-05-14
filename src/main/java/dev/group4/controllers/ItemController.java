@@ -2,10 +2,13 @@ package dev.group4.controllers;
 
 
 import dev.group4.aspects.InvalidCredentialException;
+import dev.group4.aspects.LoggingAspect;
 import dev.group4.aspects.Secured;
 import dev.group4.entities.Item;
 import dev.group4.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,5 +45,14 @@ public class ItemController {
     public Item claimItem(@RequestBody Item item,@PathVariable String potluck_id){
         item.setPotluckId(potluck_id);
         return itemService.updateSupplier(item, item.getSupplier());
+    }
+
+    @ExceptionHandler(Throwable.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Object handleInvalidTimeException(Throwable e){
+        LoggingAspect.LogError(e);
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(e.getMessage().substring(e.getMessage().indexOf(":")+1));
     }
 }
