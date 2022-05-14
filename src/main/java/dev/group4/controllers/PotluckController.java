@@ -11,12 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Component
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin("*")
 public class PotluckController {
 
     @Autowired
@@ -31,11 +30,6 @@ public class PotluckController {
     @GetMapping("/potlucks")
     public List<Potluck> getAllPublicPotlucks(){
         return potluckService.getAllPublicPotlucks();
-    }
-
-    @GetMapping("/users/{creator_id}/potlucks")
-    public List<Potluck> getAllPublicPotlucks(@PathVariable String creator_id){
-        return potluckService.getPotlucksByCreator(creator_id);
     }
 
     //@Secured
