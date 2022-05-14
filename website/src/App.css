@@ -37,9 +37,8 @@
   }
 }
 
-.accstatus {
-  display:block;
-  float:right;
+.userHandler {
+  align:right;
   padding-right:0.5%;
   padding-top:0.5%
 }

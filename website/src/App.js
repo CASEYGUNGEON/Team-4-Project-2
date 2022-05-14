@@ -7,17 +7,16 @@ import Potlucks from './potlucks'
 function App() {
   const[username, setUsername] = useState("undefined");
   let pageDisplay = "potlucks";
-  let jsx = [<UserHandler username={username} setUsername={setUsername} />];
+  const jsx = [<UserHandler className="userHandler" username={username} setUsername={setUsername} key="userHandler" />];
 
 
   if(pageDisplay === "index") {
       jsx.push(test());
   }
   else if(pageDisplay === "potlucks") {
-    jsx.push(<Potlucks username={username} />)
+    jsx.push(<Potlucks username={username} key="potlucks"/>)
   }
-  return(
-    <>
+  return(<>
     {jsx}
     </>);
 }
