@@ -16,6 +16,7 @@ import javax.websocket.server.PathParam;
 
 @Component
 @RestController
+@CrossOrigin("*")
 public class ItemController {
 
     @Autowired

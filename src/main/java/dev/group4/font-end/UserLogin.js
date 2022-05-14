@@ -15,16 +15,13 @@ export default function UserLogin(){
     }
 
     async function sendLogin(){
-        const a =sessionStorage.getItem("auth");
         const response = await fetch("https://52c8-67-253-63-98.ngrok.io/users",{
             method:"GET", 
             headers:{
                 "Authorization":btoa(`${username}:${password}`)
             }
-        });        
+        });
 
-        const name = btoa(`${username}:${password}`);
-        console.log(name);
         const auth = await response.json();
         sessionStorage.setItem("auth", JSON.stringify(auth));
     }

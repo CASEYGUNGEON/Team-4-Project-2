@@ -6,7 +6,6 @@ import Result from './Result';
 
 export default function Potluck(){
 
-
     const [potluck,setPotluck] = useState([]);
     const [visibility,setVisibility] = useState([]);
     const [date,setDate]= useState([]);
@@ -26,7 +25,6 @@ export default function Potluck(){
 
     setPotluck(body);
     }
-
 
     useEffect(()=>{ getPotlucks();
     },[]);
@@ -48,7 +46,7 @@ export default function Potluck(){
             getPotlucks();
             alert(`New book registered with id of ${body.id}`)
         }else{
-            alert("FAILED TO CREATE A BOOK")
+            alert("FAILED TO CREATE A Potluck")
         }
 
        
