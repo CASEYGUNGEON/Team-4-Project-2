@@ -37,6 +37,11 @@ public class PotluckController {
         return potluckService.getAllPublicPotlucks();
     }
 
+    @GetMapping("/users/{creator_id}/potlucks")
+    public List<Potluck> getAllPublicPotlucks(@PathVariable String creator_id){
+        return potluckService.getPotlucksByCreator(creator_id);
+    }
+
     //@Secured
     @PatchMapping("/potluck/{potluck_id}")
     public Potluck changePotluck(@RequestBody Potluck potluck,@PathVariable String potluck_id){

@@ -13,6 +13,7 @@ import javax.websocket.server.PathParam;
 
 @Component
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class ItemController {
 
     @Autowired

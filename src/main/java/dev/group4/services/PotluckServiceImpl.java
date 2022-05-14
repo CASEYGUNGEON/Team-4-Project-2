@@ -54,6 +54,11 @@ public class PotluckServiceImpl implements PotluckService{
         //return potlucks.stream().filter(Potluck::getVisibility).collect(Collectors.toList());
     }
 
+    @Override
+    public List<Potluck> getPotlucksByCreator(String creator) {
+        List<Potluck> potlucks = potluckRepo.findPotluckByCreatorId(creator);
+        return potlucks;
+    }
 
     public Potluck changePotluckTime(Potluck potluck) throws InvalidTimeException {
         long epoch = potluck.getDateTime();

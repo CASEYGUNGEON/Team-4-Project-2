@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface PotluckRepo extends JpaRepository<Potluck,String> {
     List<Potluck> findPotluckByVisibility(boolean visibility);
+    List<Potluck> findPotluckByCreatorId(String creatorId);
 }

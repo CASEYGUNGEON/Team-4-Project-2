@@ -10,15 +10,16 @@ function App() {
 
 
   const[username, setUsername] = useState("undefined");
+  const[loggedIn, setLoggedIn] = useState(false);
   let pageDisplay = "potlucks";
-  const jsx = [<UserHandler className="userHandler" username={username} setUsername={setUsername} host={host} key="userHandler" />];
+  const jsx = [<UserHandler className="userHandler" username={username} setUsername={setUsername} loggedIn={loggedIn} setLoggedIn={setLoggedIn} host={host} key="userHandler" />];
 
 
   if(pageDisplay === "index") {
       jsx.push(test());
   }
   else if(pageDisplay === "potlucks") {
-    jsx.push(<Potlucks username={username} host={host} key="potlucks"/>)
+    jsx.push(<Potlucks username={username} loggedIn={loggedIn} host={host} key="potlucks"/>)
   }
   return(<>
     {jsx}

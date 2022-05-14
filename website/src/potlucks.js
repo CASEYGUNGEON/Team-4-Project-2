@@ -4,37 +4,54 @@ import { useEffect, useState, useSyncExternalStore } from 'react';
 export default function Potlucks(props) {
     const host = props.host;
     const username = props.username;
-    let date = 0;
-    let visibility = 0;
-    let potluckList = [];
+    const loggedIn = props.loggedIn;
+    const [date,setDate] = useState(0);
+    const [visibility,setVisibility] = useState(true);
+    const [potluckList, setPotluckList] = useState([]);
 
-    function setDate(event) {
-        date = event.target.value;
-    }
-
-    function setVis(event) {
-        visibility = event.target.checked;
-    }
+    const ListElement = potluckList.map((n) => (
+        <tr key={n.id}>
+            <td>{new Date(n.dateTime).toDateString()}</td>
+            <td>{new Date(n.dateTime).toLocaleTimeString()}</td>
+            <td>{n.creatorId}</td>
+            <td>{n.visibility?"public":"private"}</td>
+        </tr>));
     
     async function getPotlucks() {
-        const request = await fetch(host + "/potlucks");
-        const body = await request.json();
-        potluckList = body;
+        let body = '';
+        let req = '';
+        if(loggedIn) {
+            req = await fetch(host + "/users/" + username + "/potlucks/");
+            body = await req.json();
+        }
+        req = await fetch(host + "/potlucks");
+        const body2 = await req.json();
+        setPotluckList([...body, ...body2]);
     }
 
     async function createPotluck() {
         const potluck = {dateTime: new Date(date).getTime(),creatorId:{username}, visibility:Boolean(visibility)};
     }
 
-    useEffect(() => { getPotlucks(); });
+    useEffect(() => { getPotlucks(); }, []);
 
     return(<>
-        {potluckList}
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th><th>Time</th><th>Creator</th><th>Public</th>
+                </tr>
+                {ListElement}
+            </thead>
+        </table>
+        <h3>Create New Potluck</h3>
         <label>
             Start time: &nbsp;
-            <input type={"dateTime-local"} /><br />
-            <input onClick={(e) => setVis(e)} type="checkbox" />
+            <input onChange={(e) => setDate(e.target.value)}type={"dateTime-local"} />{' '}
             Public
+            <input onClick={(e) => setVisibility(e.target.checked)} type="checkbox" />
         </label>
+        {' '}<button onClick={() => createPotluck()}>Create</button>
+        <br /><button onClick={() => getPotlucks()}>Test</button>
     </>);
 }
