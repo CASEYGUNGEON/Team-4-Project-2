@@ -15,6 +15,7 @@ import java.util.List;
 
 @Component
 @RestController
+@CrossOrigin("*")
 public class PotluckController {
 
     @Autowired

@@ -33,7 +33,6 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    @Secured
     public UserInfo login() throws InvalidCredentialException {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getResponse();
