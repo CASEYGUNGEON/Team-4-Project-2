@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
+import java.util.List;
 
 @Component
 @RestController
@@ -24,6 +25,11 @@ public class ItemController {
     public Item addItem(@RequestBody Item item,@PathVariable String potluck_id) throws InvalidCredentialException {
         item.setPotluckId(potluck_id);
         return itemService.registerItem(item);
+    }
+
+    @GetMapping("/potlucks/{potluck_id}/items")
+    public List<Item> getItemsByPotluck(@PathVariable String potluck_id) {
+        return itemService.getItemsByPotluck(potluck_id);
     }
 
     //@Secured

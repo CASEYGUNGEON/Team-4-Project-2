@@ -2,18 +2,27 @@ import './App.css';
 import { useEffect, useState, useSyncExternalStore } from 'react';
 
 
-//TODO: Add another stateful potlucklist variable and display owned potlucks in a separate table
+//TODO: Add another stateful potlucklist variable and display owned potlucks in a separate table,
+//      use jsx array to only show creation form if logged in
 
 export default function Potlucks(props) {
     const host = props.host;
     const username = props.username;
     const loggedIn = props.loggedIn;
+    const setChosenPotluck = props.setChosenPotluck;
+    const setPageDisplay = props.setPageDisplay;
     const [date,setDate] = useState(0);
     const [visibility,setVisibility] = useState(true);
     const [potluckList, setPotluckList] = useState([]);
 
+    function goToPotluck(id) {
+        setChosenPotluck(id);
+        setPageDisplay("items");
+    }
+
     const ListElement = potluckList.map((n) => (
         <tr key={n.id}>
+            <td><button onClick={() => goToPotluck(n.id)}>View</button></td>
             <td>{new Date(n.dateTime).toDateString()}</td>
             <td>{new Date(n.dateTime).toLocaleTimeString()}</td>
             <td>{n.creatorId}</td>
@@ -42,7 +51,7 @@ export default function Potlucks(props) {
         <table>
             <thead>
                 <tr>
-                    <th>Date</th><th>Time</th><th>Creator</th><th>Public</th>
+                    <th></th><th>Date</th><th>Time</th><th>Creator</th><th>Public</th>
                 </tr>
                 {ListElement}
             </thead>
@@ -55,6 +64,6 @@ export default function Potlucks(props) {
             <input onClick={(e) => setVisibility(e.target.checked)} type="checkbox" />
         </label>
         {' '}<button onClick={() => createPotluck()}>Create</button>
-        <br /><button onClick={() => getPotlucks()}>Test</button>
+        <br /><button onClick={() => getPotlucks()}>refresh list</button>
     </>);
 }

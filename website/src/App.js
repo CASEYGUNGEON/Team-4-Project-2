@@ -1,8 +1,8 @@
 import './App.css';
 import { useState } from 'react'
-import test from './test'
 import UserHandler from './UserHandler'
 import Potlucks from './potlucks'
+import Items from './items'
 
 function App() {
 
@@ -11,19 +11,22 @@ function App() {
 
   const[username, setUsername] = useState("undefined");
   const[loggedIn, setLoggedIn] = useState(false);
-  let pageDisplay = "potlucks";
+  const[chosenPotluck,setChosenPotluck] = useState("");
+  const[pageDisplay,setPageDisplay] = useState("potluckList");
   const jsx = [<UserHandler className="userHandler" username={username} setUsername={setUsername} loggedIn={loggedIn} setLoggedIn={setLoggedIn} host={host} key="userHandler" />];
 
 
   if(pageDisplay === "index") {
-      jsx.push(test());
+      jsx.push();
   }
-  else if(pageDisplay === "potlucks") {
-    jsx.push(<Potlucks username={username} loggedIn={loggedIn} host={host} key="potlucks"/>)
+  else if(pageDisplay === "potluckList") {
+    jsx.push(<Potlucks username={username} loggedIn={loggedIn} setChosenPotluck={setChosenPotluck} setPageDisplay={setPageDisplay} host={host} key="potlucks"/>)
   }
-  return(<>
-    {jsx}
-    </>);
+  else if(pageDisplay === "items") {
+    jsx.push(<Items chosenPotluck={chosenPotluck} setPageDisplay={setPageDisplay} username={username} loggedIn={loggedIn} host={host} key="items" />)
+  }
+
+  return(<>{jsx}</>);
 }
 
 export default App;
