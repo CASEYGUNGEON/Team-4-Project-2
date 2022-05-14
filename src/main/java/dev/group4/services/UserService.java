@@ -1,6 +1,7 @@
 package dev.group4.services;
 
 import dev.group4.aspects.InvalidCredentialException;
+import dev.group4.dtos.UserInfo;
 import dev.group4.entities.User;
 
 public interface UserService {
@@ -14,9 +15,10 @@ public interface UserService {
 
     /**
      * A method that allows the user to login to their Potluck Account
-     * @param user the User object which contains the username and password
+     *
+     * @param authorization the Authorization String which contains the decrypted username and password
      * @return a User if credentials are valid
      * @throws InvalidCredentialException The password or username was incorrect
      */
-    User login(User user) throws InvalidCredentialException;
+    UserInfo login(String authorization) throws InvalidCredentialException;
 }

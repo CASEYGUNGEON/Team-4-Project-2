@@ -24,12 +24,8 @@ public class PotluckController {
 
     //@Secured
     @PostMapping("/potlucks")
-    public Potluck createPotluck(@RequestBody Potluck potluck){
-        try {
+    public Potluck createPotluck(@RequestBody Potluck potluck) throws InvalidTimeException {
             return this.potluckService.schedulePotluck(potluck);
-        } catch (InvalidTimeException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @GetMapping("/potlucks")
@@ -44,13 +40,10 @@ public class PotluckController {
 
     //@Secured
     @PatchMapping("/potluck/{potluck_id}")
-    public Potluck changePotluck(@RequestBody Potluck potluck,@PathVariable String potluck_id){
+    public Potluck changePotluck(@RequestBody Potluck potluck,@PathVariable String potluck_id) throws InvalidTimeException {
         potluck.setId(potluck_id);
-        try {
             return potluckService.changePotluckTime(potluck);
-        } catch (InvalidTimeException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
     //@Secured
