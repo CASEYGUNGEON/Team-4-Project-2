@@ -17,8 +17,7 @@ public interface PotluckService {
     Potluck getPotluckById(String id);
     List<Potluck> getAllPublicPotlucks();
     //List<Potluck> getAllPotlucksByStatus(StatusType status);
-    Potluck changePotluckTime(Potluck potluck, long epoch) throws InvalidTimeException;
-    Potluck changePotluckTime(String id, long epoch) throws InvalidTimeException;
+    Potluck changePotluckTime(Potluck potluck) throws InvalidTimeException;
     boolean cancelPotluck(Potluck potluck);
     boolean cancelPotluck(String id);
 

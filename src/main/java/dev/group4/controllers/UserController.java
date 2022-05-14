@@ -22,8 +22,8 @@ public class UserController {
         try {
             return this.userService.registerUser(user);
         } catch (InvalidCredentialException e) {
-            //throw new RuntimeException(e);
-            return null;
+            throw new RuntimeException(e);
+            //return null;
         }
     }
 

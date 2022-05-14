@@ -32,7 +32,7 @@ public class PotluckServiceImpl implements PotluckService{
         }
         List<Long> potlucks = potluckRepo.findAll().stream().map(Potluck::getDateTime).collect(Collectors.toList());
         for(long time : potlucks){
-            if(timeToValidate +3600000 <=  time  )
+            if(timeToValidate <=  time + 3600000 )
                 throw new InvalidTimeException("The time you wish to schedule the potluck " +
                         "is within an hour of a currently scheduled Potluck");
         }
@@ -55,19 +55,10 @@ public class PotluckServiceImpl implements PotluckService{
     }
 
 
-    public Potluck changePotluckTime(Potluck potluck, long epoch) throws InvalidTimeException {
-        if(validateTime(epoch)) {
-            potluck.setDateTime(epoch);
-            potluck = potluckRepo.save(potluck);
-        }
-        return potluck;
-    }
-
-    @Override
-    public Potluck changePotluckTime(String id, long epoch) throws InvalidTimeException {
-        Potluck potluck = null;
-        if(validateTime(epoch)) {
-            potluck = getPotluckById(id);
+    public Potluck changePotluckTime(Potluck potluck) throws InvalidTimeException {
+        long epoch = potluck.getDateTime();
+        if(validateTime(potluck.getDateTime())) {
+            potluck= getPotluckById(potluck.getId());
             potluck.setDateTime(epoch);
             potluck = potluckRepo.save(potluck);
         }

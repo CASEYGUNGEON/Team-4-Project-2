@@ -1,5 +1,6 @@
 package dev.group4.services;
 
+import dev.group4.aspects.InvalidCredentialException;
 import dev.group4.entities.Item;
 import dev.group4.repos.ItemRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,14 @@ public class ItemServiceImpl implements ItemService{
     private ItemRepo itemRepo;
 
     @Override
-    public Item registerItem(Item item) {
+    public Item registerItem(Item item) throws InvalidCredentialException {
+        if (item.getDescription().equals("")){
+            throw new InvalidCredentialException("Status cannot be left blank");
+        }
+        if (item.getDescription().length() > 50){
+            throw new InvalidCredentialException("Cannot create an item over 50 characters");
+        }
+
         return itemRepo.save(item);
     }
 

@@ -316,6 +316,7 @@ status varchar(9) NOT NULL
 supplier varchar(50),
 potluck_id varchar(50) references potluck(potluck_id) on delete cascade
 ) [42001-200]
+<<<<<<< HEAD
 2022-05-13 19:11:18 database: flush
 org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/revature/Team-4-Project-2/data/potluckdb.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
@@ -1069,6 +1070,9 @@ insert into reg_user values("username2","password1!",false) [42122-200]
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
 2022-05-13 19:22:41 jdbc[14]: null
+=======
+2022-05-12 19:42:10 jdbc[14]: null
+>>>>>>> main
 org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-200]
 	at org.h2.message.DbException.get(DbException.java:205)
 	at org.h2.message.DbException.get(DbException.java:181)
@@ -1077,6 +1081,7 @@ org.h2.message.DbException: The connection was not closed by the application and
 	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:186)
 	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
 	at org.h2.Driver.connect(Driver.java:69)
+<<<<<<< HEAD
 	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:309)
 	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:289)
 	at org.h2.server.web.WebServer.getConnection(WebServer.java:785)
@@ -1123,10 +1128,23 @@ org.h2.message.DbException: The connection was not closed by the application and
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+=======
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:364)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476)
+	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71)
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:726)
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:712)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+>>>>>>> main
 	at java.base/java.lang.Thread.run(Thread.java:833)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The connection was not closed by the application and is garbage collected [90018-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+<<<<<<< HEAD
 	... 54 more
 2022-05-13 19:41:09 jdbc[14]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "VISILIBILITY" not found; SQL statement:
@@ -1201,3 +1219,6 @@ SELECT[*] * FROM POTLUCK"; SQL statement:
 update potluck set visibility = true
 
 select * from potluck [42000-200]
+=======
+	... 18 more
+>>>>>>> main
