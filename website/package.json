@@ -1,4 +1,6 @@
 {
+  "Access-Control-Allow-Origin": "http://localhost:3000",
+
   "name": "website",
   "version": "0.1.0",
   "private": true,

@@ -38,9 +38,13 @@
 }
 
 .userHandler {
-  align:right;
-  padding-right:0.5%;
-  padding-top:0.5%
+  float:right;
+  padding-right:1%;
+  padding-top:1%
+}
+
+.right {
+    float:right;
 }
 
 .rightbutton {

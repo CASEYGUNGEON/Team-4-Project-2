@@ -50,7 +50,8 @@ public class PotluckServiceImpl implements PotluckService{
     @Override
     public List<Potluck> getAllPublicPotlucks() {
         List<Potluck> potlucks = potluckRepo.findAll();
-        return potlucks.stream().filter(Potluck::getVisibility).collect(Collectors.toList());
+        return potluckRepo.findPotluckByVisibility(true);
+        //return potlucks.stream().filter(Potluck::getVisibility).collect(Collectors.toList());
     }
 
 

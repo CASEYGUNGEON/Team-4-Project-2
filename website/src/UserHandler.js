@@ -6,18 +6,14 @@ export default function UserHandler(props) {
     let password = '';
     let loggedin = false;
 
-    function setPassword(event) {
-        password = event.target.value;
-    }
-
 
     if(!loggedin) {
         return(
-            <div>
+            <div className="right">
             <label htmlFor="username">Username </label>
-            <input type="text" name="username" onChange={setUsername} placeholder="username" /><br />
+            <input type="text" name="username" onChange={(e) => setUsername(e.target.value)} placeholder="username" /><br />
             <label htmlFor="password">Password </label>
-            <input type="text" name="password" onChange={(e) => setPassword(e)} placeholder="password" /><br/>
+            <input type="text" name="password" onChange={(e) => password = e.target.value} placeholder="password" /><br/>
             <button className="rightbutton" onClick={() => loggedin = true}>Log In</button>
             </div>
         );

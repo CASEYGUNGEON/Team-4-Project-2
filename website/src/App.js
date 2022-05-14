@@ -5,16 +5,20 @@ import UserHandler from './UserHandler'
 import Potlucks from './potlucks'
 
 function App() {
+
+  const host = "http://localhost:8080";
+
+
   const[username, setUsername] = useState("undefined");
   let pageDisplay = "potlucks";
-  const jsx = [<UserHandler className="userHandler" username={username} setUsername={setUsername} key="userHandler" />];
+  const jsx = [<UserHandler className="userHandler" username={username} setUsername={setUsername} host={host} key="userHandler" />];
 
 
   if(pageDisplay === "index") {
       jsx.push(test());
   }
   else if(pageDisplay === "potlucks") {
-    jsx.push(<Potlucks username={username} key="potlucks"/>)
+    jsx.push(<Potlucks username={username} host={host} key="potlucks"/>)
   }
   return(<>
     {jsx}
