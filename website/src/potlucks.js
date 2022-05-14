@@ -1,6 +1,9 @@
 import './App.css';
 import { useEffect, useState, useSyncExternalStore } from 'react';
 
+
+//TODO: Add another stateful potlucklist variable and display owned potlucks in a separate table
+
 export default function Potlucks(props) {
     const host = props.host;
     const username = props.username;
