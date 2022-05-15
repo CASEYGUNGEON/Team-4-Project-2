@@ -54,7 +54,7 @@ const ListElement2 = publicPotlucks.map((n) => (
     }
 
     async function createPotluck() {
-        const potluck = {'dateTime':date, 'creatorId':username, 'visibility':Boolean(visibility)};
+        const potluck = {id:'blah', dateTime:date, creatorId:username, visibility:Boolean(visibility)};
 
         const response = await fetch(host + "/potlucks",{
             body:JSON.stringify(potluck),
@@ -65,13 +65,13 @@ const ListElement2 = publicPotlucks.map((n) => (
             }     
         });
         if(response.status === 200){
-            //const body = await response.json();
+            const body = await response.json();
             
-            alert(`New potluck registered at ${potluck.dateTime}`)
+            alert(`New potluck registered.`)
             getPotlucks();
             getPublicPotlucks();
         }else{
-            alert("FAILED TO CREATE A Potluck");
+            alert("Failed to create a potluck.");
         }
     }
 
