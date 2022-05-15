@@ -55,12 +55,12 @@ public class ItemController {
         return itemService.updateSupplier(item, item.getSupplier());
     }
 
-    @ExceptionHandler(Throwable.class)
+    @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Object handleInvalidTimeException(Throwable e){
         LoggingAspect.LogError(e);
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body(e.getMessage().substring(e.getMessage().indexOf(":")+1));
+                .body(e.getCause().getMessage());
     }
 }

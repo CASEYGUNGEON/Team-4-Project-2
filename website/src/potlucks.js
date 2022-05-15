@@ -39,7 +39,7 @@ const ListElement2 = publicPotlucks.map((n) => (
 </tr>));
     
     async function getPotlucks() {
-        if(loggedIn) {
+        if(sessionStorage.getItem("auth")) {
             const req = await fetch(host+"/users/"+username+"/potlucks");
             const body = await req.json();
             setPotluckList([...body]);
@@ -64,14 +64,16 @@ const ListElement2 = publicPotlucks.map((n) => (
                 "Content-Type":"application/json"
             }     
         });
+        const body = await response.arrayBuffer();
+        const string = new TextDecoder().decode(body);
         if(response.status === 200){
-            const body = await response.json();
+            //const body = await response.json();
             
             alert(`New potluck registered.`)
             getPotlucks();
             getPublicPotlucks();
         }else{
-            alert("Failed to create a potluck.");
+            alert(string);
         }
     }
 
@@ -93,7 +95,7 @@ const ListElement2 = publicPotlucks.map((n) => (
     getPublicPotlucks();
 }, []);
 
-    if(loggedIn) {
+    if(sessionStorage.getItem("auth")) {
         jsx.push(<>
             <label htmlFor='private'>Your Potlucks</label>
             <table id='private'>
@@ -120,7 +122,7 @@ const ListElement2 = publicPotlucks.map((n) => (
         </table>
         <button onClick={() => {getPotlucks();getPublicPotlucks()}}>refresh list</button></>);
 
-        if(loggedIn) {
+        if(sessionStorage.getItem("auth")) {
             jsx.push(<form>
                 <fieldset id='createPotluck'>
             <legend htmlFor='createPotluck'>Create New Potluck</legend>
