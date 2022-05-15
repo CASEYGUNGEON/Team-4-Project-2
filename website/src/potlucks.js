@@ -12,8 +12,9 @@ export default function Potlucks(props) {
     const setChosenPotluck = props.setChosenPotluck;
     const setPageDisplay = props.setPageDisplay;
     const [date,setDate] = useState(0);
-    const [visibility,setVisibility] = useState(true);
+    const [visibility,setVisibility] = useState(false);
     const [potluckList, setPotluckList] = useState([]);
+    const [publicPotlucks, setPublicPotlucks]=useState([]);
 
     function goToPotluck(id) {
         setChosenPotluck(id);
@@ -25,45 +26,92 @@ export default function Potlucks(props) {
             <td><button onClick={() => goToPotluck(n.id)}>View</button></td>
             <td>{new Date(n.dateTime).toDateString()}</td>
             <td>{new Date(n.dateTime).toLocaleTimeString()}</td>
-            <td>{n.creatorId}</td>
-            <td>{n.visibility?"public":"private"}</td>
-        </tr>));
+    </tr>));
+
+const ListElement2 = publicPotlucks.map((n) => (
+    
+    <tr key={n.id}>        
+        <td><button onClick={() => goToPotluck(n.id)}>View</button></td>
+        <td>{new Date(n.dateTime).toDateString()}</td>
+        <td>{new Date(n.dateTime).toLocaleTimeString()}</td>
+        <td>{n.creatorId}</td>
+</tr>));
     
     async function getPotlucks() {
         let body = '';
-        let req = '';
         if(loggedIn) {
-            req = await fetch(host + "/users/" + username + "/potlucks/");
+            console.log(`${host}/users/${username}/potlucks`)
+            const req = await fetch(host+"/users/"+username+"/potlucks");
             body = await req.json();
         }
-        req = await fetch(host + "/potlucks");
-        const body2 = await req.json();
-        setPotluckList([...body, ...body2]);
+        setPotluckList([...body]);
+    }
+    async function getPublicPotlucks(){
+        let req = '';
+        req = await fetch(`${host}/potlucks/`);
+        const body = await req.json();
+        setPublicPotlucks([...body]);
     }
 
     async function createPotluck() {
-        const potluck = {dateTime: new Date(date).getTime(),creatorId:{username}, visibility:Boolean(visibility)};
+        const potluck = {id:2,dateTime:new Date(date).getTime(),creatorId:"username",visibility:Boolean(visibility)}
+        console.log(potluck)
+
+        const response = await fetch(`${host}/potlucks`,{
+            body:JSON.stringify(potluck),
+            method:"POST",
+            headers:{
+              //  "Authorization":`${session.authorization}`,
+                "Content-Type":"application/json"
+            }     
+        });
+        const body = await response.json();
+        if(response.status === 200){
+            //const body = await response.json();
+            
+            alert(`New potluck registered at ${body.dateTime}`)
+            getPotlucks();
+            getPublicPotlucks();
+        }else{
+            alert("FAILED TO CREATE A Potluck");
+        }
     }
 
-    useEffect(() => { getPotlucks(); }, []);
+    useEffect(() => { getPotlucks(); 
+    getPublicPotlucks();
+}, []);
 
     return(<>
-        <table>
+        <label htmlFor='private'>Your Putlucks</label>
+        <table id='private'>
             <thead>
                 <tr>
-                    <th></th><th>Date</th><th>Time</th><th>Creator</th><th>Public</th>
+                    <th></th><th>Date</th><th>Time</th>
                 </tr>
                 {ListElement}
             </thead>
         </table>
-        <h3>Create New Potluck</h3>
-        <label>
+        <label htmlFor='public'>Public Potlucks</label>
+        <table id='public'>
+            <thead>
+                <tr>
+                    <th></th><th>Date</th><th>Time</th><th>Creator</th>
+                </tr>
+                {ListElement2}
+            </thead>
+        </table>
+        <button onClick={() => getPotlucks()}>refresh list</button>
+        
+        <form>
+            <fieldset id='createPotluck'>
+        <legend htmlFor='createPotluck'>Create New Potluck</legend>
             Start time: &nbsp;
-            <input onChange={(e) => setDate(e.target.value)}type={"dateTime-local"} />{' '}
+            <input required onChange={(e) => setDate(e.target.value)}type={"dateTime-local"} />{' '}
             Public
             <input onClick={(e) => setVisibility(e.target.checked)} type="checkbox" />
-        </label>
-        {' '}<button onClick={() => createPotluck()}>Create</button>
-        <br /><button onClick={() => getPotlucks()}>refresh list</button>
+        
+        {' '}<button onClick={() => createPotluck()}>Create</button></fieldset></form>
+        
+        
     </>);
 }
