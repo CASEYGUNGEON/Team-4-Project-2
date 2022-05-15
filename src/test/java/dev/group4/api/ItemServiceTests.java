@@ -19,7 +19,7 @@ public class ItemServiceTests {
     @Autowired
     private ItemRepo itemRepo;
     //THIS IS A HARD-WIRED VALUE FOR THE POTLUCK ID, YOU WILL CURRENTLY NEED TO OVERWRITE THE POTLUCK ID WITH AN EXISTING VALUE FROM YOUR OWN DATABASE
-    static Item item = new Item ("notgeneratedid","IceCream", StatusType.WANTED, "Ron from Accounting","1322f481-5b03-49a2-84d1-7a80e967c1e3");
+    static Item item = new Item ("notgeneratedid","IceCream", "WANTED", "Ron from Accounting","1322f481-5b03-49a2-84d1-7a80e967c1e3");
 
 
     @Test
@@ -68,13 +68,13 @@ public class ItemServiceTests {
 
     @Test
     void SQLException(){
-        Item badItem = new Item ("notgeneratedid","IceCream", StatusType.WANTED, "Ron from Accounting","memes");
+        Item badItem = new Item ("notgeneratedid","IceCream", "WANTED", "Ron from Accounting","memes");
         Assertions.assertThrows(DataIntegrityViolationException.class, () -> itemService.registerItem(badItem));
     }
 
     @Test
     void BlankDescription(){
-        Item badItem = new Item ("notgeneratedid","", StatusType.WANTED, "Ron from Accounting","1322f481-5b03-49a2-84d1-7a80e967c1e3");
+        Item badItem = new Item ("notgeneratedid","", "WANTED", "Ron from Accounting","1322f481-5b03-49a2-84d1-7a80e967c1e3");
         Assertions.assertThrows(InvalidCredentialException.class, () -> itemService.registerItem(badItem));
 
     }

@@ -21,20 +21,20 @@ public class PotluckServiceImpl implements PotluckService{
     @Override
     public Potluck schedulePotluck(Potluck potluck) throws InvalidTimeException {
         if(validateTime(potluck.getDateTime()))
-            potluck = potluckRepo.save(potluck);
-        return potluck;
+            return potluckRepo.save(potluck);
+        return null;
     }
 
     private boolean validateTime(long timeToValidate) throws InvalidTimeException {
         if(timeToValidate<= System.currentTimeMillis()) {
-            System.out.println(System.currentTimeMillis());
             throw new InvalidTimeException("The time you wish to schedule the potluck has already passed.");
         }
         List<Long> potlucks = potluckRepo.findAll().stream().map(Potluck::getDateTime).collect(Collectors.toList());
         for(long time : potlucks){
-            if(timeToValidate <=  time + 3600000 )
+            if(Math.abs(time - timeToValidate) <= 3600000 ) {
                 throw new InvalidTimeException("The time you wish to schedule the potluck " +
                         "is within an hour of a currently scheduled Potluck");
+            }
         }
         return true;
     }

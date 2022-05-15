@@ -22,7 +22,7 @@ public class Item {
     private String description;
 
     @Column(name = "status")
-    private StatusType status;
+    private String status;
 
     @Column(name = "supplier")
     private String supplier;
