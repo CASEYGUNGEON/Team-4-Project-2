@@ -14,6 +14,7 @@ export default function Items(props) {
     useEffect(() => {getItems();}, []);
 
     async function getItems() {
+        console.log(host + "/potlucks/" + chosenPotluck + "/items")
         const req = await fetch(host + "/potlucks/" + chosenPotluck + "/items");
         const body = await req.json();
         setItemList(body);

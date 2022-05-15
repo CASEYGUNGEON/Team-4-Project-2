@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Component
@@ -30,12 +29,13 @@ public class PotluckController {
 
     @GetMapping("/potlucks")
     public List<Potluck> getAllPublicPotlucks(){
+
         return potluckService.getAllPublicPotlucks();
     }
 
-    @GetMapping("/users/{creator_id}/potlucks")
-    public List<Potluck> getAllPublicPotlucks(@PathVariable String creator_id){
-        return potluckService.getPotlucksByCreator(creator_id);
+    @GetMapping("/users/{id}/potlucks")
+    public List<Potluck> getAllPrivatePotlucks(@PathVariable String id){
+        return potluckService.getPotlucksByCreator(id);
     }
 
     //@Secured

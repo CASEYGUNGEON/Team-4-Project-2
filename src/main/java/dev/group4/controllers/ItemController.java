@@ -31,9 +31,10 @@ public class ItemController {
     }
 
     @GetMapping("/potlucks/{potluck_id}/items")
-    public List<Item> getItemsByPotluck(@PathVariable String potluck_id) {
+    public List<Item> getItems(@PathVariable String potluck_id){
         return itemService.getItemsByPotluck(potluck_id);
     }
+
 
     //@Secured
     @DeleteMapping("/potlucks/{potluck_id}/items")
