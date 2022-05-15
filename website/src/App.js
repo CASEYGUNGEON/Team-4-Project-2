@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import UserHandler from './UserHandler'
 import Potlucks from './potlucks'
 import Items from './items'
@@ -7,19 +7,25 @@ import logo from './gatherLogo.png'
 
 function App() {
 
-  const host = "https://52c8-67-253-63-98.ngrok.io";
+  const host = "https://31fd-67-253-63-98.ngrok.io";
 
 
   const[username, setUsername] = useState();
   const[loggedIn, setLoggedIn] = useState(false);
   const[chosenPotluck,setChosenPotluck] = useState("");
   const[pageDisplay,setPageDisplay] = useState("potluckList");
+  const [password, setPassword] = useState([]);
 
   function createNewUser(){
     console.log("hello");
   }
+  useEffect(() => { 
+    if(sessionStorage.getItem("auth"))
+      setUsername(atob(JSON.parse(sessionStorage.getItem("auth")).authorization).split(":")[0]);
+}, []);
 
-  const jsx = [<div id='header'><div id='brand'><img id='logo' src={logo}/></div><div id='saying'><h1>Gather</h1><p id='sub-saying'>Food brings us together</p></div><div id='user'><UserHandler className="userHandler" username={username} setUsername={setUsername} loggedIn={loggedIn} setLoggedIn={setLoggedIn} createUser={createNewUser} host={host} key="userHandler" /></div></div>];
+
+  const jsx = [<div id='header'><div id='brand'><img id='logo' src={logo}/></div><div id='saying'><h1>Gather</h1><p id='sub-saying'>Food brings us together</p></div><div id='user'><UserHandler className="userHandler" chosenPotluck = {chosenPotluck} setPageDisplay={setPageDisplay} password={password} setPassword = {setPassword} username={username} setUsername={setUsername} loggedIn={loggedIn} setLoggedIn={setLoggedIn} createUser={createNewUser} host={host} key="userHandler" /></div></div>];
 
 
   if(pageDisplay === "index") {
