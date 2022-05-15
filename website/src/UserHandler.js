@@ -22,7 +22,7 @@ export default function UserHandler(props) {
     }
     else
         return(<>
-            <div>Welcome, {username} <button onClick={() => setLoggedIn(false)}>Log Out</button></div>
+            <div className="right">Welcome, {username} <button onClick={() => setLoggedIn(false)}>Log Out</button></div>
             
         </>);
 }

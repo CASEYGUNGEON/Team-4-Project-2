@@ -45,25 +45,31 @@ export default function Items(props) {
         const body = await req.json();
     }
 
-    const listElement = itemList.map((n) => (
+    const listElement = itemList.filter(n => n.status != "fulfilled").map((n) => (
         <tr key={n.id}>
             <td>{n.description}</td>
             <td>{n.status.toString()}</td>
-            <td>{n.supplier!=null?n.supplier:"N/A"}</td>
-            <td><button onClick={() => fulfill(n)}>Fulfill</button></td>
-        </tr>
-    ))
+            <td><button onClick={() => fulfill(n)}>Claim</button></td>
+        </tr>))
+        .concat(itemList.filter(n => n.status === "fulfilled").map((n) => 
+                <tr key={n.id}>
+                    <td>{n.description}</td>
+                    <td>{n.status.toString()}</td>
+                    <td>{n.supplier}</td>
+                </tr>));
 
-    return(
-        <>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Description</th><th>Status</th><th>Supplier</th><th></th>
-                    </tr>
-                    {listElement}
-                </thead>
-            </table><br/>
-            <input name="name" type="text" placeholder="input name to fulfill" onChange={(e) => setGuestName(e.target.value)} />
-        </>);
+    jsx.push(
+        <table key="table">
+            <thead>
+                <tr>
+                    <th>Description</th><th>Status</th><th>Supplier</th><th></th>
+                </tr>
+                {listElement}
+            </thead>
+        </table>);
+    
+    if(!loggedIn)
+        jsx.push(<input name="name" type="text" placeholder="input name to fulfill" onChange={(e) => setGuestName(e.target.value)} key="nameinput"/>)
+
+    return(<>{jsx}</>);
 }
