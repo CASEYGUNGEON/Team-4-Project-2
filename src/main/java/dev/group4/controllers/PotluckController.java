@@ -29,7 +29,13 @@ public class PotluckController {
 
     @GetMapping("/potlucks")
     public List<Potluck> getAllPublicPotlucks(){
+
         return potluckService.getAllPublicPotlucks();
+    }
+
+    @GetMapping("/users/{id}/potlucks")
+    public List<Potluck> getAllPrivatePotlucks(@PathVariable String id){
+        return potluckService.getPotlucksByCreator(id);
     }
 
     //@Secured
