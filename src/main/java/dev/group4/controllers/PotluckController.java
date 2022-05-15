@@ -24,7 +24,7 @@ public class PotluckController {
     //@Secured
     @PostMapping("/potlucks")
     public Potluck createPotluck(@RequestBody Potluck potluck) throws InvalidTimeException {
-            return this.potluckService.schedulePotluck(potluck);
+            return potluckService.schedulePotluck(potluck);
     }
 
     @GetMapping("/potlucks")

@@ -7,7 +7,7 @@ import logo from './gatherLogo.png'
 
 function App() {
 
-  const host = "https://52c8-67-253-63-98.ngrok.io";
+  const host = "http://localhost:8080";
 
 
   const[username, setUsername] = useState();

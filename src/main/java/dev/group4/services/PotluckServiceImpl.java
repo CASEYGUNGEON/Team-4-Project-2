@@ -21,12 +21,12 @@ public class PotluckServiceImpl implements PotluckService{
     @Override
     public Potluck schedulePotluck(Potluck potluck) throws InvalidTimeException {
         if(validateTime(potluck.getDateTime()))
-            potluck = potluckRepo.save(potluck);
-        return potluck;
+            return potluckRepo.save(potluck);
+        return null;
     }
 
     private boolean validateTime(long timeToValidate) throws InvalidTimeException {
-        if(timeToValidate<= System.currentTimeMillis()) {
+        if(timeToValidate<= System.currentTimeMillis() + 11644473600L) {
             System.out.println(System.currentTimeMillis());
             throw new InvalidTimeException("The time you wish to schedule the potluck has already passed.");
         }

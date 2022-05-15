@@ -15,6 +15,7 @@ export default function Potlucks(props) {
     const [visibility,setVisibility] = useState(false);
     const [potluckList, setPotluckList] = useState([]);
     const [publicPotlucks, setPublicPotlucks]=useState([]);
+    const jsx = [];
 
     function goToPotluck(id) {
         setChosenPotluck(id);
@@ -23,7 +24,7 @@ export default function Potlucks(props) {
 
     const ListElement = potluckList.map((n) => (
         <tr key={n.id}>
-            <td><button onClick={() => goToPotluck(n.id)}>View</button></td>
+            <td><button onClick={() => deletePotluck(n)}>Delete</button><button onClick={() => goToPotluck(n.id)}>View</button></td>
             <td>{new Date(n.dateTime).toDateString()}</td>
             <td>{new Date(n.dateTime).toLocaleTimeString()}</td>
     </tr>));
@@ -38,14 +39,13 @@ const ListElement2 = publicPotlucks.map((n) => (
 </tr>));
     
     async function getPotlucks() {
-        let body = '';
         if(loggedIn) {
-            console.log(`${host}/users/${username}/potlucks`)
             const req = await fetch(host+"/users/"+username+"/potlucks");
-            body = await req.json();
+            const body = await req.json();
+            setPotluckList([...body]);
         }
-        setPotluckList([...body]);
     }
+
     async function getPublicPotlucks(){
         let req = '';
         req = await fetch(`${host}/potlucks/`);
@@ -54,9 +54,9 @@ const ListElement2 = publicPotlucks.map((n) => (
     }
 
     async function createPotluck() {
-        const potluck = {dateTime: new Date(date).getTime(),creatorId:{username}, visibility:Boolean(visibility)};
+        const potluck = {'dateTime':date, 'creatorId':username, 'visibility':Boolean(visibility)};
 
-        const response = await fetch(`${host}/potlucks`,{
+        const response = await fetch(host + "/potlucks",{
             body:JSON.stringify(potluck),
             method:"POST",
             headers:{
@@ -64,11 +64,10 @@ const ListElement2 = publicPotlucks.map((n) => (
                 "Content-Type":"application/json"
             }     
         });
-        const body = await response.json();
         if(response.status === 200){
             //const body = await response.json();
             
-            alert(`New potluck registered at ${body.dateTime}`)
+            alert(`New potluck registered at ${potluck.dateTime}`)
             getPotlucks();
             getPublicPotlucks();
         }else{
@@ -76,20 +75,40 @@ const ListElement2 = publicPotlucks.map((n) => (
         }
     }
 
+    async function deletePotluck(potluck) {
+        console.log(potluck.id);
+        const response = await fetch(host + "/potlucks/" + potluck.id,{
+            method:"DELETE",
+            headers:{
+              //  "Authorization":`${session.authorization}`,
+                "Content-type":"application/json"
+            }     
+        });
+        //const body = await response.json();
+        getPotlucks();
+        getPublicPotlucks();
+    }
+
     useEffect(() => { getPotlucks(); 
     getPublicPotlucks();
 }, []);
 
-    return(<>
-        <label htmlFor='private'>Your Putlucks</label>
-        <table id='private'>
-            <thead>
-                <tr>
-                    <th></th><th>Date</th><th>Time</th>
-                </tr>
-                {ListElement}
-            </thead>
-        </table>
+    if(loggedIn) {
+        jsx.push(<>
+            <label htmlFor='private'>Your Potlucks</label>
+            <table id='private'>
+                <thead>
+                    <tr>
+                        <th></th><th>Date</th><th>Time</th>
+                    </tr>
+                    {ListElement}
+                </thead>
+            </table><br/><br/></>
+        )
+    }
+
+    jsx.push(<>
+        
         <label htmlFor='public'>Public Potlucks</label>
         <table id='public'>
             <thead>
@@ -99,18 +118,19 @@ const ListElement2 = publicPotlucks.map((n) => (
                 {ListElement2}
             </thead>
         </table>
-        <button onClick={() => getPotlucks()}>refresh list</button>
-        
-        <form>
-            <fieldset id='createPotluck'>
-        <legend htmlFor='createPotluck'>Create New Potluck</legend>
-            Start time: &nbsp;
-            <input required onChange={(e) => setDate(e.target.value)}type={"dateTime-local"} />{' '}
-            Public
-            <input onClick={(e) => setVisibility(e.target.checked)} type="checkbox" />
-        
-        {' '}<button onClick={() => createPotluck()}>Create</button></fieldset></form>
-        
-        
-    </>);
+        <button onClick={() => {getPotlucks();getPublicPotlucks()}}>refresh list</button></>);
+
+        if(loggedIn) {
+            jsx.push(<form>
+                <fieldset id='createPotluck'>
+            <legend htmlFor='createPotluck'>Create New Potluck</legend>
+                Start time:&nbsp;
+                <input required onChange={(e) => setDate(new Date(e.target.value).getTime())}type={"dateTime-local"} />{' '}
+                Public
+                <input onClick={(e) => setVisibility(e.target.checked)} type="checkbox" />
+            
+            {' '}<button onClick={(e) => {e.preventDefault(); createPotluck() }}>Create</button></fieldset></form>)
+        }
+
+    return(<>{jsx}</>);
 }
