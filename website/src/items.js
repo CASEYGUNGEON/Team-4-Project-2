@@ -19,6 +19,22 @@ export default function Items(props) {
         setItemList(body);
     }
 
+    async function createItem(item) {
+        const req = await fetch(host +"/items",
+            { 
+                method: "PATCH",
+                headers: { "Content-type": "application/json" },
+                body: JSON.stringify(
+                    {
+                        itemId: item.id,
+                        description: item.description,
+                        potluckId: chosenPotluck,
+                        status : "fulfilled",
+                        supplier: item.supplier
+                }),
+            });
+        const body = await req.json();
+    }
 
     async function fulfill(item) {
         if(loggedIn)

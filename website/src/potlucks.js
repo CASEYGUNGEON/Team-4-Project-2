@@ -43,6 +43,7 @@ export default function Potlucks(props) {
 
     async function createPotluck() {
         const potluck = {dateTime: new Date(date).getTime(),creatorId:{username}, visibility:Boolean(visibility)};
+        
     }
 
     useEffect(() => { getPotlucks(); }, []);
