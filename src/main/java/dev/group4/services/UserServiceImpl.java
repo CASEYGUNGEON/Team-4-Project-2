@@ -1,13 +1,15 @@
 package dev.group4.services;
 
 import dev.group4.aspects.InvalidCredentialException;
+import dev.group4.dtos.UserInfo;
 import dev.group4.entities.User;
 import dev.group4.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLOutput;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 
 @Component
@@ -48,14 +50,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(User user) throws InvalidCredentialException {
+    public UserInfo login(String authorization) throws InvalidCredentialException {
 
-        String username = user.getUsername();
+        String username = authorization.substring(0,authorization.indexOf(':'));
+        String pass = authorization.substring(authorization.indexOf(':')+1);
+        User user = new User(username,pass);
 
         if (userRepo.findById(username).isPresent()) {
             String password = userRepo.findById(username).get().getPassword();
             if (user.getPassword().equals(password))
-                return user;
+                return new UserInfo(Base64.getEncoder()
+                        .encodeToString((username+":"+password)
+                                .getBytes(StandardCharsets.UTF_8)));
         }
         throw new InvalidCredentialException("Login was invalid");
 
