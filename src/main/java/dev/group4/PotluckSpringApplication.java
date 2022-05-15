@@ -1,4 +1,4 @@
-package dev.group4.api;
+package dev.group4;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,6 +20,7 @@ import java.sql.DriverManager;
 public class PotluckSpringApplication {
 
 	public static void main(String[] args) {
+
 		Server server = null;
 		try {
 			server = Server.createTcpServer("-tcpAllowOthers").start();
@@ -32,6 +33,8 @@ public class PotluckSpringApplication {
 			e.printStackTrace();
 		}
 		SpringApplication.run(PotluckSpringApplication.class, args);
+
+
 	}
 
 }

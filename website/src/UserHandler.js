@@ -1,30 +1,30 @@
 import './App.css';
+import {useState } from 'react';
 
 export default function UserHandler(props) {
-    const user = props.userId;
-    const setUserId = props.setUserId;
     const username = props.username;
     const setUsername = props.setUsername;
+    const loggedIn = props.loggedIn;
+    const setLoggedIn = props.setLoggedIn;
+    const createNewUser = props.createNewUser;
     let password = '';
 
-    function setUsernameWithLog(event) {
-        setUsername(event.target.value);
-        console.log(event.target.value);
-    }
 
-
-    if(user === "") {
+    if(!loggedIn) {
         return(
-            <div class="accstatus">
+            <div className="right">
             <label htmlFor="username">Username </label>
-            <input type="text" name="username" onChange={setUsernameWithLog} placeholder="username" /><br/><br/>
-            <button class="rightbutton" onClick={() => props.setUserId("A")}>Log In</button>
+            <input type="text" name="username" onChange={(e) => setUsername(e.target.value)} placeholder="username" /><br />
+            <label htmlFor="password">Password </label>
+            <input type="text" name="password" onChange={(e) => password = e.target.value} placeholder="password" /><br/>
+            <button onClick={() => createNewUser()}>Create User</button>
+            <button className="rightbutton" onClick={() => setLoggedIn(true)}>Log In</button>
             </div>
         );
     }
     else
         return(<>
-            <div class="accstatus">Welcome, {username} <button onClick={() => props.setUserId("")}>Log Out</button></div>
+            <div>Welcome, {username} <button onClick={() => setLoggedIn(false)}>Log Out</button></div>
             
         </>);
 }

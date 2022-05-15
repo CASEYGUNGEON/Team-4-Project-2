@@ -26,8 +26,10 @@ public class PotluckServiceImpl implements PotluckService{
     }
 
     private boolean validateTime(long timeToValidate) throws InvalidTimeException {
-        if(timeToValidate<= System.currentTimeMillis())
+        if(timeToValidate<= System.currentTimeMillis()) {
+            System.out.println(System.currentTimeMillis());
             throw new InvalidTimeException("The time you wish to schedule the potluck has already passed.");
+        }
         List<Long> potlucks = potluckRepo.findAll().stream().map(Potluck::getDateTime).collect(Collectors.toList());
         for(long time : potlucks){
             if(timeToValidate <=  time + 3600000 )
@@ -48,9 +50,15 @@ public class PotluckServiceImpl implements PotluckService{
     @Override
     public List<Potluck> getAllPublicPotlucks() {
         List<Potluck> potlucks = potluckRepo.findAll();
-        return potlucks.stream().filter(Potluck::getVisibility).collect(Collectors.toList());
+        return potluckRepo.findPotluckByVisibility(true);
+        //return potlucks.stream().filter(Potluck::getVisibility).collect(Collectors.toList());
     }
 
+    @Override
+    public List<Potluck> getPotlucksByCreator(String creator) {
+        List<Potluck> potlucks = potluckRepo.findPotluckByCreatorId(creator);
+        return potlucks;
+    }
 
     public Potluck changePotluckTime(Potluck potluck) throws InvalidTimeException {
         long epoch = potluck.getDateTime();

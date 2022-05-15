@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -34,6 +35,11 @@ public class ItemServiceImpl implements ItemService{
         if(item.isPresent())
             return item.get();
         throw new NullPointerException("Item not found, id: " + id);
+    }
+
+    @Override
+    public List<Item> getItemsByPotluck(String potluckId) {
+        return itemRepo.findItemByPotluckId(potluckId);
     }
 
     @Override
