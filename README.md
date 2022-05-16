@@ -1,4 +1,4 @@
-# Team-4-Project-2 READ ME
+#<u>Team-4-Project-2 READ ME</u>
 
 Created By: 
 David Brumagin,
@@ -11,7 +11,7 @@ Anthony Padron
 
 When launched, creates a potluck application page where the user can create and edit values within 3 categories
 
-##Users
+###Users
 As a user you can:
 * View public potlucks, even if the User is not logged in.
 * Create a User Account if you are unregistered, a create account requires:
@@ -23,7 +23,7 @@ As a user you can:
 
  
 
-##Potlucks
+###Potlucks
 Created Potlucks require:
 * A provided date and time that must not be within an hour of another potluck or before the current time.
 * A logged in user
@@ -41,7 +41,7 @@ The User can:
 
 
 
-##Items
+###Items
 Created Items require:
 * Description/Name of Item
 * Status of
