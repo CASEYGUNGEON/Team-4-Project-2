@@ -16,14 +16,12 @@ public class UserServiceTests {
     static User testUser = new User("username13", "Password22!");
     @Autowired
     private UserRepo userRepo;
-
     @Autowired
     private UserService userService;
 
     @Test
     public void registerUser() throws InvalidCredentialException {
-        //String most likely would be Null or empty quotes, unknown till have a database to test on
-        userService.registerUser(testUser);//userRepo.save(user);
+        userService.registerUser(testUser);
         System.out.println(testUser);
         Assertions.assertNotNull(testUser.getUsername());
         userRepo.delete(testUser);
@@ -36,10 +34,9 @@ public class UserServiceTests {
         UserInfo user1 = userService.login(authorization);
         Assertions.assertNotNull(user1.getAuthorization());
         userRepo.delete(testUser);
-
     }
 
-    ////SHOULD BE WRONG TESTS BEGIN HERE////////////SHOULD BE WRONG TESTS BEGIN HERE//////////////////////SHOULD BE WRONG TESTS BEGIN HERE/////////////////////
+    ////Negative Tests Start Here
     @Test
     public void BlankUsernameOrPasswordOnCreateUserTest(){
         User wrongUser = new User("","ProperPassword2!");
