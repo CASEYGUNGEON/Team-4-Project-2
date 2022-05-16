@@ -42,8 +42,7 @@ public class PotLuckServiceTests {
 
     @Test
     @Order(3)
-    void getAllPotlucksTest() throws InvalidTimeException {
-
+    void getAllPotlucksTest(){
         list1 = potluckService.getAllPublicPotlucks();
         System.out.println(list1);
         Assertions.assertTrue(list1 != null && !list1.isEmpty());
@@ -80,7 +79,6 @@ public class PotLuckServiceTests {
     @Test
     @Order(8)
     void firstValidationTimeTest(){
-
         Potluck newPotLuck = new Potluck("Second", System.currentTimeMillis() + 10000L,
                 "username",true);
         Assertions.assertThrows(InvalidTimeException.class,
@@ -91,7 +89,6 @@ public class PotLuckServiceTests {
     @Test
     @Order(9)
     void secondValidationTimeTest(){
-
         Potluck newPotLuck = new Potluck("Second", 1000L, "username",true);
         Assertions.assertThrows(InvalidTimeException.class,
                 () -> potluckService.schedulePotluck(newPotLuck),
