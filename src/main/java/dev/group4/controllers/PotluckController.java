@@ -15,7 +15,7 @@ import java.util.List;
 
 @Component
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class PotluckController {
 
     @Autowired
@@ -39,7 +39,7 @@ public class PotluckController {
     }
 
     //@Secured
-    @PatchMapping("/potluck/{potluck_id}")
+    @PatchMapping("/potlucks/{potluck_id}")
     public Potluck changePotluck(@RequestBody Potluck potluck,@PathVariable String potluck_id) throws InvalidTimeException {
         potluck.setId(potluck_id);
             return potluckService.changePotluckTime(potluck);
@@ -54,7 +54,7 @@ public class PotluckController {
 
     //@Secured
     @GetMapping("/potlucks/{potluck_id}")
-    public Potluck shareLink(@PathVariable String potluck_id) {
+    public Potluck getPotluckById(@PathVariable String potluck_id) {
         return potluckService.getPotluckById(potluck_id);
     }
 

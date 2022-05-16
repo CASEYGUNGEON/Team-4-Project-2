@@ -26,6 +26,7 @@ export default function Potlucks(props) {
         setChosenPotluck(potluck.id);
         setPageDisplay("updatePotluck")
     }
+  
     function generateLink(potluck){    
         return host+'/'+ potluck.id;
     }
@@ -91,8 +92,8 @@ ListElement2 = publicPotlucks.map((n) => (
         const string = new TextDecoder().decode(body);
         if(response.status === 200){
             //const body = await response.json();
-            
-            alert(`New potluck registered.`)
+          alert(`New potluck registered.`)
+
             getPotlucks();
             getPublicPotlucks();
         }else{
@@ -154,6 +155,5 @@ ListElement2 = publicPotlucks.map((n) => (
             
             {' '}<button onClick={(e) => {e.preventDefault(); createPotluck() }}>Create</button></fieldset></form>)
         }
-
     return(<>{jsx}</>);
 }

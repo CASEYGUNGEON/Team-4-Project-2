@@ -59,19 +59,18 @@ public class ItemServiceTests {
     void registerTestCreatingUserAndPotluck() throws InvalidCredentialException, InvalidTimeException {
         User user = new User ("UsernameUnique!", "Password123!");
         testUser= userService.registerUser(user);
+
         Potluck potluck = new Potluck("first",System.currentTimeMillis() + 1000000000L, testUser.getUsername(), true);
         testPotluck = potluckService.schedulePotluck(potluck);
+
         Item testItem = new Item ("frist","Jello","WANTED","Stacey's Mom", testPotluck.getId());
-        item = itemService.registerItem(testItem);
+        testItem = itemService.registerItem(testItem);
         Assertions.assertNotEquals("frist", item.getId());
+
         itemRepo.delete(item);
         potluckRepo.delete(testPotluck);
         userRepo.delete(testUser);
-
-
-
     }
-
 
     @Test
     void getByIdTest() throws InvalidCredentialException {
@@ -88,7 +87,6 @@ public class ItemServiceTests {
         System.out.println(testItem);
         Assertions.assertEquals((testItem.getDescription()), "Pizza Ball");
         itemRepo.delete(testItem);
-
     }
 
     @Test
@@ -101,12 +99,11 @@ public class ItemServiceTests {
     }
 
     @Test
-    void deleteTest() {
-        Assertions.assertTrue(itemService.deleteItem(item));
+    void deleteTest() throws InvalidCredentialException {
+        Item testItem = itemService.registerItem(item);
+        Assertions.assertTrue(itemService.deleteItem(testItem));
     }
-
-
-    ////SHOULD BE WRONG TESTS BEGIN HERE////////////SHOULD BE WRONG TESTS BEGIN HERE//////////////////////SHOULD BE WRONG TESTS BEGIN HERE/////////////////////
+    ////Negative Tests Here
 
     @Test
     void SQLException(){
@@ -118,8 +115,6 @@ public class ItemServiceTests {
     void BlankDescription(){
         Item badItem = new Item ("notgeneratedid","", "WANTED", "Ron from Accounting","1322f481-5b03-49a2-84d1-7a80e967c1e3");
         Assertions.assertThrows(InvalidCredentialException.class, () -> itemService.registerItem(badItem));
-
     }
-
 
 }
