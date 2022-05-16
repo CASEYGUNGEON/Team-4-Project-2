@@ -75,31 +75,20 @@ public class PotLuckServiceTests {
 
     @Test
     @Order(8)
-    void firstValidationTimeTest() {
-        Potluck newPotLuck = new Potluck("Second", System.currentTimeMillis() + 10000L,
-                "username",true);
-        Assertions.assertThrows(InvalidTimeException.class, () -> potluckService.schedulePotluck(newPotLuck),
-                "The potluck was scheduled but it is within an hour of a currently scheduled Potluck.");
+    void secondValidationTimeTest(){
+
+        Potluck newPotLuck = new Potluck("Second", 1000L, "username",true);
+        Assertions.assertThrows(InvalidTimeException.class, () -> potluckService.schedulePotluck(newPotLuck), "The potluck was scheduled but the time has passed.");
     }
 
     @Test
     @Order(9)
-    void secondValidationTimeTest(){
-
-        Potluck newPotLuck = new Potluck("Second", 1000L, "username",true);
-        Assertions.assertThrows(InvalidTimeException.class,
-                () -> potluckService.schedulePotluck(newPotLuck),
-                "The potluck was scheduled but the time has passed.");
-    }
-
-    @Test
-    @Order(10)
     void cancelNegativeTest() {
         Assertions.assertTrue(potluckService.cancelPotluck(testPotluck1));
     }
 
     @Test
-    @Order(11)
+    @Order(10)
     void noPotluckIdTest()throws NullPointerException{
         Assertions.assertThrows(NullPointerException.class,
                () -> potluckService.getPotluckById(testPotluck.getId()),
