@@ -34,6 +34,7 @@ Created Potlucks require:
 
 Also Created:
 - PotluckId (Primary Key)
+- OwnerId (Foreign Key: User(Username))
 
 
 The User can:
@@ -54,6 +55,7 @@ Created Items require:
 
 Also Created:
 * ItemId (Primary Key)
+* PotluckId (Foreign Key: Potluck(id))
 
 
 The User Can:
