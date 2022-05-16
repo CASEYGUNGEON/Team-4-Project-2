@@ -35,48 +35,42 @@ public class ItemServiceTests {
 
     static User testUser;
     static Potluck testPotluck;
-
-
-
-
     //THIS IS A HARD-WIRED VALUE FOR THE POTLUCK ID, YOU WILL CURRENTLY NEED TO OVERWRITE THE POTLUCK ID WITH AN EXISTING VALUE FROM YOUR OWN DATABASE
     static Item item = new Item ("notgeneratedid","IceCream", "WANTED", "Ron from Accounting","1322f481-5b03-49a2-84d1-7a80e967c1e3");
-
-
-
 
     @Test
     void registerTest() throws InvalidCredentialException {
         itemService.registerItem(item);
         Item testItem = this.itemRepo.findItemByDescription("IceCream");
+
         Assertions.assertNotEquals("notgeneratedid",testItem.getId());
         System.out.println(testItem);
         itemRepo.delete(testItem);
     }
 
-
     @Test
     void registerTestCreatingUserAndPotluck() throws InvalidCredentialException, InvalidTimeException {
         User user = new User ("UsernameUnique!", "Password123!");
         testUser= userService.registerUser(user);
+
         Potluck potluck = new Potluck("first",System.currentTimeMillis() + 1000000000L, testUser.getUsername(), true);
         testPotluck = potluckService.schedulePotluck(potluck);
+
         Item testItem = new Item ("frist","Jello","WANTED","Stacey's Mom", testPotluck.getId());
         item = itemService.registerItem(testItem);
         Assertions.assertNotEquals("frist", item.getId());
+
         itemRepo.delete(item);
         potluckRepo.delete(testPotluck);
         userRepo.delete(testUser);
 
-
-
     }
-
 
     @Test
     void getByIdTest() throws InvalidCredentialException {
         Item testItem = itemService.registerItem(item);
         Item temp = itemService.getItemById(testItem.getId());
+
         Assertions.assertNotNull(temp);
         itemRepo.delete(testItem);
     }
@@ -85,17 +79,16 @@ public class ItemServiceTests {
     void replaceTest() throws InvalidCredentialException {
         Item testItem = itemService.registerItem(item);
         testItem.setDescription("Pizza Ball");
-        System.out.println(testItem);
+
         Assertions.assertEquals((testItem.getDescription()), "Pizza Ball");
         itemRepo.delete(testItem);
-
     }
 
     @Test
     void supplierTest() throws InvalidCredentialException {
         Item testItem = itemService.registerItem(item);
-
         item = itemService.updateSupplier(testItem, "Your Mom");
+
         Assertions.assertEquals("Your Mom", item.getSupplier());
         itemRepo.delete(testItem);
     }
@@ -104,9 +97,7 @@ public class ItemServiceTests {
     void deleteTest() {
         Assertions.assertTrue(itemService.deleteItem(item));
     }
-
-
-    ////SHOULD BE WRONG TESTS BEGIN HERE////////////SHOULD BE WRONG TESTS BEGIN HERE//////////////////////SHOULD BE WRONG TESTS BEGIN HERE/////////////////////
+    //Negative Tests Begin Here
 
     @Test
     void SQLException(){
@@ -118,7 +109,6 @@ public class ItemServiceTests {
     void BlankDescription(){
         Item badItem = new Item ("notgeneratedid","", "WANTED", "Ron from Accounting","1322f481-5b03-49a2-84d1-7a80e967c1e3");
         Assertions.assertThrows(InvalidCredentialException.class, () -> itemService.registerItem(badItem));
-
     }
 
 

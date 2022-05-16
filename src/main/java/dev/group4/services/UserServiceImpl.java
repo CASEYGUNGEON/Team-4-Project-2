@@ -11,13 +11,11 @@ import org.springframework.stereotype.Service;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-
 @Component
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepo userRepo;
-
 
     @Override
     public User registerUser(User user) throws InvalidCredentialException {
@@ -64,7 +62,6 @@ public class UserServiceImpl implements UserService {
                                 .getBytes(StandardCharsets.UTF_8)));
         }
         throw new InvalidCredentialException("Login was invalid");
-
     }
 }
 

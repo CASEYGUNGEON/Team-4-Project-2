@@ -65,7 +65,7 @@ public class PotLuckServiceTests {
         Assertions.assertTrue(potluckService.cancelPotluck(testPotluck));
     }
 
-    //negative tests
+
 
     @Test
     @Order(7)
@@ -75,6 +75,8 @@ public class PotLuckServiceTests {
         Assertions.assertNotEquals("", newPotLuck.getId());
     }
 
+    //Negative Tests Begin Here
+
     @Test
     @Order(8)
     void firstValidationTimeTest(){
@@ -83,7 +85,7 @@ public class PotLuckServiceTests {
                 "username",true);
         Assertions.assertThrows(InvalidTimeException.class,
                 () -> potluckService.schedulePotluck(newPotLuck),
-                "The potluck was scheduled but it is within an hour of a currently scheduled Potluck.");
+                "The Potluck was somehow scheduled even though it is within an hour of another potluck");
     }
 
     @Test
@@ -93,7 +95,7 @@ public class PotLuckServiceTests {
         Potluck newPotLuck = new Potluck("Second", 1000L, "username",true);
         Assertions.assertThrows(InvalidTimeException.class,
                 () -> potluckService.schedulePotluck(newPotLuck),
-                "The potluck was scheduled but the time has passed.");
+                "The potluck was somehow scheduled for a time that already happened.");
     }
 
     @Test

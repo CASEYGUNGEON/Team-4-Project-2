@@ -36,10 +36,9 @@ public class UserServiceTests {
         UserInfo user1 = userService.login(authorization);
         Assertions.assertNotNull(user1.getAuthorization());
         userRepo.delete(testUser);
-
     }
 
-    ////SHOULD BE WRONG TESTS BEGIN HERE////////////SHOULD BE WRONG TESTS BEGIN HERE//////////////////////SHOULD BE WRONG TESTS BEGIN HERE/////////////////////
+    ////Negative Tests Begin here
     @Test
     public void BlankUsernameOrPasswordOnCreateUserTest(){
         User wrongUser = new User("","ProperPassword2!");

@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
 public class LoggingAspect {
-
     public static void LogError(Throwable e) {
         String path = System.getProperty("user.dir") + "//potluck.log";
         File file = new File(path);

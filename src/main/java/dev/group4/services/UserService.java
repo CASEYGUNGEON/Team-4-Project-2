@@ -12,7 +12,6 @@ public interface UserService {
      * @throws InvalidCredentialException the username or password were invalid
      */
     User registerUser(User user) throws InvalidCredentialException;
-
     /**
      * A method that allows the user to login to their Potluck Account
      *
