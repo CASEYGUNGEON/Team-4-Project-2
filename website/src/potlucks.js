@@ -81,7 +81,7 @@ ListElement2 = publicPotlucks.map((n) => (
         if(response.status === 200){
             //const body = await response.json();
 
-            alert(`New potluck registered.`)
+            
             getPotlucks();
             getPublicPotlucks();
         }else{

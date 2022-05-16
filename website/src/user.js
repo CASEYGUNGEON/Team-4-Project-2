@@ -26,7 +26,7 @@ export default function user(props){
         });
         if(response.status === 200){
             const body = await response.json();       
-            alert(`New user registered${body.username}`)
+            alert(`New user registered ${body.username}`)
             window.location.reload(false);
         }else{
             alert("FAILED TO CREATE A User");
