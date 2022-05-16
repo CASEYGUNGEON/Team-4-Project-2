@@ -51,7 +51,7 @@ export default function user(props){
         <br/>
         <button id="back-button" onClick={() => setPageDisplay('potluckList')}>View Potlucks</button></div>
     )
-
+    
     return(<>{jsx}</>);
     
 }
