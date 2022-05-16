@@ -15,7 +15,7 @@ import java.util.List;
 
 @Component
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class PotluckController {
 
     @Autowired

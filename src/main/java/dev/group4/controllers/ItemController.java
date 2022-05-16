@@ -17,7 +17,7 @@ import java.util.List;
 
 @Component
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class ItemController {
 
     @Autowired

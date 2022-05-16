@@ -8,7 +8,7 @@ import logo from './gatherLogo.png'
 
 function App() {
 
-  const host = "https://ec2-54-176-244-61.us-west-1.compute.amazonaws.com:8080";
+  const host = "http://ec2-54-176-244-61.us-west-1.compute.amazonaws.com:8080";
 
 
   const[username, setUsername] = useState();
