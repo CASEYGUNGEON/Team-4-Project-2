@@ -8,8 +8,10 @@ export default function Potlucks(props) {
     const setChosenPotluck = props.setChosenPotluck;
     const setChosenPotluckCreator = props.setChosenPotluckCreator;
     const setPageDisplay = props.setPageDisplay;
-    const [date,setDate] = useState(0);
-    const [visibility,setVisibility] = useState(false);
+    const setDate = props.setDate;
+    const date = props.date;
+    const setVisibility = props.setVisibility;
+    const visibility = props.visibility;
     const [potluckList, setPotluckList] = useState([]);
     const [publicPotlucks, setPublicPotlucks]=useState([]);
     const jsx = [];
@@ -20,18 +22,22 @@ export default function Potlucks(props) {
         setChosenPotluckCreator(potluck.creatorId);
         setPageDisplay("items");
     }
+    function changePotluck(potluck) {
+        setChosenPotluck(potluck.id);
+        setPageDisplay("updatePotluck")
+    }
 
     const ListElement = potluckList.map((n) => (
         <tr key={n.id}>
-            <td><button onClick={() => deletePotluck(n)}>Delete</button><button onClick={() => goToPotluck(n)}>View</button></td>
+            <td><button onClick={() => goToPotluck(n)}>View</button><button onClick={() => changePotluck(n)}>Change</button><button onClick={() => deletePotluck(n)}>Delete</button></td>
             <td>{new Date(n.dateTime).toDateString()}</td>
             <td>{new Date(n.dateTime).toLocaleTimeString()}</td>
             <td>{n.visibility?"public":"private"}</td>
     </tr>));
 if(sessionStorage.getItem("auth")){
     ListElement2 = publicPotlucks.filter(n=>n.creatorId!=username).map((n) => (
-
-        <tr key={n.id}>
+    
+        <tr key={n.id}>        
             <td><button onClick={() => goToPotluck(n)}>View</button></td>
             <td>{new Date(n.dateTime).toDateString()}</td>
             <td>{new Date(n.dateTime).toLocaleTimeString()}</td>
@@ -41,15 +47,15 @@ if(sessionStorage.getItem("auth")){
 else{
 
 ListElement2 = publicPotlucks.map((n) => (
-
-    <tr key={n.id}>
+    
+    <tr key={n.id}>        
         <td><button onClick={() => goToPotluck(n)}>View</button></td>
         <td>{new Date(n.dateTime).toDateString()}</td>
         <td>{new Date(n.dateTime).toLocaleTimeString()}</td>
         <td>{n.creatorId}</td>
     </tr>));
 }
-
+    
     async function getPotlucks() {
         const name = sessionStorage.getItem("username");
         if(name) {
@@ -74,14 +80,13 @@ ListElement2 = publicPotlucks.map((n) => (
             headers:{
               //  "Authorization":`${session.authorization}`,
                 "Content-Type":"application/json"
-            }
+            }     
         });
         const body = await response.arrayBuffer();
         const string = new TextDecoder().decode(body);
         if(response.status === 200){
             //const body = await response.json();
 
-            
             getPotlucks();
             getPublicPotlucks();
         }else{
@@ -96,7 +101,7 @@ ListElement2 = publicPotlucks.map((n) => (
             headers:{
               //  "Authorization":`${session.authorization}`,
                 "Content-type":"application/json"
-            }
+            }     
         });
         //const body = await response.json();
         getPotlucks();
