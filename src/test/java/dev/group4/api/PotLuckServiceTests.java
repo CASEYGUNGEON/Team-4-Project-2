@@ -76,12 +76,11 @@ public class PotLuckServiceTests {
 
     @Test
     @Order(8)
-    void firstValidationTimeTest()throws InvalidTimeException{
+    void firstValidationTimeTest() {
 
         Potluck newPotLuck = new Potluck("Second", System.currentTimeMillis() + 10000L,
                 "username",true);
-        Assertions.assertThrows(InvalidTimeException.class,
-                () -> potluckService.schedulePotluck(newPotLuck),
+        Assertions.assertThrows(InvalidTimeException.class, () -> potluckService.schedulePotluck(newPotLuck),
                 "The potluck was scheduled but it is within an hour of a currently scheduled Potluck.");
     }
 

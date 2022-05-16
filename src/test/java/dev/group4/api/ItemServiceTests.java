@@ -59,8 +59,9 @@ public class ItemServiceTests {
     }
 
     @Test
-    void deleteTest() {
-        Assertions.assertTrue(itemService.deleteItem(item));
+    void deleteTest() throws InvalidCredentialException {
+        Item testItem = itemService.registerItem(item);
+        Assertions.assertTrue(itemService.deleteItem(testItem));
     }
 
 
