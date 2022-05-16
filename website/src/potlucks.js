@@ -80,8 +80,6 @@ ListElement2 = publicPotlucks.map((n) => (
         const string = new TextDecoder().decode(body);
         if(response.status === 200){
             //const body = await response.json();
-
-            
             getPotlucks();
             getPublicPotlucks();
         }else{
@@ -143,6 +141,5 @@ ListElement2 = publicPotlucks.map((n) => (
             
             {' '}<button onClick={(e) => {e.preventDefault(); createPotluck() }}>Create</button></fieldset></form>)
         }
-
     return(<>{jsx}</>);
 }

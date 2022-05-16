@@ -29,7 +29,7 @@ export default function user(props){
             alert(`New user registered ${body.username}`)
             window.location.reload(false);
         }else{
-            alert("FAILED TO CREATE A User");
+            alert("Failed to Create a User");
         }
     }
 

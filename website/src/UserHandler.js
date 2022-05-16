@@ -32,7 +32,7 @@ export default function UserHandler(props) {
         window.location.reload(false);
         }
         else{
-            alert("Login was invalid")
+            alert("Login information was invalid")
         }
 
         
