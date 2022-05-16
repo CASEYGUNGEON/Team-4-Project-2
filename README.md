@@ -1,4 +1,4 @@
-# Team-4-Project-2 READ ME
+# <u>Team-4-Project-2 READ ME</u>
 
 Created By: 
 David Brumagin,
@@ -7,11 +7,13 @@ Isaiah Lee,
 Brian Mokua, and
 Anthony Padron 
 
-##NOTE This is currently typed out assuming all tasks are completed, this will be changed tonight Once I get a better final sense of what is and isn't complete
+Start [Potlukk 1.0](https://main.d3pbgde6ddw94g.amplifyapp.com/)
+
+## NOTE This is currently typed out assuming all tasks are completed, this will be changed tonight Once I get a better final sense of what is and isn't complete
 
 When launched, creates a potluck application page where the user can create and edit values within 3 categories
 
-##Users
+### Users
 As a user you can:
 * View public potlucks, even if the User is not logged in.
 * Create a User Account if you are unregistered, a create account requires:
@@ -23,7 +25,7 @@ As a user you can:
 
  
 
-##Potlucks
+### Potlucks
 Created Potlucks require:
 * A provided date and time that must not be within an hour of another potluck or before the current time.
 * A logged in user
@@ -41,7 +43,7 @@ The User can:
 
 
 
-##Items
+### Items
 Created Items require:
 * Description/Name of Item
 * Status of
