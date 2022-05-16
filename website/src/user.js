@@ -13,7 +13,6 @@ export default function user(props){
 
 
         const user = {username,password};
-        console.log(user);
 
         const response = await fetch(`${host}/users`,{
             body:JSON.stringify(user),
@@ -27,7 +26,7 @@ export default function user(props){
             alert(`New user registered${body.username}`)
             window.location.reload(false);
         }else{
-            alert("FAILED TO CREATE A User");
+            alert("Failed to create user.");
         }
     }
 

@@ -3,10 +3,10 @@ import {useEffect, useState} from 'react'
 
 export default function Items(props) {
     const chosenPotluck = props.chosenPotluck;
+    const chosenPotluckCreator = props.chosenPotluckCreator;
     const setPageDisplay= props.setPageDisplay;
     const host = props.host;
     const username = props.username;
-    const loggedIn = props.loggedIn;
     const [itemList, setItemList] = useState([]);
     const [guestName, setGuestName] = useState("");
 
@@ -24,11 +24,11 @@ export default function Items(props) {
     }
 
     async function createItem() {
-        if(description != "" && status != "") {
+        if(description !== "" && status !== "") {
             const item = {'description':description,'status':status,'potluckId':chosenPotluck}
             if(status === "FULFILLED") {
                 if(sessionStorage.getItem("auth"))
-                    item.supplier = username;
+                    item.supplier = sessionStorage.getItem("username");
                 else
                     item.supplier = guestName;
             }
@@ -50,7 +50,7 @@ export default function Items(props) {
     async function fulfill(item) {
         if(sessionStorage.getItem("auth"))
             item.supplier = username;
-        else if(guestName != "") {
+        else if(guestName !== "") {
             item.supplier = guestName;
         } else {
             alert("Please enter a name or log in to claim an item.");
@@ -87,8 +87,8 @@ export default function Items(props) {
     }
     let listElement = {};
 
-    if(sessionStorage.getItem("auth")) {
-        listElement = itemList.filter(n => n.status != "fulfilled").map((n) => (
+    if(sessionStorage.getItem("auth") && sessionStorage.getItem("username") == chosenPotluckCreator) {
+        listElement = itemList.filter(n => n.status !== "fulfilled").map((n) => (
         <tr key={n.id}>
             <td>{n.description}</td>
             <td>{n.status.toString()}</td>
@@ -104,7 +104,7 @@ export default function Items(props) {
                 </tr>));
     }
     else {
-        listElement = itemList.filter(n => n.status != "fulfilled").map((n) => (
+        listElement = itemList.filter(n => n.status !== "fulfilled").map((n) => (
             <tr key={n.id}>
                 <td>{n.description}</td>
                 <td>{n.status.toString()}</td>

@@ -2,14 +2,11 @@ import './App.css';
 import { useEffect, useState, useSyncExternalStore } from 'react';
 
 
-//TODO: Add another stateful potlucklist variable and display owned potlucks in a separate table,
-//      use jsx array to only show creation form if logged in
-
 export default function Potlucks(props) {
     const host = props.host;
     const username = props.username;
-    const loggedIn = props.loggedIn;
     const setChosenPotluck = props.setChosenPotluck;
+    const setChosenPotluckCreator = props.setChosenPotluckCreator;
     const setPageDisplay = props.setPageDisplay;
     const [date,setDate] = useState(0);
     const [visibility,setVisibility] = useState(false);
@@ -17,14 +14,15 @@ export default function Potlucks(props) {
     const [publicPotlucks, setPublicPotlucks]=useState([]);
     const jsx = [];
 
-    function goToPotluck(id) {
-        setChosenPotluck(id);
+    function goToPotluck(potluck) {
+        setChosenPotluck(potluck.id);
+        setChosenPotluckCreator(potluck.creatorId);
         setPageDisplay("items");
     }
 
     const ListElement = potluckList.map((n) => (
         <tr key={n.id}>
-            <td><button onClick={() => deletePotluck(n)}>Delete</button><button onClick={() => goToPotluck(n.id)}>View</button></td>
+            <td><button onClick={() => deletePotluck(n)}>Delete</button><button onClick={() => goToPotluck(n)}>View</button></td>
             <td>{new Date(n.dateTime).toDateString()}</td>
             <td>{new Date(n.dateTime).toLocaleTimeString()}</td>
     </tr>));
@@ -32,15 +30,16 @@ export default function Potlucks(props) {
 const ListElement2 = publicPotlucks.map((n) => (
     
     <tr key={n.id}>        
-        <td><button onClick={() => goToPotluck(n.id)}>View</button></td>
+        <td><button onClick={() => goToPotluck(n)}>View</button></td>
         <td>{new Date(n.dateTime).toDateString()}</td>
         <td>{new Date(n.dateTime).toLocaleTimeString()}</td>
         <td>{n.creatorId}</td>
 </tr>));
     
     async function getPotlucks() {
-        if(sessionStorage.getItem("auth")) {
-            const req = await fetch(host+"/users/"+username+"/potlucks");
+        const name = sessionStorage.getItem("username");
+        if(name) {
+            const req = await fetch(host+"/users/"+name+"/potlucks");
             const body = await req.json();
             setPotluckList([...body]);
         }
@@ -91,9 +90,7 @@ const ListElement2 = publicPotlucks.map((n) => (
         getPublicPotlucks();
     }
 
-    useEffect(() => { getPotlucks(); 
-    getPublicPotlucks();
-}, []);
+    useEffect(() => { getPotlucks(); getPublicPotlucks();}, []);
 
     if(sessionStorage.getItem("auth")) {
         jsx.push(<>

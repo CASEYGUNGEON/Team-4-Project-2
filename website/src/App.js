@@ -14,13 +14,11 @@ function App() {
   const[username, setUsername] = useState();
   const[loggedIn, setLoggedIn] = useState(false);
   const[chosenPotluck,setChosenPotluck] = useState("");
+  const[chosenPotluckCreator,setChosenPotluckCreator] = useState("");
   const[pageDisplay,setPageDisplay] = useState("potluckList");
   const [password, setPassword] = useState([]);
 
-  useEffect(() => { 
-    if(sessionStorage.getItem("auth"))
-      setUsername(atob(JSON.parse(sessionStorage.getItem("auth")).authorization).split(":")[0]);
-}, []);
+  useEffect(() => { setUsername(sessionStorage.getItem("username")); }, []);
 
 
   const jsx = [<div id='header'><div id='brand'><img id='logo' src={logo}/></div><div id='saying'><h1>Gather</h1><p id='sub-saying'>Food brings us together</p></div><div id='user'><UserHandler className="userHandler" chosenPotluck = {chosenPotluck} setPageDisplay={setPageDisplay} password={password} setPassword = {setPassword} username={username} setUsername={setUsername} loggedIn={loggedIn} setLoggedIn={setLoggedIn} host={host} key="userHandler" /></div></div>];
@@ -30,10 +28,10 @@ function App() {
     jsx.push();
   }
   else if(pageDisplay === "potluckList") {
-    jsx.push(<div id='display'><Potlucks username={username} loggedIn={loggedIn} setChosenPotluck={setChosenPotluck} setPageDisplay={setPageDisplay} host={host} key="potlucks"/></div>)
+    jsx.push(<div id='display'><Potlucks username={username} setChosenPotluck={setChosenPotluck} setChosenPotluckCreator={setChosenPotluckCreator} setPageDisplay={setPageDisplay} host={host} key="potlucks"/></div>)
   }
   else if(pageDisplay === "items") {
-    jsx.push(<div id='display'><Items chosenPotluck={chosenPotluck} setPageDisplay={setPageDisplay} username={username} loggedIn={loggedIn} host={host} key="items" /></div>)
+    jsx.push(<div id='display'><Items chosenPotluck={chosenPotluck} chosenPotluckCreator={chosenPotluckCreator} setPageDisplay={setPageDisplay} username={username} host={host} key="items" /></div>)
   }
   else if(pageDisplay === "user"){
     jsx.push(<div id='display'><UserCreator chosenPotluck={chosenPotluck} setPageDisplay={setPageDisplay} username={username} setUsername = {setUsername} password = {password} setPassword = {setPassword}   host={host} key="user"  /></div>)
