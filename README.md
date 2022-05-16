@@ -7,6 +7,8 @@ Isaiah Lee,
 Brian Mokua, and
 Anthony Padron 
 
+Start [Potlukk 1.0](https://main.d3pbgde6ddw94g.amplifyapp.com/)
+
 ## NOTE This is currently typed out assuming all tasks are completed, this will be changed tonight Once I get a better final sense of what is and isn't complete
 
 When launched, creates a potluck application page where the user can create and edit values within 3 categories
