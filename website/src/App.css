@@ -2,13 +2,19 @@
     background: pink;
 }
 
-#password:not(:focus):not(:placeholder-shown) + div {
+#password:invalid:not(:focus):not(:placeholder-shown) + div {
     max-height: 200px;
     padding: 0 30px 20px 50px;
     overflow: show;
 }
 #create{
-    justify-content: center;
+    padding: 20px;
+    display: block;
+    justify-items: right;
+}
+#create label{
+    padding: 10px;
+    margin: 10px;
 }
 ul{
     list-style-type: none;
@@ -154,7 +160,7 @@ table{
     height: 100%;
     width: 100%;
     justify-content: center;
-    background: linear-gradient(#FFCDAB  ,#EDFEFF  );
+    background: linear-gradient(#FFCDAB  ,#defdff  );
     background-color: rgb(218, 211, 208);
 }
 

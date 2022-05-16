@@ -13,6 +13,7 @@ export default function user(props){
 
 
         const user = {username,password};
+        console.log(user);
 
         const response = await fetch(`${host}/users`,{
             body:JSON.stringify(user),
@@ -26,7 +27,7 @@ export default function user(props){
             alert(`New user registered${body.username}`)
             window.location.reload(false);
         }else{
-            alert("Failed to create user.");
+            alert("FAILED TO CREATE A User");
         }
     }
 
@@ -36,7 +37,7 @@ export default function user(props){
     <input  type="text" name="username" onChange={(e) => setUsername(e.target.value)} required placeholder="username" />
 
         <label htmlFor="password">Password</label>
-        <input pattern="(?=.*\d)(?=.*[A-Z]).{6,}"  type="text" name="password" id='password' onChange={(e) => setPassword(e.target.value)} required placeholder="password" />
+        <input pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{3,}$"  type="text" name="password" id='password' onChange={(e) => setPassword(e.target.value)} required placeholder="password" />
        <div class="requirements">
             <label>You must have the following:</label>
         <ul><li>An Uppercase Letter</li>
