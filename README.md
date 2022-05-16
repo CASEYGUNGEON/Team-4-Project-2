@@ -13,7 +13,7 @@ Start [Potlukk 1.0](https://main.d3pbgde6ddw94g.amplifyapp.com/)
 
 When launched, creates a potluck application page where the user can create and edit values within 3 categories
 
-### Users
+### <u>Users</u>
 As a user you can:
 * View public potlucks, even if the User is not logged in.
 * Create a User Account if you are unregistered, a create account requires:
@@ -25,9 +25,9 @@ As a user you can:
 
  
 
-### Potlucks
+### <u>Potlucks</u>
 Created Potlucks require:
-* A provided date and time that must not be within an hour of another potluck or before the current time.
+* A provided date and time that must be after the current time.
 * A logged in user
 * Selecting between Public/Private, a private Potluck will not be seen on the main page instead, the owner must provide a link that when clicked, takes you to the potluck item list.
   * The owner is provided a link regardless of whether the potluck is public or private.
@@ -43,7 +43,7 @@ The User can:
 
 
 
-### Items
+### <u>Items</u>
 Created Items require:
 * Description/Name of Item
 * Status of
