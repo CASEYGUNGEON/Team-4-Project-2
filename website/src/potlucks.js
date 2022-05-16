@@ -13,6 +13,7 @@ export default function Potlucks(props) {
     const [potluckList, setPotluckList] = useState([]);
     const [publicPotlucks, setPublicPotlucks]=useState([]);
     const jsx = [];
+    let ListElement2;
 
     function goToPotluck(potluck) {
         setChosenPotluck(potluck.id);
@@ -25,17 +26,30 @@ export default function Potlucks(props) {
             <td><button onClick={() => deletePotluck(n)}>Delete</button><button onClick={() => goToPotluck(n)}>View</button></td>
             <td>{new Date(n.dateTime).toDateString()}</td>
             <td>{new Date(n.dateTime).toLocaleTimeString()}</td>
+            <td>{n.visibility?"public":"private"}</td>
     </tr>));
+if(sessionStorage.getItem("auth")){
+    ListElement2 = publicPotlucks.filter(n=>n.creatorId!=username).map((n) => (
 
-const ListElement2 = publicPotlucks.map((n) => (
-    
-    <tr key={n.id}>        
+        <tr key={n.id}>
+            <td><button onClick={() => goToPotluck(n)}>View</button></td>
+            <td>{new Date(n.dateTime).toDateString()}</td>
+            <td>{new Date(n.dateTime).toLocaleTimeString()}</td>
+            <td>{n.creatorId}</td>
+        </tr>));
+}
+else{
+
+ListElement2 = publicPotlucks.map((n) => (
+
+    <tr key={n.id}>
         <td><button onClick={() => goToPotluck(n)}>View</button></td>
         <td>{new Date(n.dateTime).toDateString()}</td>
         <td>{new Date(n.dateTime).toLocaleTimeString()}</td>
         <td>{n.creatorId}</td>
-</tr>));
-    
+    </tr>));
+}
+
     async function getPotlucks() {
         const name = sessionStorage.getItem("username");
         if(name) {
@@ -46,8 +60,7 @@ const ListElement2 = publicPotlucks.map((n) => (
     }
 
     async function getPublicPotlucks(){
-        let req = '';
-        req = await fetch(`${host}/potlucks/`);
+        const req = await fetch(`${host}/potlucks/`);
         const body = await req.json();
         setPublicPotlucks([...body]);
     }
@@ -61,13 +74,13 @@ const ListElement2 = publicPotlucks.map((n) => (
             headers:{
               //  "Authorization":`${session.authorization}`,
                 "Content-Type":"application/json"
-            }     
+            }
         });
         const body = await response.arrayBuffer();
         const string = new TextDecoder().decode(body);
         if(response.status === 200){
             //const body = await response.json();
-            
+
             alert(`New potluck registered.`)
             getPotlucks();
             getPublicPotlucks();
@@ -83,7 +96,7 @@ const ListElement2 = publicPotlucks.map((n) => (
             headers:{
               //  "Authorization":`${session.authorization}`,
                 "Content-type":"application/json"
-            }     
+            }
         });
         //const body = await response.json();
         getPotlucks();
@@ -98,7 +111,7 @@ const ListElement2 = publicPotlucks.map((n) => (
             <table id='private'>
                 <thead>
                     <tr>
-                        <th></th><th>Date</th><th>Time</th>
+                        <th></th><th>Date</th><th>Time</th><th>Public/Private</th>
                     </tr>
                     {ListElement}
                 </thead>
