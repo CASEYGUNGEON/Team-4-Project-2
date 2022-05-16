@@ -34,8 +34,8 @@ export default function Potlucks(props) {
 
     const ListElement = potluckList.map((n) => (
         <tr key={n.id}>
-            <td>{generateLink(n)}</td>
             <td><button onClick={() => goToPotluck(n)}>View</button><button onClick={() => changePotluck(n)}>Change</button><button onClick={() => deletePotluck(n)}>Delete</button></td>
+            <td>{generateLink(n)}</td>
             <td>{new Date(n.dateTime).toDateString()}</td>
             <td>{new Date(n.dateTime).toLocaleTimeString()}</td>
             <td>{n.visibility?"public":"private"}</td>
@@ -123,7 +123,7 @@ ListElement2 = publicPotlucks.map((n) => (
             <table id='private'>
                 <thead>
                     <tr>
-                    <th>Link</th><th></th><th>Date</th><th>Time</th><th>Public/Private</th>
+                    <th></th><th>Link</th><th>Date</th><th>Time</th><th>Public/Private</th>
                     </tr>
                     {ListElement}
                 </thead>
