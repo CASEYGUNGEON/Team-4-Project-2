@@ -6,11 +6,12 @@ import Potlucks from './potlucks'
 import Items from './items'
 import logo from './gatherLogo.png'
 import UpdatePotluck from './updatePotluck'
+import {useParams } from 'react-router';
+
 
 function App() {
-
+  
   const host = "http://ec2-54-176-244-61.us-west-1.compute.amazonaws.com:8080";
-
 
   const[username, setUsername] = useState();
   const[loggedIn, setLoggedIn] = useState(false);
@@ -20,8 +21,16 @@ function App() {
   const [password, setPassword] = useState([]);
   const [date,setDate] = useState(0);
   const [visibility,setVisibility] = useState(false);
+  const id= useParams().id;
+  
+    async function getPotluck() {
+      console.log(id);
+      if(id){
+        setPageDisplay("items");
+        setChosenPotluck(id);
+    }}
 
-  useEffect(() => { setUsername(sessionStorage.getItem("username")); }, []);
+  useEffect(() => {getPotluck(); setUsername(sessionStorage.getItem("username")); }, []);
 
 
   const jsx = [<div id='header'><div id='brand'><img id='logo' src={logo}/></div><div id='saying'><h1>Gather</h1><p id='sub-saying'>Food brings us together</p></div><div id='user'><UserHandler className="userHandler" chosenPotluck = {chosenPotluck} setPageDisplay={setPageDisplay} password={password} setPassword = {setPassword} username={username} setUsername={setUsername} loggedIn={loggedIn} setLoggedIn={setLoggedIn} host={host} key="userHandler" /></div></div>];
