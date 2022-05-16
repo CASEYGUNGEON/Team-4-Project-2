@@ -62,7 +62,7 @@ public class ItemServiceTests {
         Potluck potluck = new Potluck("first",System.currentTimeMillis() + 1000000000L, testUser.getUsername(), true);
         testPotluck = potluckService.schedulePotluck(potluck);
         Item testItem = new Item ("frist","Jello","WANTED","Stacey's Mom", testPotluck.getId());
-        item = itemService.registerItem(testItem);
+        testItem = itemService.registerItem(testItem);
         Assertions.assertNotEquals("frist", item.getId());
         itemRepo.delete(item);
         potluckRepo.delete(testPotluck);

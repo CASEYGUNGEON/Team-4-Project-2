@@ -21,7 +21,7 @@ import java.util.Base64;
 
 @Component
 @RestController
-@CrossOrigin("*")
+@CrossOrigin
 public class UserController {
 
     @Autowired
