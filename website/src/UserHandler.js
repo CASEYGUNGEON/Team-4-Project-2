@@ -50,9 +50,9 @@ export default function UserHandler(props) {
             <div className="right">
             
             <label htmlFor="username">Username </label>
-            <input  type="text" name="username" onChange={(e) => setUsername(e.target.value)} required placeholder="username" /><br />
+            <input type="text" name="username" onChange={(e) => setUsername(e.target.value)} required placeholder="username" /><br />
             <label htmlFor="password">Password </label>
-            <input  type="password" name="password" onChange={(e) => setPassword(e.target.value)} required placeholder="password" /><br/>
+            <input type="password" name="password" onChange={(e) => setPassword(e.target.value)} required placeholder="password" /><br/>
             <button onClick={() => createNewUser()}>Create User</button>
             <button className="rightbutton" onClick={(e) =>{e.preventDefault(); sendLogin()}}>Log In</button>
            

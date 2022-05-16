@@ -27,7 +27,7 @@ export default function Items(props) {
         if(description != "" && status != "") {
             const item = {'description':description,'status':status,'potluckId':chosenPotluck}
             if(status === "FULFILLED") {
-                if(loggedIn)
+                if(sessionStorage.getItem("auth"))
                     item.supplier = username;
                 else
                     item.supplier = guestName;
@@ -48,11 +48,12 @@ export default function Items(props) {
     }
 
     async function fulfill(item) {
-        if(loggedIn)
+        if(sessionStorage.getItem("auth"))
             item.supplier = username;
         else if(guestName != "") {
             item.supplier = guestName;
         } else {
+            alert("Please enter a name or log in to claim an item.");
             return null;
         }
 
@@ -62,7 +63,7 @@ export default function Items(props) {
                 headers: { "Content-type": "application/json" },
                 body: JSON.stringify(
                     {
-                        itemId: item.id,
+                        id: item.id,
                         description: item.description,
                         potluckId: chosenPotluck,
                         status : "fulfilled",
@@ -70,6 +71,7 @@ export default function Items(props) {
                 }),
             });
         const body = await req.json();
+        getItems();
     }
 
     async function deleteItem(item) {
@@ -85,7 +87,7 @@ export default function Items(props) {
     }
     let listElement = {};
 
-    if(loggedIn) {
+    if(sessionStorage.getItem("auth")) {
         listElement = itemList.filter(n => n.status != "fulfilled").map((n) => (
         <tr key={n.id}>
             <td>{n.description}</td>
@@ -126,7 +128,7 @@ export default function Items(props) {
             </thead>
         </table>);
     
-    if(!loggedIn)
+    if(!sessionStorage.getItem("auth"))
         jsx.push(<input name="name" type="text" placeholder="input name to claim" onChange={(e) => setGuestName(e.target.value)} key="nameinput"/>)
      else
         jsx.push(
