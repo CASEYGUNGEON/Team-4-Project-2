@@ -1,5 +1,6 @@
 import './App.css';
 import {useEffect, useState } from 'react';
+import { computeHeadingLevel } from '@testing-library/react';
 
 export default function UserHandler(props) {
     const username = props.username;
@@ -22,12 +23,21 @@ export default function UserHandler(props) {
                 "Authorization":btoa(`${username}:${password}`)
             }
         });
-
-        const name = btoa(`${username}:${password}`);
+        if (response.status == 200){
+            const name = btoa(`${username}:${password}`);
         const auth = await response.json();
         sessionStorage.setItem("auth", JSON.stringify(auth));
         sessionStorage.setItem("username", username);
+        console.log(username);
         window.location.reload(false);
+        }
+        else{
+            alert("Login was invalid")
+        }
+
+        
+        
+        
     }
 
     function logout(){
