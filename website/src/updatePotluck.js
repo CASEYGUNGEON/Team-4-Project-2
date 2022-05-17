@@ -33,13 +33,6 @@ export default function UpdatePotluck(props) {
                 "Content-Type": "application/json"
             }
         });
-        const body = await response.arrayBuffer();
-        const string = new TextDecoder().decode(body);
-        if (response.status === 200) {
-            alert("Potluck updated.");
-        } else {
-            alert(string);
-        }
     }
 
     async function getPotluck() {
