@@ -49,6 +49,14 @@ public class PotLuckServiceTests {
     }
 
     @Test
+    @Order(4)
+    void getPotlucksByCreatorTest(){
+        List<Potluck> retrievedPotlucks = potluckService.getPotlucksByCreator(testPotluck.getCreatorId());
+        System.out.println(retrievedPotlucks);
+        Assertions.assertNotEquals("", testPotluck.getCreatorId());
+    }
+
+    @Test
     @Order(5)
     void changeTimeTest() throws InvalidTimeException {
         long test = testPotluck.getDateTime();
