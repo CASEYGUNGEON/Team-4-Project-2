@@ -64,7 +64,7 @@ export default function UpdatePotluck(props) {
                 <input required onChange={(e) => setDate(new Date(e.target.value).getTime())} type={"dateTime-local"} />{' '}
                 Public
                 <input onClick={(e) => setVisibility(e.target.checked)} type="checkbox" />
-                {' '}<button onClick={(e) => { e.preventDefault(); update() }}>Update</button>
+                {' '}<button onClick={(e) => { update() }}>Update</button>
             </fieldset>
             <button id="back-button" onClick={() => setPageDisplay('potluckList')}>Back</button>
         </form>
