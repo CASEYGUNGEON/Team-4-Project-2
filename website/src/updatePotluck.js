@@ -19,18 +19,12 @@ export default function UpdatePotluck(props) {
     }, []);
 
     async function update() {
-        console.log(date);
-        console.log(visibility);
-        console.log(username);
-        console.log(potluckId);
-        console.log(host + " host);
         const potluck = { id: potluckId, dateTime: date, creatorId: username, visibility: Boolean(visibility) };
 
         const response = await fetch(host + "/potlucks/" + potluckId, {
             body: JSON.stringify(potluck),
             method: "PATCH",
             headers: {
-                //  "Authorization":`${session.authorization}`,
                 "Content-Type": "application/json"
             }
         });
