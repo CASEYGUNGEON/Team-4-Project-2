@@ -21,6 +21,8 @@ export default function UpdatePotluck(props) {
     async function update() {
         console.log(date);
         console.log(visibility);
+        console.log(username);
+        console.log(potluckId);
         const potluck = { id: potluckId, dateTime: date, creatorId: username, visibility: Boolean(visibility) };
 
         const response = await fetch(host + "/potlucks/" + potluckId, {
