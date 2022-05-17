@@ -24,15 +24,19 @@ export default function Items(props) {
     }
 
     async function createItem() {
-        if(description !== "" && status !== "") {
+        if(description !== "" && (status !== "" || !sessionStorage.getItem("auth"))) {
             const item = {'description':description,'status':status,'potluckId':chosenPotluck}
-            if(status === "FULFILLED") {
+            if(status === "fulfilled" || status === "") {
                 if(sessionStorage.getItem("auth"))
                     item.supplier = sessionStorage.getItem("username");
-                else
-                    if(!guestName)
-                        return null;
+                else {
+                    if(!guestName) {
+                        alert("Please type in your name to add an item as a guest!")
+                        return;
+                    }
+                    item.status = "fulfilled";
                     item.supplier = guestName;
+                }
             }
 
             const req = await fetch(host + "/potlucks/" + chosenPotluck + "/items",
@@ -45,7 +49,7 @@ export default function Items(props) {
             getItems();
         }
         else {
-            alert(`Please fill in a description and status for the new item.`)
+            alert(`Please fill in info for the new item.`)
         }
     }
 
@@ -120,6 +124,8 @@ export default function Items(props) {
                     </tr>));
     }
 
+    jsx.push(<h1>{chosenPotluckCreator}'s Potluck</h1>)
+
     jsx.push(
         <table key="table">
             <thead>
@@ -130,8 +136,18 @@ export default function Items(props) {
             </thead>
         </table>);
     
-    if(!sessionStorage.getItem("auth"))
-        jsx.push(<input name="name" type="text" placeholder="input name to claim" onChange={(e) => setGuestName(e.target.value)} key="nameinput"/>)
+    if(!sessionStorage.getItem("auth")) {
+        jsx.push(<input name="name" type="text" placeholder="input name" onChange={(e) => setGuestName(e.target.value)} key="nameinput"/>)
+        jsx.push(<><br/>
+            <form>
+                <fieldset id='createItem'>
+                    <legend htmlFor='createItem'>Add item that you want to bring:</legend>
+                        Description:&nbsp;
+                        <input required onChange={(e) => setDescription(e.target.value)}type="text" />
+                        <button onClick={(e) => {e.preventDefault(); createItem() }}>Create</button>
+                </fieldset>
+            </form></>);
+    }
      else
         jsx.push(
             <form>

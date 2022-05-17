@@ -15,6 +15,7 @@ export default function UpdatePotluck(props) {
     const [potluck, setPotluck] = useState([]);
 
     useEffect(() => {
+        setVisibility(false);
         getPotluck();
     }, []);
 
