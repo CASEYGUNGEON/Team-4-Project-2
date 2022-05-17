@@ -28,7 +28,7 @@ export default function Potlucks(props) {
     }
   
     function generateLink(potluck){    
-        return host+'/'+ potluck.id;
+        return 'https://main.d3pbgde6ddw94g.amplifyapp.com/'+ potluck.id;
     }
 
 

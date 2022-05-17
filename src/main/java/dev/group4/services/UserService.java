@@ -15,7 +15,6 @@ public interface UserService {
 
     /**
      * A method that allows the user to login to their Potluck Account
-     *
      * @param authorization the Authorization String which contains the decrypted username and password
      * @return a User if credentials are valid
      * @throws InvalidCredentialException The password or username was incorrect

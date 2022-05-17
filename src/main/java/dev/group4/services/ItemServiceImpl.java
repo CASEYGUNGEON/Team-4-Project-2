@@ -30,7 +30,7 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public Item getItemById(String id) {
+    public Item getItemById(String id) throws NullPointerException {
         Optional<Item> item = itemRepo.findById(id);
         if(item.isPresent())
             return item.get();
