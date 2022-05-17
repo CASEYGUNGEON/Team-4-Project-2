@@ -23,7 +23,7 @@ export default function UpdatePotluck(props) {
         console.log(visibility);
         const potluck = { id: potluckId, dateTime: date, creatorId: username, visibility: Boolean(visibility) };
 
-        const response = await fetch(host + "/potlucks/" + potluckId, {
+        const response = await fetch(host + "/potluck/" + potluckId, {
             body: JSON.stringify(potluck),
             method: "PATCH",
             headers: {

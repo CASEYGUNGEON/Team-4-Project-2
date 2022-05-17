@@ -41,7 +41,7 @@ public class PotluckController {
     //@Secured
     @PatchMapping("/potlucks/{potluck_id}")
     public Potluck changePotluck(@RequestBody Potluck potluck,@PathVariable String potluck_id) throws InvalidTimeException {
-        potluck.setId(potluck_id);
+        //potluck.setId(potluck_id);
             return potluckService.changePotluckTime(potluck);
 
     }
