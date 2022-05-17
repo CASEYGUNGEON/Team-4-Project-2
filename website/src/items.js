@@ -30,8 +30,10 @@ export default function Items(props) {
                 if(sessionStorage.getItem("auth"))
                     item.supplier = sessionStorage.getItem("username");
                 else
-                    if(!guestName)
+                    if(!guestName) {
+                        alert("Please type in your name to add an item as a guest!")
                         return null;
+                    }
                     item.supplier = guestName;
             }
 
@@ -130,8 +132,17 @@ export default function Items(props) {
             </thead>
         </table>);
     
-    if(!sessionStorage.getItem("auth"))
-        jsx.push(<input name="name" type="text" placeholder="input name to claim" onChange={(e) => setGuestName(e.target.value)} key="nameinput"/>)
+    if(!sessionStorage.getItem("auth")) {
+        jsx.push(<input name="name" type="text" placeholder="input name" onChange={(e) => setGuestName(e.target.value)} key="nameinput"/>)
+        jsx.push(<><br/>
+            <form>
+                <fieldset id='createItem'>
+                    <legend htmlFor='createItem'>Add item that you want to bring:</legend>
+                        Description:&nbsp;
+                        <input required onChange={(e) => setDescription(e.target.value)}type="text" />
+                </fieldset>
+            </form></>);
+    }
      else
         jsx.push(
             <form>
