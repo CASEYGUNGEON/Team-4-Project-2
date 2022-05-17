@@ -34,7 +34,8 @@ export default function UpdatePotluck(props) {
         const body = await response.arrayBuffer();
         const string = new TextDecoder().decode(body);
         if (response.status === 200) {
-            alert("Potluck updated.");
+            alert("Potluck rescheduled.");
+            setPotluck(potluck);
         } else {
             alert(string);
         }
