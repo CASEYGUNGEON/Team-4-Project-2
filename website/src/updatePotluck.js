@@ -53,7 +53,6 @@ export default function UpdatePotluck(props) {
 
 
     return (<>
-        <form>
             <fieldset id='update'>
                 <legend htmlFor='update'>Update Potluck</legend>
                 <table>
@@ -71,7 +70,6 @@ export default function UpdatePotluck(props) {
                 {' '}<button onClick={(e) => { e.preventDefault(); update() }}>Update</button>
             </fieldset>
             <button id="back-button" onClick={() => setPageDisplay('potluckList')}>Back</button>
-        </form>
     </>);
 
 }
