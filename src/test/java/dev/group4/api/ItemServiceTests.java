@@ -46,6 +46,7 @@ public class ItemServiceTests {
 
 
     @Test
+    @Disabled
     void registerTest() throws InvalidCredentialException {
         itemService.registerItem(item);
         Item testItem = this.itemRepo.findItemByDescription("IceCream");
@@ -56,6 +57,7 @@ public class ItemServiceTests {
 
 
     @Test
+    @Disabled
     void registerTestCreatingUserAndPotluck() throws InvalidCredentialException, InvalidTimeException {
         User user = new User ("UsernameUnique!", "Password123!");
         testUser= userService.registerUser(user);
@@ -73,6 +75,7 @@ public class ItemServiceTests {
     }
 
     @Test
+    @Disabled
     void getByIdTest() throws InvalidCredentialException {
         Item testItem = itemService.registerItem(item);
         Item temp = itemService.getItemById(testItem.getId());
@@ -81,6 +84,7 @@ public class ItemServiceTests {
     }
 
     @Test
+    @Disabled
     void replaceTest() throws InvalidCredentialException {
         Item testItem = itemService.registerItem(item);
         testItem.setDescription("Pizza Ball");
@@ -90,6 +94,7 @@ public class ItemServiceTests {
     }
 
     @Test
+    @Disabled
     void supplierTest() throws InvalidCredentialException {
         Item testItem = itemService.registerItem(item);
 
@@ -99,6 +104,7 @@ public class ItemServiceTests {
     }
 
     @Test
+    @Disabled
     void deleteTest() throws InvalidCredentialException {
         Item testItem = itemService.registerItem(item);
         Assertions.assertTrue(itemService.deleteItem(testItem));
@@ -106,12 +112,14 @@ public class ItemServiceTests {
     ////Negative Tests Here
 
     @Test
+    @Disabled
     void SQLException(){
         Item badItem = new Item ("notgeneratedid","IceCream", "WANTED", "Ron from Accounting","memes");
         Assertions.assertThrows(DataIntegrityViolationException.class, () -> itemService.registerItem(badItem));
     }
 
     @Test
+    @Disabled
     void BlankDescription(){
         Item badItem = new Item ("notgeneratedid","", "WANTED", "Ron from Accounting","1322f481-5b03-49a2-84d1-7a80e967c1e3");
         Assertions.assertThrows(InvalidCredentialException.class, () -> itemService.registerItem(badItem));
