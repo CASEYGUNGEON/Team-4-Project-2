@@ -26,10 +26,10 @@ export default function user(props){
         });
         if(response.status === 200){
             const body = await response.json();       
-            alert(`New user registered${body.username}`)
+            alert(`New user registered ${body.username}`)
             window.location.reload(false);
         }else{
-            alert("FAILED TO CREATE A User");
+            alert("Failed to Create a User");
         }
     }
 
@@ -51,7 +51,7 @@ export default function user(props){
         <br/>
         <button id="back-button" onClick={() => setPageDisplay('potluckList')}>View Potlucks</button></div>
     )
-
+    
     return(<>{jsx}</>);
     
 }

@@ -8,33 +8,59 @@ export default function Potlucks(props) {
     const setChosenPotluck = props.setChosenPotluck;
     const setChosenPotluckCreator = props.setChosenPotluckCreator;
     const setPageDisplay = props.setPageDisplay;
-    const [date,setDate] = useState(0);
-    const [visibility,setVisibility] = useState(false);
+    const setDate = props.setDate;
+    const date = props.date;
+    const setVisibility = props.setVisibility;
+    const visibility = props.visibility;
     const [potluckList, setPotluckList] = useState([]);
     const [publicPotlucks, setPublicPotlucks]=useState([]);
     const jsx = [];
+    let ListElement2;
 
     function goToPotluck(potluck) {
         setChosenPotluck(potluck.id);
         setChosenPotluckCreator(potluck.creatorId);
         setPageDisplay("items");
     }
+    function changePotluck(potluck) {
+        setChosenPotluck(potluck.id);
+        setPageDisplay("updatePotluck")
+    }
+  
+    function generateLink(potluck){    
+        return host+'/'+ potluck.id;
+    }
+
 
     const ListElement = potluckList.map((n) => (
         <tr key={n.id}>
-            <td><button onClick={() => deletePotluck(n)}>Delete</button><button onClick={() => goToPotluck(n)}>View</button></td>
+            <td><button onClick={() => goToPotluck(n)}>View</button><button onClick={() => changePotluck(n)}>Change</button><button onClick={() => deletePotluck(n)}>Delete</button></td>
+            <td>{generateLink(n)}</td>
             <td>{new Date(n.dateTime).toDateString()}</td>
             <td>{new Date(n.dateTime).toLocaleTimeString()}</td>
+            <td>{n.visibility?"public":"private"}</td>
     </tr>));
+if(sessionStorage.getItem("auth")){
+    ListElement2 = publicPotlucks.filter(n=>n.creatorId!=username).map((n) => (
+    
+        <tr key={n.id}>        
+            <td><button onClick={() => goToPotluck(n)}>View</button></td>
+            <td>{new Date(n.dateTime).toDateString()}</td>
+            <td>{new Date(n.dateTime).toLocaleTimeString()}</td>
+            <td>{n.creatorId}</td>
+        </tr>));
+}
+else{
 
-const ListElement2 = publicPotlucks.map((n) => (
+ListElement2 = publicPotlucks.map((n) => (
     
     <tr key={n.id}>        
         <td><button onClick={() => goToPotluck(n)}>View</button></td>
         <td>{new Date(n.dateTime).toDateString()}</td>
         <td>{new Date(n.dateTime).toLocaleTimeString()}</td>
         <td>{n.creatorId}</td>
-</tr>));
+    </tr>));
+}
     
     async function getPotlucks() {
         const name = sessionStorage.getItem("username");
@@ -46,8 +72,7 @@ const ListElement2 = publicPotlucks.map((n) => (
     }
 
     async function getPublicPotlucks(){
-        let req = '';
-        req = await fetch(`${host}/potlucks/`);
+        const req = await fetch(`${host}/potlucks/`);
         const body = await req.json();
         setPublicPotlucks([...body]);
     }
@@ -67,8 +92,8 @@ const ListElement2 = publicPotlucks.map((n) => (
         const string = new TextDecoder().decode(body);
         if(response.status === 200){
             //const body = await response.json();
-            
-            alert(`New potluck registered.`)
+          alert(`New potluck registered.`)
+
             getPotlucks();
             getPublicPotlucks();
         }else{
@@ -98,7 +123,7 @@ const ListElement2 = publicPotlucks.map((n) => (
             <table id='private'>
                 <thead>
                     <tr>
-                        <th></th><th>Date</th><th>Time</th>
+                    <th></th><th>Link</th><th>Date</th><th>Time</th><th>Public/Private</th>
                     </tr>
                     {ListElement}
                 </thead>
@@ -130,6 +155,5 @@ const ListElement2 = publicPotlucks.map((n) => (
             
             {' '}<button onClick={(e) => {e.preventDefault(); createPotluck() }}>Create</button></fieldset></form>)
         }
-
     return(<>{jsx}</>);
 }

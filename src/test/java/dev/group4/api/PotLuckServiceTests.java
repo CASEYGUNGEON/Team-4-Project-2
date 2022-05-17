@@ -28,6 +28,7 @@ public class PotLuckServiceTests {
     void schedulePotluckTest() throws InvalidTimeException {
         Potluck newPotLuck = new Potluck("First", System.currentTimeMillis() + 1000L, "username",true);
         testPotluck =potluckService.schedulePotluck(newPotLuck);
+        System.out.println(testPotluck);
         Assertions.assertNotEquals("", newPotLuck.getId());
     }
 
@@ -41,8 +42,7 @@ public class PotLuckServiceTests {
 
     @Test
     @Order(3)
-    void getAllPotlucksTest() throws InvalidTimeException {
-
+    void getAllPotlucksTest() {
         list1 = potluckService.getAllPublicPotlucks();
         System.out.println(list1);
         Assertions.assertTrue(list1 != null && !list1.isEmpty());
@@ -71,8 +71,7 @@ public class PotLuckServiceTests {
         System.out.println(testPotluck);
         Assertions.assertTrue(potluckService.cancelPotluck(testPotluck));
     }
-
-    //negative tests
+    //Negative Tests Start Here
 
     @Test
     @Order(7)
@@ -84,33 +83,20 @@ public class PotLuckServiceTests {
 
     @Test
     @Order(8)
-    void firstValidationTimeTest()throws InvalidTimeException{
+    void secondValidationTimeTest(){
 
-        Potluck newPotLuck = new Potluck("Second", System.currentTimeMillis() + 10000L,
-                "username",true);
-        Assertions.assertThrows(InvalidTimeException.class,
-                () -> potluckService.schedulePotluck(newPotLuck),
-                "The potluck was scheduled but it is within an hour of a currently scheduled Potluck.");
+        Potluck newPotLuck = new Potluck("Second", 1000L, "username",true);
+        Assertions.assertThrows(InvalidTimeException.class, () -> potluckService.schedulePotluck(newPotLuck), "The potluck was scheduled but the time has passed.");
     }
 
     @Test
     @Order(9)
-    void secondValidationTimeTest()throws InvalidTimeException{
-
-        Potluck newPotLuck = new Potluck("Second", 1000L, "username",true);
-        Assertions.assertThrows(InvalidTimeException.class,
-                () -> potluckService.schedulePotluck(newPotLuck),
-                "The potluck was scheduled but the time has passed.");
-    }
-
-    @Test
-    @Order(10)
     void cancelNegativeTest() {
         Assertions.assertTrue(potluckService.cancelPotluck(testPotluck1));
     }
 
     @Test
-    @Order(11)
+    @Order(10)
     void noPotluckIdTest()throws NullPointerException{
         Assertions.assertThrows(NullPointerException.class,
                () -> potluckService.getPotluckById(testPotluck.getId()),

@@ -30,6 +30,8 @@ export default function Items(props) {
                 if(sessionStorage.getItem("auth"))
                     item.supplier = sessionStorage.getItem("username");
                 else
+                    if(!guestName)
+                        return null;
                     item.supplier = guestName;
             }
 

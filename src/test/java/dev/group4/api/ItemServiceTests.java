@@ -1,11 +1,17 @@
 package dev.group4.api;
 
 import dev.group4.aspects.InvalidCredentialException;
+import dev.group4.aspects.InvalidTimeException;
 import dev.group4.entities.Item;
 import dev.group4.entities.Potluck;
 import dev.group4.entities.StatusType;
+import dev.group4.entities.User;
 import dev.group4.repos.ItemRepo;
+import dev.group4.repos.PotluckRepo;
+import dev.group4.repos.UserRepo;
 import dev.group4.services.ItemServiceImpl;
+import dev.group4.services.PotluckServiceImpl;
+import dev.group4.services.UserServiceImpl;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,8 +24,25 @@ public class ItemServiceTests {
     private ItemServiceImpl itemService;
     @Autowired
     private ItemRepo itemRepo;
+    @Autowired
+    private PotluckServiceImpl potluckService;
+    @Autowired
+    private PotluckRepo potluckRepo;
+    @Autowired
+    private UserServiceImpl userService;
+    @Autowired
+    private UserRepo userRepo;
+
+    static User testUser;
+    static Potluck testPotluck;
+
+
+
+
     //THIS IS A HARD-WIRED VALUE FOR THE POTLUCK ID, YOU WILL CURRENTLY NEED TO OVERWRITE THE POTLUCK ID WITH AN EXISTING VALUE FROM YOUR OWN DATABASE
     static Item item = new Item ("notgeneratedid","IceCream", "WANTED", "Ron from Accounting","1322f481-5b03-49a2-84d1-7a80e967c1e3");
+
+
 
 
     @Test
@@ -29,6 +52,24 @@ public class ItemServiceTests {
         Assertions.assertNotEquals("notgeneratedid",testItem.getId());
         System.out.println(testItem);
         itemRepo.delete(testItem);
+    }
+
+
+    @Test
+    void registerTestCreatingUserAndPotluck() throws InvalidCredentialException, InvalidTimeException {
+        User user = new User ("UsernameUnique!", "Password123!");
+        testUser= userService.registerUser(user);
+
+        Potluck potluck = new Potluck("first",System.currentTimeMillis() + 1000000000L, testUser.getUsername(), true);
+        testPotluck = potluckService.schedulePotluck(potluck);
+
+        Item testItem = new Item ("frist","Jello","WANTED","Stacey's Mom", testPotluck.getId());
+        testItem = itemService.registerItem(testItem);
+        Assertions.assertNotEquals("frist", item.getId());
+
+        itemRepo.delete(item);
+        potluckRepo.delete(testPotluck);
+        userRepo.delete(testUser);
     }
 
     @Test
@@ -46,7 +87,6 @@ public class ItemServiceTests {
         System.out.println(testItem);
         Assertions.assertEquals((testItem.getDescription()), "Pizza Ball");
         itemRepo.delete(testItem);
-
     }
 
     @Test
@@ -59,12 +99,11 @@ public class ItemServiceTests {
     }
 
     @Test
-    void deleteTest() {
-        Assertions.assertTrue(itemService.deleteItem(item));
+    void deleteTest() throws InvalidCredentialException {
+        Item testItem = itemService.registerItem(item);
+        Assertions.assertTrue(itemService.deleteItem(testItem));
     }
-
-
-    ////SHOULD BE WRONG TESTS BEGIN HERE////////////SHOULD BE WRONG TESTS BEGIN HERE//////////////////////SHOULD BE WRONG TESTS BEGIN HERE/////////////////////
+    ////Negative Tests Here
 
     @Test
     void SQLException(){
@@ -76,8 +115,6 @@ public class ItemServiceTests {
     void BlankDescription(){
         Item badItem = new Item ("notgeneratedid","", "WANTED", "Ron from Accounting","1322f481-5b03-49a2-84d1-7a80e967c1e3");
         Assertions.assertThrows(InvalidCredentialException.class, () -> itemService.registerItem(badItem));
-
     }
-
 
 }
