@@ -124,7 +124,7 @@ export default function Items(props) {
                     </tr>));
     }
 
-    jsx.push(<h1>{chosenPotluckCreator}'s Potluck</h1>)
+    jsx.push(chosenPotluckCreator ?<h1>{chosenPotluckCreator}'s Potluck</h1> : "")
 
     jsx.push(
         <table key="table">
