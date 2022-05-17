@@ -19,15 +19,25 @@ export default function UpdatePotluck(props) {
     }, []);
 
     async function update() {
+        console.log(date);
+        console.log(visibility);
         const potluck = { id: potluckId, dateTime: date, creatorId: username, visibility: Boolean(visibility) };
 
         const response = await fetch(host + "/potlucks/" + potluckId, {
             body: JSON.stringify(potluck),
             method: "PATCH",
             headers: {
+                //  "Authorization":`${session.authorization}`,
                 "Content-Type": "application/json"
             }
         });
+        const body = await response.arrayBuffer();
+        const string = new TextDecoder().decode(body);
+        if (response.status === 200) {
+            alert("Potluck updated.");
+        } else {
+            alert(string);
+        }
     }
 
     async function getPotluck() {
@@ -58,7 +68,7 @@ export default function UpdatePotluck(props) {
                 <input required onChange={(e) => setDate(new Date(e.target.value).getTime())} type={"dateTime-local"} />{' '}
                 Public
                 <input onClick={(e) => setVisibility(e.target.checked)} type="checkbox" />
-                {' '}<button onClick={(e) => { update() }}>Update</button>
+                {' '}<button onClick={(e) => { e.preventDefault(); update() }}>Update</button>
             </fieldset>
             <button id="back-button" onClick={() => setPageDisplay('potluckList')}>Back</button>
         </form>
