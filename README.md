@@ -75,5 +75,6 @@ The User Can:
 * If the user is logged in, the supplier slot is filled in with the user's username.
 * Remove items from potlucks if the User is the owner.
 
-
-
+#### To-do
+- Minor logic changes for smoother usage and better security
+- More fluff, such as naming potlucks
