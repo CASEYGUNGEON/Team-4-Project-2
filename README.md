@@ -8,7 +8,7 @@ Brian Mokua, and
 Anthony Padron 
 
 
-## Technologyies Used
+## Technologies Used
 - Java 11
 - React 18.1.0
 - Spring Boot 2.6.7
