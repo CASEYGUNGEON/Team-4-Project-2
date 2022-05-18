@@ -1,4 +1,4 @@
-# <u>Team-4-Project-2 READ ME</u>
+# <u>Project 2: Gather (A Potluck Planning Application)</u>
 
 Created By: 
 David Brumagin,
@@ -7,11 +7,22 @@ Isaiah Lee,
 Brian Mokua, and
 Anthony Padron 
 
-Start [Potlukk 1.0](https://main.d3pbgde6ddw94g.amplifyapp.com/)
 
+## Technologyies Used
+- Java 11
+- React 18.1.0
+- Spring Boot 2.6.7
+- PostgreSQL 14.3
 
+## Getting Started
+Just visit [Gather 1.0](https://main.d3pbgde6ddw94g.amplifyapp.com/)!<br>
+(You may need to tell your browser to allow insecure connections on that page.)
+![Page example](/firefox_YJ9pN7e8nc.png)
 
-When launched, creates a potluck application page where the user can create and edit values within 3 categories
+All actions are accessible through buttons on the page. Log in or out to see somewhat different functionality!
+
+## Usage
+When accessed, displays a potluck application page where the user can create and edit values within 3 categories
 
 ### <u>Users</u>
 As a user you can:
